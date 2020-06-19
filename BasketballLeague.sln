@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "SRC\Common\Common
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "SRC\Infrastructure\Infrastructure.csproj", "{570BF0F3-EC6E-471C-A62B-E32A13F2235F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "SRC\Persistance\Persistence.csproj", "{D8165048-D10F-4251-89CF-8DF95E7C4D5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "SRC\Persistence\Persistence.csproj", "{D8165048-D10F-4251-89CF-8DF95E7C4D5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "SRC\WebUI\WebUI.csproj", "{5D3D57A8-95D1-4558-B18F-E77293602E7F}"
 EndProject

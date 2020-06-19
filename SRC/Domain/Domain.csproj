@@ -6,4 +6,11 @@
     <AssemblyName>BasketballLeague.Domain</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Common\" />
+    <Folder Include="ValueObjects\" />
+  </ItemGroup>
+
 </Project>

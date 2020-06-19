@@ -1,6 +1,6 @@
 using System;
 
-namespace WebUI
+namespace BasketballLeague.WebUI
 {
     public class WeatherForecast
     {
