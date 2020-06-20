@@ -5,16 +5,16 @@
         public int PlayerSeason1 { get; set; }
         public int PlayerId { get; set; }
         public int SeasonDivisionId { get; set; }
-        public int? Pts { get; set; }
-        public int? Fga { get; set; }
-        public int? Fgm { get; set; }
+        public int? Pts { get; private set; }
+        public int? Fga { get; private set; }
+        public int? Fgm { get; private set; }
         public int Fg3a { get; set; }
         public int Fg3m { get; set; }
         public int Fg2a { get; set; }
         public int Fg2m { get; set; }
         public int Fta { get; set; }
         public int Ftm { get; set; }
-        public int? Trb { get; set; }
+        public int? Trb { get; private set; }
         public int Orb { get; set; }
         public int Drb { get; set; }
         public int Ast { get; set; }

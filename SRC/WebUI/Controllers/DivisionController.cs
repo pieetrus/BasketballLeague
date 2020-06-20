@@ -15,7 +15,7 @@ namespace BasketballLeague.WebUI.Controllers
         [HttpGet]
         public async Task<ActionResult<Division>> GetAll()
         {
-            return Ok(await Mediator.Send(new GetDivisionListQuery()));
+            return Ok(await Mediator.Send(new GetDivisionsListQuery()));
         }
 
         [HttpGet("{id}")]

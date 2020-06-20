@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BasketballLeague.Application.Divisions.Queries.GetDivisionsList
 {
-    public class GetDivisionListQuery : IRequest<IEnumerable<Division>>
+    public class GetDivisionsListQuery : IRequest<IEnumerable<Division>>
     {
     }
 }

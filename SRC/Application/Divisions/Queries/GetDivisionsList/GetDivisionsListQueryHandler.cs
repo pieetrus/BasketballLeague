@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Divisions.Queries.GetDivisionsList
 {
-    public class GetDivisionListQueryHandler : IRequestHandler<GetDivisionListQuery, IEnumerable<Division>>
+    public class GetDivisionsListQueryHandler : IRequestHandler<GetDivisionsListQuery, IEnumerable<Division>>
     {
 
         private readonly IBasketballLeagueDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetDivisionListQueryHandler(IBasketballLeagueDbContext context, IMapper mapper)
+        public GetDivisionsListQueryHandler(IBasketballLeagueDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Division>> Handle(GetDivisionListQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Division>> Handle(GetDivisionsListQuery request, CancellationToken cancellationToken)
         {
             var divisions = await _context.Division.ToListAsync(cancellationToken);
 
