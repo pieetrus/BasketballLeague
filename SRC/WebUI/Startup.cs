@@ -1,6 +1,7 @@
 using BasketballLeague.Application;
 using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Persistence;
+using BasketballLeague.WebUI.Common;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,9 +37,11 @@ namespace BasketballLeague.WebUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCustomExceptionHandler();
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();
