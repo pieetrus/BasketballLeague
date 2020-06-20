@@ -25,6 +25,12 @@ namespace BasketballLeague.Domain.Entities
             builder.Property(e => e.Surname)
                 .IsRequired()
                 .HasMaxLength(30);
+
+            builder.Property(e => e.JerseyNr)
+                .HasColumnName("Jersey_Nr")
+                .HasMaxLength(2)
+                .IsUnicode(false)
+                .IsFixedLength();
         }
     }
 }

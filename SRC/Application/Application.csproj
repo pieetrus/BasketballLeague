@@ -19,18 +19,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Divisions\Commands\CreateDivision\" />
-    <Folder Include="Divisions\Commands\DeleteDivision\" />
-    <Folder Include="Divisions\Commands\UpdateDivision\" />
-    <Folder Include="Divisions\Queries\GetDivisionList\" />
-    <Folder Include="Divisions\Queries\GetDivisionDetail\" />
-    <Folder Include="Seasons\Commands\CreateSeason\" />
-    <Folder Include="Seasons\Commands\DeleteSeason\" />
-    <Folder Include="Seasons\Commands\UpdateSeason\" />
-    <Folder Include="Seasons\Queries\GetSeasonList\" />
-    <Folder Include="Seasons\Queries\GetSeasonDetail\" />
-  </ItemGroup>
-
 </Project>

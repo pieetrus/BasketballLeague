@@ -8,7 +8,7 @@ namespace BasketballLeague.Domain.Entities
         public int RefereeId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public int JerseyNr { get; set; }
+        public string JerseyNr { get; set; }
         public DateTime? Birthdate { get; set; }
         public string PhotoUrl { get; set; }
 

@@ -1,8 +1,8 @@
-﻿using BasketballLeague.Application.Players.Commands.CreatePlayer;
-using BasketballLeague.Application.Players.Commands.DeletePlayer;
-using BasketballLeague.Application.Players.Commands.UpdatePlayer;
-using BasketballLeague.Application.Players.Queries;
-using BasketballLeague.Application.Players.Queries.GetPlayerDetail;
+﻿using BasketballLeague.Application.Divisions.Commands.CreateDivision;
+using BasketballLeague.Application.Divisions.Commands.DeleteDivision;
+using BasketballLeague.Application.Divisions.Commands.UpdateDivision;
+using BasketballLeague.Application.Divisions.Queries.GetDivisionDetail;
+using BasketballLeague.Application.Divisions.Queries.GetDivisionsList;
 using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,21 +10,20 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.WebUI.Controllers
 {
-
-    public class PlayerController : BaseController
+    public class DivisionController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<Player>> GetAll()
+        public async Task<ActionResult<Division>> GetAll()
         {
-            return Ok(await Mediator.Send(new GetPlayersListQuery()));
+            return Ok(await Mediator.Send(new GetDivisionListQuery()));
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Player>> Get(int id)
+        public async Task<ActionResult<Division>> Get(int id)
         {
-            var player = await Mediator.Send(new GetPlayerDetailQuery { Id = id });
+            var player = await Mediator.Send(new GetDivisionDetailQuery { Id = id });
 
             return Ok(player);
         }
@@ -32,7 +31,7 @@ namespace BasketballLeague.WebUI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreatePlayerCommand command)
+        public async Task<IActionResult> Create([FromBody]CreateDivisionCommand command)
         {
             await Mediator.Send(command);
 
@@ -42,7 +41,7 @@ namespace BasketballLeague.WebUI.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdatePlayerCommand command)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateDivisionCommand command)
         {
             command.Id = id;
 
@@ -56,7 +55,7 @@ namespace BasketballLeague.WebUI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
-            await Mediator.Send(new DeletePlayerCommand { Id = id });
+            await Mediator.Send(new DeleteDivisionCommand { Id = id });
 
             return NoContent();
         }
