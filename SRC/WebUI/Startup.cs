@@ -1,5 +1,7 @@
 using BasketballLeague.Application;
+using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Persistence;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +25,9 @@ namespace BasketballLeague.WebUI
             services.AddPersistence(Configuration);
             services.AddApplication();
 
-            services.AddControllers().AddNewtonsoftJson(opt =>
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IBasketballLeagueDbContext>())
+                .AddNewtonsoftJson(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
