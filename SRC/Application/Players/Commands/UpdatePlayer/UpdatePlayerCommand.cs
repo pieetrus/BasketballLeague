@@ -16,8 +16,8 @@ namespace BasketballLeague.Application.Players.Commands.UpdatePlayer
         public string Surname { get; set; }
         public DateTime? Birthdate { get; set; }
         public string PhotoUrl { get; set; }
-        public byte? Height { get; set; }
-        public byte? Position { get; set; }
+        public int? Height { get; set; }
+        public int? Position { get; set; }
 
         public class Handler : IRequestHandler<UpdatePlayerCommand>
         {

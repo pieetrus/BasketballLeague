@@ -9,6 +9,8 @@ namespace BasketballLeague.Domain.Entities
         {
             builder.Property(e => e.IncidentId).HasColumnName("Incident_ID");
 
+            builder.Property(e => e.IncidentType).HasColumnName("Incident_type");
+
             builder.Property(e => e.MatchId).HasColumnName("Match_ID");
 
             builder.Property(e => e.Minutes)

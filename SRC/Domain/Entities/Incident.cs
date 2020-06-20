@@ -6,7 +6,8 @@
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public byte Quater { get; set; }
+        public int IncidentType { get; set; }
+        public int Quater { get; set; }
         public bool Flagged { get; set; }
 
         public virtual Match Match { get; set; }

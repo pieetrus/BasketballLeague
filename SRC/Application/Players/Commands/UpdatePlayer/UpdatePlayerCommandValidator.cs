@@ -14,7 +14,7 @@ namespace BasketballLeague.Application.Players.Commands.UpdatePlayer
                 .MinimumLength(3).WithMessage("Name minimum lenght is 3")
                 .NotEmpty().WithMessage("Surname field is required");
             RuleFor(x => x.Position)
-                .InclusiveBetween((byte)1, (byte)5).WithMessage("Position must be be beetwen 1-5");
+                .InclusiveBetween(1, 5).WithMessage("Position must be be beetwen 1-5");
         }
     }
 }

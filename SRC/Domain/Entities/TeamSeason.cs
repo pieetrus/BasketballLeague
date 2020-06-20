@@ -6,23 +6,23 @@
         public int TeamId { get; set; }
         public int SeasonDivisionId { get; set; }
         public int? Pts { get; set; }
-        public short? Fga { get; set; }
-        public short? Fgm { get; set; }
-        public short Fg3a { get; set; }
-        public short Fg3m { get; set; }
-        public short Fg2a { get; set; }
-        public short Fg2m { get; set; }
-        public short Fta { get; set; }
-        public short Ftm { get; set; }
-        public short? Trb { get; set; }
-        public short Orb { get; set; }
-        public short Drb { get; set; }
-        public short Ast { get; set; }
-        public short Stl { get; set; }
-        public short Blk { get; set; }
-        public short Tov { get; set; }
-        public short Fouls { get; set; }
-        public short OffFouls { get; set; }
+        public int? Fga { get; set; }
+        public int? Fgm { get; set; }
+        public int Fg3a { get; set; }
+        public int Fg3m { get; set; }
+        public int Fg2a { get; set; }
+        public int Fg2m { get; set; }
+        public int Fta { get; set; }
+        public int Ftm { get; set; }
+        public int? Trb { get; set; }
+        public int Orb { get; set; }
+        public int Drb { get; set; }
+        public int Ast { get; set; }
+        public int Stl { get; set; }
+        public int Blk { get; set; }
+        public int Tov { get; set; }
+        public int Fouls { get; set; }
+        public int OffFouls { get; set; }
         public int? CoachId { get; set; }
         public int? CapitainId { get; set; }
         public int RankingPoints { get; set; }

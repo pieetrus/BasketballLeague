@@ -6,27 +6,27 @@
         public int TeamId { get; set; }
         public int MatchId { get; set; }
         public int? Pts { get; set; }
-        public byte? Fga { get; set; }
-        public byte? Fgm { get; set; }
-        public byte Fg3a { get; set; }
-        public byte Fg3m { get; set; }
-        public byte Fg2a { get; set; }
-        public byte Fg2m { get; set; }
-        public byte Fta { get; set; }
-        public byte Ftm { get; set; }
-        public byte? Trb { get; set; }
-        public byte Orb { get; set; }
-        public byte Drb { get; set; }
-        public byte Ast { get; set; }
-        public byte Stl { get; set; }
-        public byte Blk { get; set; }
-        public byte Tov { get; set; }
-        public byte Fouls { get; set; }
-        public byte BenchPts { get; set; }
-        public byte Fastbreakpoints { get; set; }
-        public byte SecondChancePoints { get; set; }
-        public byte PointsFromTurnovers { get; set; }
-        public byte OffFouls { get; set; }
+        public int? Fga { get; set; }
+        public int? Fgm { get; set; }
+        public int Fg3a { get; set; }
+        public int Fg3m { get; set; }
+        public int Fg2a { get; set; }
+        public int Fg2m { get; set; }
+        public int Fta { get; set; }
+        public int Ftm { get; set; }
+        public int? Trb { get; set; }
+        public int Orb { get; set; }
+        public int Drb { get; set; }
+        public int Ast { get; set; }
+        public int Stl { get; set; }
+        public int Blk { get; set; }
+        public int Tov { get; set; }
+        public int Fouls { get; set; }
+        public int BenchPts { get; set; }
+        public int Fastbreakpoints { get; set; }
+        public int SecondChancePoints { get; set; }
+        public int PointsFromTurnovers { get; set; }
+        public int OffFouls { get; set; }
 
         public virtual Match Match { get; set; }
         public virtual Team Team { get; set; }

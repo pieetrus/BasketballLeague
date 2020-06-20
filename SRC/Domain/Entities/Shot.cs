@@ -8,7 +8,7 @@
         public int ShotType { get; set; }
         public bool IsAccurate { get; set; }
         public bool IsFastAttack { get; set; }
-        public byte Value { get; set; }
+        public int Value { get; set; }
 
         public virtual Incident Incident { get; set; }
         public virtual Player Player { get; set; }

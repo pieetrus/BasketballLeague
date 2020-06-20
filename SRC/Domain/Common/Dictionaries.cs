@@ -107,4 +107,24 @@ namespace BasketballLeague.Domain.Common
         [Description("Out Of Bounds Loose Ball")]
         OUT_OF_BOUNDS_LOOSE_BALL
     }
+
+
+    public enum IncidentType
+    {
+        [Description("Foul")]
+        FOUL,
+        [Description("Rebound")]
+        REBOUND,
+        [Description("Shot")]
+        SHOT,
+        [Description("Turnover")]
+        TURNOVER,
+        [Description("Substitution")]
+        SUBSTITUTION,
+        [Description("Timeout")]
+        TIMEOUT,
+        [Description("Jump Ball")]
+        JUMP_BALL
+    }
+
 }
