@@ -8,8 +8,10 @@ namespace BasketballLeague.Domain.Entities
         public int IncidentId { get; set; }
         public int? PlayerWhoFouledId { get; set; }
         public int? PlayerWhoWasFouledId { get; set; }
+        public int? CoachId { get; set; }
         public int FoulType { get; set; }
 
+        public virtual Coach Coach { get; set; }
         public virtual Incident Incident { get; set; }
         public virtual Player PlayerWhoFouled { get; set; }
         public virtual Player PlayerWhoWasFouled { get; set; }

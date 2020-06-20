@@ -11,6 +11,7 @@ namespace BasketballLeague.Domain.Entities
         public DateTime? Birthdate { get; set; }
         public string PhotoUrl { get; set; }
 
+        public virtual ICollection<Foul> Foul { get; set; }
         public virtual ICollection<TeamSeason> TeamSeasons { get; set; }
     }
 }

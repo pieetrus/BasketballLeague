@@ -1,5 +1,8 @@
 ﻿using BasketballLeague.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
+using Timeout = BasketballLeague.Domain.Entities.Timeout;
 
 namespace BasketballLeague.Application.Common.Interfaces
 {
@@ -32,6 +35,6 @@ namespace BasketballLeague.Application.Common.Interfaces
          DbSet<Turnover> Turnover { get; set; }
          DbSet<User> User { get; set; }
 
-        //Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
