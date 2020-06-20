@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Players.Queries
 {
-    public class GetPlayersListHandler : IRequestHandler<GetPlayersListQuery, IEnumerable<Player>>
+    public class GetPlayersListQueryHandler : IRequestHandler<GetPlayersListQuery, IEnumerable<Player>>
     {
         private readonly IBasketballLeagueDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetPlayersListHandler(IBasketballLeagueDbContext context, IMapper mapper)
+        public GetPlayersListQueryHandler(IBasketballLeagueDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
