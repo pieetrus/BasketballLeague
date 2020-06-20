@@ -1,10 +1,12 @@
-﻿namespace BasketballLeague.Domain.Entities
+﻿using BasketballLeague.Domain.Common;
+
+namespace BasketballLeague.Domain.Entities
 {
     public class Rebound
     {
         public int ReboundId { get; set; }
         public int IncidentId { get; set; }
-        public int ReboundType { get; set; }
+        public ReboundType ReboundType { get; set; }
         public int? PlayerId { get; set; }
         public int? TeamId { get; set; }
 

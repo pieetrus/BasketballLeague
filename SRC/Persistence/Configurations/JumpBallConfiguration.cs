@@ -7,6 +7,10 @@ namespace BasketballLeague.Domain.Entities
     {
         public void Configure(EntityTypeBuilder<JumpBall> builder)
         {
+            builder
+              .Property(e => e.JumpBallType)
+              .HasConversion<int>();
+
             builder.ToTable("Jump_Ball");
 
             builder.Property(e => e.JumpBallId).HasColumnName("Jump_Ball_ID");

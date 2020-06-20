@@ -7,6 +7,10 @@ namespace BasketballLeague.Domain.Entities
     {
         public void Configure(EntityTypeBuilder<Incident> builder)
         {
+            builder
+                .Property(e => e.IncidentType)
+                .HasConversion<int>();
+
             builder.Property(e => e.IncidentId).HasColumnName("Incident_ID");
 
             builder.Property(e => e.IncidentType).HasColumnName("Incident_type");

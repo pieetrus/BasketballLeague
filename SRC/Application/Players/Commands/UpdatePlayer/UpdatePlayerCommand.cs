@@ -43,7 +43,7 @@ namespace BasketballLeague.Application.Players.Commands.UpdatePlayer
                 entity.Birthdate = request.Birthdate ?? entity.Birthdate;
                 entity.PhotoUrl = request.PhotoUrl ?? entity.PhotoUrl;
                 entity.Height = request.Height ?? entity.Height;
-                entity.Position = request.Position ?? entity.Position;
+                entity.Position = (BasketballLeague.Domain.Common.Postition?)request.Position ?? entity.Position;
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

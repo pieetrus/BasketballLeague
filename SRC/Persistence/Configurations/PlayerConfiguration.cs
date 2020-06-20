@@ -7,6 +7,10 @@ namespace BasketballLeague.Domain.Entities
     {
         public void Configure(EntityTypeBuilder<Player> builder)
         {
+            builder
+             .Property(e => e.Position)
+             .HasConversion<int>();
+
             builder.Property(e => e.PlayerId).HasColumnName("Player_ID");
 
             builder.Property(e => e.Birthdate).HasColumnType("date");

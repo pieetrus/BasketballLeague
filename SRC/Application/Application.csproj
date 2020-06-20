@@ -21,7 +21,7 @@
 
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
+    <Folder Include="Incidents\Commands\" />
   </ItemGroup>
 
 </Project>

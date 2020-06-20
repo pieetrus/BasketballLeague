@@ -1,4 +1,6 @@
-﻿namespace BasketballLeague.Domain.Entities
+﻿using BasketballLeague.Domain.Common;
+
+namespace BasketballLeague.Domain.Entities
 {
     public class Incident
     {
@@ -6,7 +8,7 @@
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public int IncidentType { get; set; }
+        public IncidentType IncidentType { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
 

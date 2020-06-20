@@ -7,24 +7,25 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.Players.Queries
+namespace BasketballLeague.Application.Shots.Queries.GetShotsList
 {
-    public class GetPlayersListQueryHandler : IRequestHandler<GetPlayersListQuery, IEnumerable<Player>>
+    public class GetShostListQueryHandler : IRequestHandler<GetShostListQuery, IEnumerable<Shot>>
     {
+
         private readonly IBasketballLeagueDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetPlayersListQueryHandler(IBasketballLeagueDbContext context, IMapper mapper)
+        public GetShostListQueryHandler(IBasketballLeagueDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Player>> Handle(GetPlayersListQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Shot>> Handle(GetShostListQuery request, CancellationToken cancellationToken)
         {
-            var players = await _context.Player.ToListAsync(cancellationToken);
+            var matches = await _context.Shot.ToListAsync(cancellationToken);
 
-            return players;
+            return matches;
         }
     }
 }

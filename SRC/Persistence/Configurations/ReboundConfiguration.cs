@@ -7,6 +7,10 @@ namespace BasketballLeague.Domain.Entities
     {
         public void Configure(EntityTypeBuilder<Rebound> builder)
         {
+            builder
+             .Property(e => e.ReboundType)
+             .HasConversion<int>();
+
             builder.HasIndex(e => e.IncidentId)
                      .HasName("UQ_Rebound_Incident_ID")
                      .IsUnique();

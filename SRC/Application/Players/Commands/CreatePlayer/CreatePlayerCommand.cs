@@ -15,7 +15,7 @@ namespace BasketballLeague.Application.Players.Commands.CreatePlayer
         public DateTime? Birthdate { get; set; }
         public string PhotoUrl { get; set; }
         public byte? Height { get; set; }
-        public byte? Position { get; set; }
+        public int? Position { get; set; }
 
 
         public class Handler : IRequestHandler<CreatePlayerCommand>
@@ -38,7 +38,7 @@ namespace BasketballLeague.Application.Players.Commands.CreatePlayer
                     Birthdate = request.Birthdate,
                     PhotoUrl = request.PhotoUrl,
                     Height = request.Height,
-                    Position = request.Position
+                    Position = (BasketballLeague.Domain.Common.Postition)request.Position
                 };
 
                 _context.Player.Add(entity);

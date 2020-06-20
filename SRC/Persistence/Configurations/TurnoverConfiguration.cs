@@ -7,6 +7,10 @@ namespace BasketballLeague.Domain.Entities
     {
         public void Configure(EntityTypeBuilder<Turnover> builder)
         {
+            builder
+             .Property(e => e.TurnoverType)
+             .HasConversion<int>();
+
             builder.HasIndex(e => e.IncidentId)
                      .HasName("UQ_Turnover_Incident_ID")
                      .IsUnique();

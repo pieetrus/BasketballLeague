@@ -7,6 +7,11 @@ namespace BasketballLeague.Domain.Entities
     {
         public void Configure(EntityTypeBuilder<Foul> builder)
         {
+
+            builder
+               .Property(e => e.FoulType)
+               .HasConversion<int>();
+
             builder.HasIndex(e => e.IncidentId)
                      .HasName("UQ_Foul_Incident_ID")
                      .IsUnique();

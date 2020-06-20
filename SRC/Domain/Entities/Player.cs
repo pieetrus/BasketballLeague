@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasketballLeague.Domain.Common;
+using System;
 using System.Collections.Generic;
 
 namespace BasketballLeague.Domain.Entities
@@ -11,7 +12,7 @@ namespace BasketballLeague.Domain.Entities
         public DateTime? Birthdate { get; set; }
         public string PhotoUrl { get; set; }
         public int? Height { get; set; }
-        public int? Position { get; set; }
+        public Postition? Position { get; set; }
 
         public virtual ICollection<Assist> Assists { get; set; }
         public virtual ICollection<Block> Blocks { get; set; }

@@ -5,126 +5,129 @@ namespace BasketballLeague.Domain.Common
     public enum Postition
     {
         [Description("Point Guard")]
-        PG,
+        PG = 1,
         [Description("Shooting Guard")]
-        SG,
+        SG = 2,
         [Description("Small Forward")]
-        SF,
+        SF = 3,
         [Description("Power Forward")]
-        PF,
+        PF = 4,
         [Description("Center")]
-        C
+        C = 5
+    }
+
+    public enum ReboundType
+    {
+        [Description("Offensive Rebound Player")]
+        PLAYER_OFF = 1,
+        [Description("Defensive Rebound Player")]
+        PLAYER_DEF = 2,
+        [Description("Offensive Rebound Team")]
+        TEAM_OFF = 3,
+        [Description("Defensive Rebound Team")]
+        TEAM_DEF = 4
     }
 
     public enum TurnoverType
     {
         [Description("Bad Pass")]
-        BAD_PASS,
+        BAD_PASS = 1,
         [Description("Ball Handling")]
-        BALL_HANDLING,
+        BALL_HANDLING = 2,
         [Description("Travel")]
-        TRAVEL,
+        TRAVEL = 3,
         [Description("Double Dribble")]
-        DOUBLE_DRIBBLE,
+        DOUBLE_DRIBBLE = 4,
         [Description("Out Of Bounds")]
-        OUT_OF_BOUNDS,
+        OUT_OF_BOUNDS = 5,
         [Description("Back Court")]
-        BACK_COURT,
+        BACK_COURT = 6,
         [Description("Seconds 3")]
-        SECONDS_3,
+        SECONDS_3 = 7,
         [Description("Seconds 5")]
-        SECONDS_5,
+        SECONDS_5 = 8,
         [Description("Offensive Goal Tending")]
-        OFFENSIVE_GOAL_TENDING,
+        OFFENSIVE_GOAL_TENDING = 9,
         [Description("Other")]
-        OTHER
+        OTHER = 10
     }
 
     public enum ShotType
     {
         [Description("Jumpshot")]
-        JUMPSHOT,
+        JUMPSHOT = 1,
         [Description("Floating Jump Shot")]
-        FLOATING_JUMP_SHOT,
+        FLOATING_JUMP_SHOT = 2,
         [Description("Turnaround Jump Shot")]
-        TURNAROUND_JUMP_SHOT,
+        TURNAROUND_JUMP_SHOT = 3,
         [Description("Step Back Jump Shot")]
-        STEP_BACK_JUMP_SHOT,
+        STEP_BACK_JUMP_SHOT = 4,
         [Description("Pull Up Jump Shot")]
-        PULL_UP_JUMP_SHOT,
+        PULL_UP_JUMP_SHOT = 5,
         [Description("Layoup")]
-        LAYOUP,
+        LAYOUP = 6,
         [Description("Driving Layoup")]
-        DRIVING_LAYOUP,
+        DRIVING_LAYOUP = 7,
         [Description("Dunk")]
-        DUNK,
+        DUNK = 8,
         [Description("Alley Oop")]
-        ALLEY_OOP,
+        ALLEY_OOP = 9,
         [Description("Hook Shot")]
-        HOOK_SHOT
+        HOOK_SHOT = 10
     }
 
-    public enum PlayerFoulType
+    public enum FoulType
     {
         [Description("Personal")]
-        PERSONAL,
+        PERSONAL = 1,
         [Description("Shooting")]
-        SHOOTING,
+        SHOOTING = 2,
         [Description("Offensive")]
-        OFFENSIVE,
+        OFFENSIVE = 3,
         [Description("Technical")]
-        TECHNICAL,
+        TECHNICAL = 4,
         [Description("Double")]
-        DOUBLE,
+        DOUBLE = 5,
         [Description("Unsportsmanlike")]
-        UNSPORTSMANLIKE,
+        UNSPORTSMANLIKE = 6,
         [Description("Unsportsmalike Shooting")]
-        UNSPORTSMALIKE_SHOOTING,
+        UNSPORTSMALIKE_SHOOTING = 7,
         [Description("Disqualifying")]
-        DISQUALIFYING,
+        DISQUALIFYING = 8,
         [Description("Disqualifying Shooting")]
-        DISQUALIFYING_SHOOTING,
-    }
-
-    public enum CoachFoulType
-    {
-        [Description("Coach Disqualifying")]
-        DISQUALIFYING,
-        [Description("Coach Technical")]
-        TECHNICAL,
+        DISQUALIFYING_SHOOTING = 9
     }
 
     public enum JumpBallType
     {
         [Description("Lodged Ball")]
-        LODGED_BALL,
+        LODGED_BALL = 1,
         [Description("Contested Rebound")]
-        CONTESTED_REBOUND,
+        CONTESTED_REBOUND = 2,
         [Description("Out Of Bounds Rebound")]
-        OUT_OF_BOUNDS_REBOUND,
+        OUT_OF_BOUNDS_REBOUND = 3,
         [Description("Held ball")]
-        HELD_BALL,
+        HELD_BALL = 4,
         [Description("Out Of Bounds Loose Ball")]
-        OUT_OF_BOUNDS_LOOSE_BALL
+        OUT_OF_BOUNDS_LOOSE_BALL = 5
     }
-
 
     public enum IncidentType
     {
         [Description("Foul")]
-        FOUL,
+        FOUL = 1,
         [Description("Rebound")]
-        REBOUND,
+        REBOUND = 2,
         [Description("Shot")]
-        SHOT,
+        SHOT = 3,
         [Description("Turnover")]
-        TURNOVER,
+        TURNOVER = 4,
         [Description("Substitution")]
-        SUBSTITUTION,
+        SUBSTITUTION = 5,
         [Description("Timeout")]
-        TIMEOUT,
+        TIMEOUT = 6,
         [Description("Jump Ball")]
-        JUMP_BALL
+        JUMP_BALL = 7
     }
 
 }
