@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.WebUI.Controllers
 {
-    public class TeamMatchesController : BaseController
+    public class TeamMatchController : BaseController
     {
         [HttpGet]
         public async Task<ActionResult<TeamMatch>> GetAll()

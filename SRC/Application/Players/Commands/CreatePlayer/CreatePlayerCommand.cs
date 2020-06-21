@@ -5,6 +5,7 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Position = BasketballLeague.Domain.Common.Postition;
 
 namespace BasketballLeague.Application.Players.Commands.CreatePlayer
 {
@@ -15,7 +16,7 @@ namespace BasketballLeague.Application.Players.Commands.CreatePlayer
         public DateTime? Birthdate { get; set; }
         public string PhotoUrl { get; set; }
         public byte? Height { get; set; }
-        public int? Position { get; set; }
+        public Position Position { get; set; }
 
 
         public class Handler : IRequestHandler<CreatePlayerCommand>
@@ -38,7 +39,7 @@ namespace BasketballLeague.Application.Players.Commands.CreatePlayer
                     Birthdate = request.Birthdate,
                     PhotoUrl = request.PhotoUrl,
                     Height = request.Height,
-                    Position = (BasketballLeague.Domain.Common.Postition)request.Position
+                    Position = request.Position
                 };
 
                 _context.Player.Add(entity);

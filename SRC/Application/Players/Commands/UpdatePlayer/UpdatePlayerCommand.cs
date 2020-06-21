@@ -1,5 +1,6 @@
 ﻿using BasketballLeague.Application.Common.Exceptions;
 using BasketballLeague.Application.Common.Interfaces;
+using BasketballLeague.Domain.Common;
 using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace BasketballLeague.Application.Players.Commands.UpdatePlayer
         public DateTime? Birthdate { get; set; }
         public string PhotoUrl { get; set; }
         public int? Height { get; set; }
-        public int? Position { get; set; }
+        public Postition? Position { get; set; }
 
         public class Handler : IRequestHandler<UpdatePlayerCommand>
         {
@@ -43,7 +44,7 @@ namespace BasketballLeague.Application.Players.Commands.UpdatePlayer
                 entity.Birthdate = request.Birthdate ?? entity.Birthdate;
                 entity.PhotoUrl = request.PhotoUrl ?? entity.PhotoUrl;
                 entity.Height = request.Height ?? entity.Height;
-                entity.Position = (BasketballLeague.Domain.Common.Postition?)request.Position ?? entity.Position;
+                entity.Position = request.Position ?? entity.Position;
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

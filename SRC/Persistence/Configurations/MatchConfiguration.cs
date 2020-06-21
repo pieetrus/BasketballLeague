@@ -26,7 +26,7 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.SeasonDivision)
                 .WithMany(p => p.Matches)
                 .HasForeignKey(d => d.SeasonDivisionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Match_Season_Division_ID_Season_Division_Season_Division_ID");
 
             builder.HasOne(d => d.TeamGuest)

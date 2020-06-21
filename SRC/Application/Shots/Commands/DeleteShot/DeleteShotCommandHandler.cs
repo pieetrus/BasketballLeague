@@ -2,6 +2,7 @@
 using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +20,9 @@ namespace BasketballLeague.Application.Shots.Commands.DeleteShot
 
         public async Task<Unit> Handle(DeleteShotCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Shot.FindAsync(request.Id);
+            var entity = await _context.Shot
+                //.Include(x => x.Incident)
+                .FirstOrDefaultAsync(x => x.ShotId == request.Id);
 
             if (entity == null)
             {
@@ -27,6 +30,7 @@ namespace BasketballLeague.Application.Shots.Commands.DeleteShot
             }
 
             _context.Shot.Remove(entity);
+            //_context.Incident.Remove(entity.Incident);
 
             var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

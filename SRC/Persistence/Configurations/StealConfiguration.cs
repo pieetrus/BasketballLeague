@@ -26,7 +26,7 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.Turnover)
                 .WithOne(p => p.Steal)
                 .HasForeignKey<Steal>(d => d.TurnoverId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Steal_Turnover_ID_Turnover_Turnover_ID");
         }
     }

@@ -28,7 +28,7 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.Incident)
                 .WithOne(p => p.Rebound)
                 .HasForeignKey<Rebound>(d => d.IncidentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Rebound_Incident_ID_Incident_Incident_ID");
 
             builder.HasOne(d => d.Player)

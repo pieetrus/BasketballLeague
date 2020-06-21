@@ -29,15 +29,16 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
             RuleFor(x => x.PlayerId)
                 .NotEmpty();
 
-            RuleFor(x => x.ShotType)
+            RuleFor(x => (int)x.ShotType)
                 .InclusiveBetween(1, 7)
                 .NotEmpty();
 
-            RuleFor(x => x.IsAccurate)
-                .NotEmpty();
 
             RuleFor(x => x.IsFastAttack)
-                .NotEmpty();
+                .Must(x => x == false || x == true);
+
+            RuleFor(x => x.IsAccurate)
+               .Must(x => x == false || x == true);
 
             RuleFor(x => x.Value)
                 .InclusiveBetween(2,3)

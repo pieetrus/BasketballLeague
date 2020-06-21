@@ -26,7 +26,7 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.Shot)
                     .WithOne(p => p.Block)
                     .HasForeignKey<Block>(d => d.ShotId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Block_Shot_ID_Shot_Shot_ID");
            
         }

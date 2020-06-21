@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BasketballLeague.Application.Shots.Queries.GetShotsList
 {
-    public class GetShostListQuery : IRequest<IEnumerable<Shot>>
+    public class GetShotsListQuery : IRequest<IEnumerable<Shot>>
     {
     }
 }

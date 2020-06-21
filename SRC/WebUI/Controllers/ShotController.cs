@@ -1,6 +1,7 @@
 ﻿using BasketballLeague.Application.Shots.Commands.CreateShot;
 using BasketballLeague.Application.Shots.Commands.DeleteShot;
 using BasketballLeague.Application.Shots.Commands.UpdateShot;
+using BasketballLeague.Application.Shots.Queries.GetShotDetail;
 using BasketballLeague.Application.Shots.Queries.GetShotsList;
 using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +15,18 @@ namespace BasketballLeague.WebUI.Controllers
         [HttpGet]
         public async Task<ActionResult<Shot>> GetAll()
         {
-            return Ok(await Mediator.Send(new GetShostListQuery()));
+            return Ok(await Mediator.Send(new GetShotsListQuery()));
+        }
+
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Player>> Get(int id)
+        {
+            var player = await Mediator.Send(new GetShotDetailQuery { Id = id });
+
+            return Ok(player);
         }
 
         [HttpPost]

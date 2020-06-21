@@ -18,7 +18,7 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.Foul)
                 .WithMany(p => p.FreeThrows)
                 .HasForeignKey(d => d.FoulId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade) // cascade ??
                 .HasConstraintName("FK_Free_Throw_Foul_ID_Foul_Foul_ID");
 
             builder.HasOne(d => d.PlayerShooter)

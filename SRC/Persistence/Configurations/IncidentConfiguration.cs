@@ -32,7 +32,7 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.Match)
                 .WithMany(p => p.Incidents)
                 .HasForeignKey(d => d.MatchId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Incident_Match_ID_Match_Match_ID");
 
         }

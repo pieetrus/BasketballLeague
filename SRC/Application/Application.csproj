@@ -21,7 +21,10 @@
 
 
   <ItemGroup>
+    <Folder Include="Fouls\Commands\UpdateFoul\" />
     <Folder Include="Incidents\Commands\" />
+    <Folder Include="JumpBalls\Commands\DeleteJumpBall\" />
+    <Folder Include="JumpBalls\Commands\UpdateJumpBall\" />
   </ItemGroup>
 
 </Project>

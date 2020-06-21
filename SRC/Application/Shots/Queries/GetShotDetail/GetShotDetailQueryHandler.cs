@@ -2,6 +2,7 @@
 using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +18,9 @@ namespace BasketballLeague.Application.Shots.Queries.GetShotDetail
         }
         public async Task<Shot> Handle(GetShotDetailQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Shot.FindAsync(request.Id);
+            var entity = await _context.Shot
+                .Include(x => x.Incident)
+                .FirstOrDefaultAsync(x => x.ShotId == request.Id, cancellationToken);
 
             if (entity == null)
             {

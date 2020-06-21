@@ -22,7 +22,7 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.Incident)
                 .WithOne(p => p.Substitution)
                 .HasForeignKey<Substitution>(d => d.IncidentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Substitution_Incident_ID_Incident_Incident_ID");
 
             builder.HasOne(d => d.PlayerIn)

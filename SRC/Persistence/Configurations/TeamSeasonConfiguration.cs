@@ -82,13 +82,13 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.SeasonDivision)
                 .WithMany(p => p.TeamSeasons)
                 .HasForeignKey(d => d.SeasonDivisionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Team_Season_Season_Division_ID_Season_Division_ID");
 
             builder.HasOne(d => d.Team)
                 .WithMany(p => p.TeamSeasons)
                 .HasForeignKey(d => d.TeamId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Team_Season_Team_ID_Team_ID");
         }
     }

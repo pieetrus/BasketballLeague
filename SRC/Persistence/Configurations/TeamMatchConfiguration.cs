@@ -74,13 +74,13 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.Match)
                 .WithMany(p => p.TeamMatches)
                 .HasForeignKey(d => d.MatchId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Team_Match_Match_ID_Match_ID");
 
             builder.HasOne(d => d.Team)
                 .WithMany(p => p.TeamMatches)
                 .HasForeignKey(d => d.TeamId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Team_Match_Team_ID_Team_ID");
         }
     }

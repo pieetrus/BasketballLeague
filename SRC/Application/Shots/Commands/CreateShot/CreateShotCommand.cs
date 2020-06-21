@@ -13,12 +13,12 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public int IncidentType { get; set; }
+        public IncidentType IncidentType { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
 
         public int PlayerId { get; set; }
-        public int ShotType { get; set; }
+        public ShotType ShotType { get; set; }
         public bool IsAccurate { get; set; }
         public bool IsFastAttack { get; set; }
         public int Value { get; set; }
@@ -35,7 +35,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
 
             public async Task<Unit> Handle(CreateShotCommand request, CancellationToken cancellationToken)
             {
-                if (request.IncidentType != (int)BasketballLeague.Domain.Common.IncidentType.SHOT)
+                if (request.IncidentType != IncidentType.SHOT)
                 {
                     throw new Exception("Error creating shot incident - bad incident type");
                 }
@@ -45,7 +45,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                     MatchId = request.MatchId,
                     Minutes = request.Minutes,
                     Seconds = request.Seconds,
-                    IncidentType = (IncidentType)request.IncidentType,
+                    IncidentType = request.IncidentType,
                     Quater = request.Quater,
                     Flagged = request.Flagged
                 };
@@ -53,12 +53,11 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                 var shot = new Shot
                 {
                     PlayerId = request.PlayerId,
-                    ShotType = (ShotType)request.ShotType,
-                    IsAccurate = request.IsAccurate,
+                    ShotType = request.ShotType,
                     IsFastAttack = request.IsFastAttack,
+                    IsAccurate = request.IsAccurate,
                     Value = request.Value,
                     Incident = incident,
-                    IncidentId = incident.IncidentId,
                 };
 
                 _context.Shot.Add(shot);
