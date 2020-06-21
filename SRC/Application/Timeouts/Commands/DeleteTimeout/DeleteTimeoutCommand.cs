@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
 
 namespace BasketballLeague.Application.Timeouts.Commands.DeleteTimeout
 {
-    class DeleteTimeoutCommand
+    public class DeleteTimeoutCommand : IRequest
     {
+        public int Id { get; set; }
     }
 }

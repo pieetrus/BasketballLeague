@@ -1,4 +1,6 @@
 ﻿using BasketballLeague.Application.JumpBalls.Commands.CreateJumpBall;
+using BasketballLeague.Application.JumpBalls.Commands.DeleteJumpBall;
+using BasketballLeague.Application.JumpBalls.Commands.UpdateJumpBall;
 using BasketballLeague.Application.JumpBalls.Queries.GetJumpBallDetail;
 using BasketballLeague.Application.JumpBalls.Queries.GetJumpBallsList;
 using BasketballLeague.Domain.Entities;
@@ -36,26 +38,26 @@ namespace BasketballLeague.WebUI.Controllers
             return NoContent();
         }
 
-        //[HttpPut("{id}")]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> Update(int id, [FromBody] UpdateJumpBallCommand command)
-        //{
-        //    command.Id = id;
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateJumpBallCommand command)
+        {
+            command.Id = id;
 
-        //    await Mediator.Send(command);
+            await Mediator.Send(command);
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //[HttpDelete("{id}")]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    await Mediator.Send(new DeleteJumpBallCommand { Id = id });
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await Mediator.Send(new DeleteJumpBallCommand { Id = id });
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
     }
 }

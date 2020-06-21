@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
+namespace BasketballLeague.Application.Turnovers.Commands.UpdateTimeout
 {
-    public class UpdateSubstitutionCommandValidator : AbstractValidator<UpdateSubstitutionCommand>
+    public class UpdateTurnoverCommandValidator : AbstractValidator<UpdateTurnoverCommand>
     {
-        public UpdateSubstitutionCommandValidator()
+        public UpdateTurnoverCommandValidator()
         {
             RuleFor(x => x.Minutes)
                 .MinimumLength(1)
@@ -16,9 +16,6 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
 
             RuleFor(x => x.Quater)
                 .InclusiveBetween(1, 4);
-
-            RuleFor(x => x.PlayerInId)
-                .NotEqual(x => x.PlayerOutId);
         }
     }
 }

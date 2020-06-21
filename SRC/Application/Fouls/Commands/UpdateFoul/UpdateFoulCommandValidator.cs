@@ -1,11 +1,16 @@
 ﻿using FluentValidation;
 
-namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
+namespace BasketballLeague.Application.Fouls.Commands.UpdateFoul
 {
-    public class UpdateSubstitutionCommandValidator : AbstractValidator<UpdateSubstitutionCommand>
+    class UpdateFoulCommandValidator : AbstractValidator<UpdateFoulCommand>
     {
-        public UpdateSubstitutionCommandValidator()
+        public UpdateFoulCommandValidator()
         {
+            //todo validation based on foultype
+
+            RuleFor(x => (int)x.FoulType)
+              .InclusiveBetween(1, 9);
+
             RuleFor(x => x.Minutes)
                 .MinimumLength(1)
                 .MaximumLength(2);
@@ -16,9 +21,6 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
 
             RuleFor(x => x.Quater)
                 .InclusiveBetween(1, 4);
-
-            RuleFor(x => x.PlayerInId)
-                .NotEqual(x => x.PlayerOutId);
         }
     }
 }

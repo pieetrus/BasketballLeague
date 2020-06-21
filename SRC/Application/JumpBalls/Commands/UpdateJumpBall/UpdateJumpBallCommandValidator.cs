@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
+namespace BasketballLeague.Application.JumpBalls.Commands.UpdateJumpBall
 {
-    public class UpdateSubstitutionCommandValidator : AbstractValidator<UpdateSubstitutionCommand>
+    public class UpdateJumpBallCommandValidator : AbstractValidator<UpdateJumpBallCommand>
     {
-        public UpdateSubstitutionCommandValidator()
+        public UpdateJumpBallCommandValidator()
         {
             RuleFor(x => x.Minutes)
                 .MinimumLength(1)
@@ -17,8 +17,8 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
             RuleFor(x => x.Quater)
                 .InclusiveBetween(1, 4);
 
-            RuleFor(x => x.PlayerInId)
-                .NotEqual(x => x.PlayerOutId);
+            RuleFor(x => (int)x.JumpBallType)
+                .InclusiveBetween(1, 5);
         }
     }
 }

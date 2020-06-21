@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace BasketballLeague.Application.Substitutions.Commands.CreateSubstitution
+namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
 {
-    public class CreateSubstitutionCommandValidator : AbstractValidator<CreateSubstitutionCommand>
+    class CreateTurnoverCommandValidator : AbstractValidator<CreateTurnoverCommand>
     {
-        public CreateSubstitutionCommandValidator()
+        public CreateTurnoverCommandValidator()
         {
             RuleFor(x => x.MatchId)
                 .NotEmpty();
@@ -26,11 +26,9 @@ namespace BasketballLeague.Application.Substitutions.Commands.CreateSubstitution
                 .InclusiveBetween(1, 4)
                 .NotEmpty();
 
-            RuleFor(x => x.PlayerOutId)
+            RuleFor(x => x.PlayerId)
                 .NotEmpty();
-
-            RuleFor(x => x.PlayerInId)
-                .NotEqual(x => x.PlayerOutId)
+            RuleFor(x => x.TurnoverType)
                 .NotEmpty();
         }
     }

@@ -21,13 +21,13 @@ namespace BasketballLeague.Domain.Entities
             builder.HasOne(d => d.Match)
                 .WithMany(p => p.RefereeMatches)
                 .HasForeignKey(d => d.MatchId)
-                .OnDelete(DeleteBehavior.Cascade)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Referee_Matches_Match_ID_Match_Match_ID");
 
             builder.HasOne(d => d.Referee)
                 .WithMany(p => p.RefereeMatches)
                 .HasForeignKey(d => d.RefereeId)
-                .OnDelete(DeleteBehavior.Cascade)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Referee_Matches_Referee_ID_Referee_Referee_ID");
         }
     }

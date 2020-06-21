@@ -5,11 +5,10 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Timeout = BasketballLeague.Domain.Entities.Timeout;
 
-namespace BasketballLeague.Application.Timeouts.Commands.CreateTimeout
+namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
 {
-    public class CreateTimeoutCommand : IRequest
+    public class CreateTurnoverCommand : IRequest
     {
         public int MatchId { get; set; }
         public string Minutes { get; set; }
@@ -18,11 +17,12 @@ namespace BasketballLeague.Application.Timeouts.Commands.CreateTimeout
         public int Quater { get; set; }
         public bool Flagged { get; set; }
 
-        public int TeamId { get; set; }
+        public int PlayerId { get; set; }
+        public TurnoverType TurnoverType { get; set; }
 
 
 
-        public class Handler : IRequestHandler<CreateTimeoutCommand>
+        public class Handler : IRequestHandler<CreateTurnoverCommand>
         {
             private readonly IBasketballLeagueDbContext _context;
 
@@ -31,11 +31,11 @@ namespace BasketballLeague.Application.Timeouts.Commands.CreateTimeout
                 _context = context;
             }
 
-            public async Task<Unit> Handle(CreateTimeoutCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(CreateTurnoverCommand request, CancellationToken cancellationToken)
             {
-                if (request.IncidentType != IncidentType.TIMEOUT)
+                if (request.IncidentType != IncidentType.TURNOVER)
                 {
-                    throw new Exception("Error creating timeout incident - bad incident type");
+                    throw new Exception("Error creating turnover incident - bad incident type");
                 }
 
                 var incident = new Incident
@@ -48,13 +48,14 @@ namespace BasketballLeague.Application.Timeouts.Commands.CreateTimeout
                     Flagged = request.Flagged
                 };
 
-                var timeout = new Timeout
+                var turnover = new Turnover
                 {
-                    TeamId = request.TeamId,
+                    PlayerId = request.PlayerId,
+                    TurnoverType = request.TurnoverType,
                     Incident = incident
                 };
 
-                _context.Timeout.Add(timeout);
+                _context.Turnover.Add(turnover);
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

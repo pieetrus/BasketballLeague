@@ -20,17 +20,14 @@ namespace BasketballLeague.Application.Shots.Commands.DeleteShot
 
         public async Task<Unit> Handle(DeleteShotCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Shot
-                //.Include(x => x.Incident)
-                .FirstOrDefaultAsync(x => x.ShotId == request.Id);
+            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Shot.ShotId == request.Id);
 
             if (entity == null)
             {
                 throw new NotFoundException(nameof(Team), request.Id);
             }
 
-            _context.Shot.Remove(entity);
-            //_context.Incident.Remove(entity.Incident);
+            _context.Incident.Remove(entity);
 
             var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

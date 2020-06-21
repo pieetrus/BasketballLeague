@@ -1,13 +1,16 @@
-﻿using BasketballLeague.Application.Common.Interfaces;
+﻿using BasketballLeague.Application.Common.Exceptions;
+using BasketballLeague.Application.Common.Interfaces;
+using BasketballLeague.Domain.Common;
+using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
+namespace BasketballLeague.Application.Turnovers.Commands.UpdateTimeout
 {
-    public class UpdateSubstitutionCommand : IRequest
+    public class UpdateTurnoverCommand : IRequest
     {
         public int Id { get; set; }
         public int? MatchId { get; set; }
@@ -16,11 +19,10 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
         public int? Quater { get; set; }
         public bool? Flagged { get; set; }
 
-        public int? PlayerInId { get; set; }
-        public int? PlayerOutId { get; set; }
+        public int? PlayerId { get; set; }
+        public TurnoverType? TurnoverType { get; set; }
 
-
-        public class Handler : IRequestHandler<UpdateSubstitutionCommand>
+        public class Handler : IRequestHandler<UpdateTurnoverCommand>
         {
             private readonly IBasketballLeagueDbContext _context;
 
@@ -29,9 +31,14 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
                 _context = context;
             }
 
-            public async Task<Unit> Handle(UpdateSubstitutionCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(UpdateTurnoverCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _context.Substitution.Include(x => x.Incident).FirstOrDefaultAsync(x => x.SubstitutionId == request.Id);
+                var entity = await _context.Turnover.Include(x => x.Incident).FirstOrDefaultAsync(x => x.TurnoverId == request.Id);
+
+                if (entity == null)
+                {
+                    throw new NotFoundException(nameof(Turnover), request.Id);
+                }
 
                 entity.Incident.MatchId = request.MatchId ?? entity.Incident.MatchId;
                 entity.Incident.Minutes = request.Minutes ?? entity.Incident.Minutes;
@@ -39,8 +46,8 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
                 entity.Incident.Quater = request.Quater ?? entity.Incident.Quater;
                 entity.Incident.Flagged = request.Flagged ?? entity.Incident.Flagged;
 
-                entity.PlayerInId = request.PlayerInId ?? entity.PlayerInId;
-                entity.PlayerOutId = request.PlayerOutId ?? entity.PlayerOutId;
+                entity.PlayerId = request.PlayerId ?? entity.PlayerId;
+                entity.TurnoverType = request.TurnoverType ?? entity.TurnoverType;
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

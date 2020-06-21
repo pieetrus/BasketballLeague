@@ -1,5 +1,6 @@
 ﻿using BasketballLeague.Application.Fouls.Commands.CreateFoul;
 using BasketballLeague.Application.Fouls.Commands.DeleteFoul;
+using BasketballLeague.Application.Fouls.Commands.UpdateFoul;
 using BasketballLeague.Application.Fouls.Queries.GetFoulDetail;
 using BasketballLeague.Application.Fouls.Queries.GetFoulsList;
 using BasketballLeague.Domain.Entities;
@@ -38,17 +39,17 @@ namespace BasketballLeague.WebUI.Controllers
             return NoContent();
         }
 
-        //[HttpPut("{id}")]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> Update(int id, [FromBody] UpdateDivisionCommand command)
-        //{
-        //    command.Id = id;
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateFoulCommand command)
+        {
+            command.Id = id;
 
-        //    await Mediator.Send(command);
+            await Mediator.Send(command);
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

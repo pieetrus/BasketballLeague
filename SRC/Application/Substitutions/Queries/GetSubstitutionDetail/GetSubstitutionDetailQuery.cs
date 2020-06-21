@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BasketballLeague.Domain.Entities;
+using MediatR;
 
 namespace BasketballLeague.Application.Substitutions.Queries.GetSubstitutionDetail
 {
-    class GetSubstitutionDetailQuery
+    public class GetSubstitutionDetailQuery : IRequest<Substitution>
     {
+        public int Id { get; set; }
     }
 }

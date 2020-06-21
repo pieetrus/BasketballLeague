@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BasketballLeague.Domain.Entities;
+using MediatR;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BasketballLeague.Application.Timeouts.Queries.GetTimeoutsList
 {
-    class GetTimeoutsListQuery
+    public class GetTimeoutsListQuery : IRequest<IEnumerable<Timeout>>
     {
     }
 }

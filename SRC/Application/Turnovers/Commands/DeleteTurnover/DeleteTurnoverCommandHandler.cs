@@ -7,24 +7,24 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.Substitutions.Commands.DeleteSubstitution
+namespace BasketballLeague.Application.Turnovers.Commands.DeleteTurnover
 {
-    public class DeleteSubstitutionCommandHandler : IRequestHandler<DeleteSubstitutionCommand>
+    public class DeleteTurnoverCommandHandler : IRequestHandler<DeleteTurnoverCommand>
     {
         private readonly IBasketballLeagueDbContext _context;
 
-        public DeleteSubstitutionCommandHandler(IBasketballLeagueDbContext context)
+        public DeleteTurnoverCommandHandler(IBasketballLeagueDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Unit> Handle(DeleteSubstitutionCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteTurnoverCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Substitution.SubstitutionId == request.Id);
+            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Turnover.TurnoverId == request.Id);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Substitution), request.Id);
+                throw new NotFoundException(nameof(Turnover), request.Id);
             }
 
             _context.Incident.Remove(entity);

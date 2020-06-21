@@ -1,13 +1,14 @@
 ﻿using BasketballLeague.Application.Common.Interfaces;
+using BasketballLeague.Domain.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
+namespace BasketballLeague.Application.JumpBalls.Commands.UpdateJumpBall
 {
-    public class UpdateSubstitutionCommand : IRequest
+    public class UpdateJumpBallCommand : IRequest
     {
         public int Id { get; set; }
         public int? MatchId { get; set; }
@@ -16,11 +17,10 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
         public int? Quater { get; set; }
         public bool? Flagged { get; set; }
 
-        public int? PlayerInId { get; set; }
-        public int? PlayerOutId { get; set; }
+        public JumpBallType? JumpBallType { get; set; }
 
 
-        public class Handler : IRequestHandler<UpdateSubstitutionCommand>
+        public class Handler : IRequestHandler<UpdateJumpBallCommand>
         {
             private readonly IBasketballLeagueDbContext _context;
 
@@ -29,9 +29,9 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
                 _context = context;
             }
 
-            public async Task<Unit> Handle(UpdateSubstitutionCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(UpdateJumpBallCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _context.Substitution.Include(x => x.Incident).FirstOrDefaultAsync(x => x.SubstitutionId == request.Id);
+                var entity = await _context.JumpBall.Include(x => x.Incident).FirstOrDefaultAsync(x => x.JumpBallId == request.Id);
 
                 entity.Incident.MatchId = request.MatchId ?? entity.Incident.MatchId;
                 entity.Incident.Minutes = request.Minutes ?? entity.Incident.Minutes;
@@ -39,8 +39,7 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
                 entity.Incident.Quater = request.Quater ?? entity.Incident.Quater;
                 entity.Incident.Flagged = request.Flagged ?? entity.Incident.Flagged;
 
-                entity.PlayerInId = request.PlayerInId ?? entity.PlayerInId;
-                entity.PlayerOutId = request.PlayerOutId ?? entity.PlayerOutId;
+                entity.JumpBallType = request.JumpBallType ?? entity.JumpBallType;
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

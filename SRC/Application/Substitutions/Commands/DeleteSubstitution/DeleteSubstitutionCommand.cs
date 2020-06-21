@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
 
 namespace BasketballLeague.Application.Substitutions.Commands.DeleteSubstitution
 {
-    class DeleteSubstitutionCommand
+    public class DeleteSubstitutionCommand : IRequest
     {
+        public int Id { get; set; }
     }
 }

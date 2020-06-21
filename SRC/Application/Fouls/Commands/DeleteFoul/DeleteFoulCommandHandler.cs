@@ -20,16 +20,14 @@ namespace BasketballLeague.Application.Fouls.Commands.DeleteFoul
 
         public async Task<Unit> Handle(DeleteFoulCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Foul
-                //.Include(x => x.Incident)
-                .FirstOrDefaultAsync(x => x.FoulId == request.Id);
+            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Shot.ShotId == request.Id);
 
             if (entity == null)
             {
                 throw new NotFoundException(nameof(Foul), request.Id);
             }
 
-            _context.Foul.Remove(entity);
+            _context.Incident.Remove(entity);
 
             var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

@@ -7,24 +7,24 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.Substitutions.Commands.DeleteSubstitution
+namespace BasketballLeague.Application.JumpBalls.Commands.DeleteJumpBall
 {
-    public class DeleteSubstitutionCommandHandler : IRequestHandler<DeleteSubstitutionCommand>
+    public class DeleteJumpBallCommandHandler : IRequestHandler<DeleteJumpBallCommand>
     {
         private readonly IBasketballLeagueDbContext _context;
 
-        public DeleteSubstitutionCommandHandler(IBasketballLeagueDbContext context)
+        public DeleteJumpBallCommandHandler(IBasketballLeagueDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Unit> Handle(DeleteSubstitutionCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteJumpBallCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Substitution.SubstitutionId == request.Id);
+            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.JumpBall.JumpBallId == request.Id);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Substitution), request.Id);
+                throw new NotFoundException(nameof(JumpBall), request.Id);
             }
 
             _context.Incident.Remove(entity);
