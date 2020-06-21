@@ -95,7 +95,13 @@ namespace BasketballLeague.Domain.Common
         [Description("Disqualifying")]
         DISQUALIFYING = 8,
         [Description("Disqualifying Shooting")]
-        DISQUALIFYING_SHOOTING = 9
+        DISQUALIFYING_SHOOTING = 9,
+        [Description("Coach Disqualifying")]
+        COACH_DISQUALIFYING = 10,
+        [Description("Coach Technical")]
+        COACH_TECHNICAL = 11,
+        [Description("Bench Technical")]
+        BENCH_TECHNICAL = 12
     }
 
     public enum JumpBallType

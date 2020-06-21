@@ -19,9 +19,6 @@ namespace BasketballLeague.Application.Timeouts.Commands.CreateTimeout
                 .MaximumLength(2)
                 .NotEmpty();
 
-            RuleFor(x => x.IncidentType)
-                .NotEmpty();
-
             RuleFor(x => x.Quater)
                 .InclusiveBetween(1, 4)
                 .NotEmpty();

@@ -13,7 +13,6 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public IncidentType IncidentType { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
 
@@ -33,17 +32,12 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
 
             public async Task<Unit> Handle(CreateTurnoverCommand request, CancellationToken cancellationToken)
             {
-                if (request.IncidentType != IncidentType.TURNOVER)
-                {
-                    throw new Exception("Error creating turnover incident - bad incident type");
-                }
-
                 var incident = new Incident
                 {
                     MatchId = request.MatchId,
                     Minutes = request.Minutes,
                     Seconds = request.Seconds,
-                    IncidentType = request.IncidentType,
+                    IncidentType = IncidentType.TURNOVER,
                     Quater = request.Quater,
                     Flagged = request.Flagged
                 };

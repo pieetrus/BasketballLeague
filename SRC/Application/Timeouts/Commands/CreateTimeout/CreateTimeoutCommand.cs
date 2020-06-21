@@ -14,7 +14,6 @@ namespace BasketballLeague.Application.Timeouts.Commands.CreateTimeout
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public IncidentType IncidentType { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
 
@@ -33,17 +32,12 @@ namespace BasketballLeague.Application.Timeouts.Commands.CreateTimeout
 
             public async Task<Unit> Handle(CreateTimeoutCommand request, CancellationToken cancellationToken)
             {
-                if (request.IncidentType != IncidentType.TIMEOUT)
-                {
-                    throw new Exception("Error creating timeout incident - bad incident type");
-                }
-
                 var incident = new Incident
                 {
                     MatchId = request.MatchId,
                     Minutes = request.Minutes,
                     Seconds = request.Seconds,
-                    IncidentType = request.IncidentType,
+                    IncidentType = IncidentType.TIMEOUT,
                     Quater = request.Quater,
                     Flagged = request.Flagged
                 };

@@ -13,7 +13,6 @@ namespace BasketballLeague.Application.Substitutions.Commands.CreateSubstitution
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public IncidentType IncidentType { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
 
@@ -32,17 +31,12 @@ namespace BasketballLeague.Application.Substitutions.Commands.CreateSubstitution
 
             public async Task<Unit> Handle(CreateSubstitutionCommand request, CancellationToken cancellationToken)
             {
-                if (request.IncidentType != IncidentType.SUBSTITUTION)
-                {
-                    throw new Exception("Error creating substitution incident - bad incident type");
-                }
-
                 var incident = new Incident
                 {
                     MatchId = request.MatchId,
                     Minutes = request.Minutes,
                     Seconds = request.Seconds,
-                    IncidentType = request.IncidentType,
+                    IncidentType = IncidentType.SUBSTITUTION,
                     Quater = request.Quater,
                     Flagged = request.Flagged
                 };

@@ -24,6 +24,8 @@ namespace BasketballLeague.Domain.Entities
 
             builder.Property(e => e.IncidentId).HasColumnName("Incident_ID");
 
+            builder.Property(e => e.TeamId).HasColumnName("Team_ID");
+
             builder.Property(e => e.PlayerWhoFouledId).HasColumnName("Player_Who_Fouled_ID");
 
             builder.Property(e => e.PlayerWhoWasFouledId).HasColumnName("Player_Who_Was_Fouled_ID");
@@ -48,6 +50,11 @@ namespace BasketballLeague.Domain.Entities
                 .WithMany(p => p.FoulsOn)
                 .HasForeignKey(d => d.PlayerWhoWasFouledId)
                 .HasConstraintName("FK_Foul_Player_Who_Was_Fouled_ID_Player_Player_ID");
+
+            builder.HasOne(d => d.Team)
+                .WithMany(p => p.BenchFouls)
+                .HasForeignKey(d => d.TeamId)
+                .HasConstraintName("FK_Foul_Team_ID_Team_Team_ID");
 
         }
     }

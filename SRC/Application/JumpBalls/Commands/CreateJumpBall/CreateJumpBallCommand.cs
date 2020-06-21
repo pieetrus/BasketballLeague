@@ -13,7 +13,6 @@ namespace BasketballLeague.Application.JumpBalls.Commands.CreateJumpBall
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public IncidentType IncidentType { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
 
@@ -31,17 +30,12 @@ namespace BasketballLeague.Application.JumpBalls.Commands.CreateJumpBall
 
             public async Task<Unit> Handle(CreateJumpBallCommand request, CancellationToken cancellationToken)
             {
-                if (request.IncidentType != IncidentType.JUMP_BALL)
-                {
-                    throw new Exception("Error creating shot incident - bad incident type");
-                }
-
                 var incident = new Incident
                 {
                     MatchId = request.MatchId,
                     Minutes = request.Minutes,
                     Seconds = request.Seconds,
-                    IncidentType = request.IncidentType,
+                    IncidentType = IncidentType.JUMP_BALL,
                     Quater = request.Quater,
                     Flagged = request.Flagged
                 };

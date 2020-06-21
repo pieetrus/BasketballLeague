@@ -19,9 +19,6 @@ namespace BasketballLeague.Application.Substitutions.Commands.CreateSubstitution
                 .MaximumLength(2)
                 .NotEmpty();
 
-            RuleFor(x => x.IncidentType)
-                .NotEmpty();
-
             RuleFor(x => x.Quater)
                 .InclusiveBetween(1, 4)
                 .NotEmpty();

@@ -16,12 +16,11 @@ namespace BasketballLeague.Application.Shots.Commands.UpdateShot
         public int? MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public int? IncidentType { get; set; }
         public int? Quater { get; set; }
         public bool Flagged { get; set; }
 
         public int? PlayerId { get; set; }
-        public int? ShotType { get; set; }
+        public ShotType? ShotType { get; set; }
         public bool? IsAccurate { get; set; }
         public bool? IsFastAttack { get; set; }
         public int? Value { get; set; }
@@ -48,12 +47,11 @@ namespace BasketballLeague.Application.Shots.Commands.UpdateShot
                 entity.Incident.MatchId = request.MatchId ?? entity.Incident.MatchId;
                 entity.Incident.Minutes = request.Minutes ?? entity.Incident.Minutes;
                 entity.Incident.Seconds = request.Seconds ?? entity.Incident.Seconds;
-                entity.Incident.IncidentType = (IncidentType?)request.IncidentType ?? entity.Incident.IncidentType;
                 entity.Incident.Quater = request.Quater ?? entity.Incident.Quater;
                 entity.Incident.Flagged = (bool?)request.Flagged ?? entity.Incident.Flagged;
 
                 entity.PlayerId = request.PlayerId ?? entity.PlayerId;
-                entity.ShotType = (ShotType?)request.ShotType ?? entity.ShotType;
+                entity.ShotType = request.ShotType ?? entity.ShotType;
                 entity.IsAccurate = request.IsAccurate ?? entity.IsAccurate;
                 entity.IsFastAttack = request.IsFastAttack ?? entity.IsFastAttack;
                 entity.Value = request.Value ?? entity.Value;

@@ -35,17 +35,12 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
 
             public async Task<Unit> Handle(CreateShotCommand request, CancellationToken cancellationToken)
             {
-                if (request.IncidentType != IncidentType.SHOT)
-                {
-                    throw new Exception("Error creating shot incident - bad incident type");
-                }
-
                 var incident = new Incident
                 {
                     MatchId = request.MatchId,
                     Minutes = request.Minutes,
                     Seconds = request.Seconds,
-                    IncidentType = request.IncidentType,
+                    IncidentType = IncidentType.SHOT,
                     Quater = request.Quater,
                     Flagged = request.Flagged
                 };

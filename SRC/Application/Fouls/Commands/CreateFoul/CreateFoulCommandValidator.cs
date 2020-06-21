@@ -8,11 +8,24 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
         {
             // todo validation based on foultype
 
-            RuleFor(x => x.PlayerWhoFouledId).NotEmpty().When(x => x.CoachId == null || x.PlayerWhoWasFouledId != null);
-            RuleFor(x => x.CoachId).NotEmpty().When(x => x.PlayerWhoFouledId == null);
+
+            RuleFor(x => x.CoachId)
+                .NotEmpty()
+                .When(x => x.FoulType == Domain.Common.FoulType.COACH_DISQUALIFYING || x.FoulType == Domain.Common.FoulType.COACH_TECHNICAL);
+
+            RuleFor(x => x.PlayerWhoFouledId)
+                .NotEmpty()
+                .When(x => x.FoulType != Domain.Common.FoulType.COACH_DISQUALIFYING
+                && x.FoulType != Domain.Common.FoulType.COACH_TECHNICAL && x.FoulType != Domain.Common.FoulType.BENCH_TECHNICAL);
+
+            RuleFor(x => x.PlayerWhoWasFouledId)
+                .NotEmpty()
+                .When(x => x.FoulType != Domain.Common.FoulType.COACH_DISQUALIFYING && x.FoulType != Domain.Common.FoulType.COACH_TECHNICAL
+                && x.FoulType != Domain.Common.FoulType.TECHNICAL && x.FoulType != Domain.Common.FoulType.DISQUALIFYING
+                && x.FoulType != Domain.Common.FoulType.BENCH_TECHNICAL);
 
             RuleFor(x => (int)x.FoulType)
-              .InclusiveBetween(1, 9)
+              .InclusiveBetween(1, 12)
               .NotEmpty();
 
             RuleFor(x => x.MatchId)

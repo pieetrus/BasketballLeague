@@ -1,14 +1,11 @@
 ﻿using FluentValidation;
 
-namespace BasketballLeague.Application.Fouls.Commands.UpdateFoul
+namespace BasketballLeague.Application.FreeThrows.Commands.UpdateFreeThrow
 {
-    class UpdateFoulCommandValidator : AbstractValidator<UpdateFoulCommand>
+    public class UpdateFreeThrowCommandValidator : AbstractValidator<UpdateFreeThrowCommand>
     {
-        public UpdateFoulCommandValidator()
+        public UpdateFreeThrowCommandValidator()
         {
-            //todo validation based on foultype
-
-
             RuleFor(x => x.CoachId)
                 .NotEmpty()
                 .When(x => x.FoulType == Domain.Common.FoulType.COACH_DISQUALIFYING || x.FoulType == Domain.Common.FoulType.COACH_TECHNICAL);
@@ -37,6 +34,12 @@ namespace BasketballLeague.Application.Fouls.Commands.UpdateFoul
 
             RuleFor(x => x.Quater)
                 .InclusiveBetween(1, 4);
+
+            RuleFor(x => x.AccurateShots)
+                .InclusiveBetween(0, 3);
+
+            RuleFor(x => x.Attempts)
+                .InclusiveBetween(1, 3);
         }
     }
 }

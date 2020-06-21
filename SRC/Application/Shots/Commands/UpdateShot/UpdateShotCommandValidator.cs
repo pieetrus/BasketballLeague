@@ -17,7 +17,7 @@ namespace BasketballLeague.Application.Shots.Commands.UpdateShot
             RuleFor(x => x.Quater)
                 .InclusiveBetween(1, 4);
 
-            RuleFor(x => x.ShotType)
+            RuleFor(x => (int)x.ShotType)
                 .InclusiveBetween(1, 7);
 
             RuleFor(x => x.Value)
