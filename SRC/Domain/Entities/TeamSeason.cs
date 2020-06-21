@@ -7,7 +7,7 @@
         public int SeasonDivisionId { get; set; }
         public int? Pts { get; private set; }
         public int? Fga { get; private set; }
-        public int? Fgm { get; set; }
+        public int? Fgm { get; private set; }
         public int Fg3a { get; set; }
         public int Fg3m { get; set; }
         public int Fg2a { get; set; }

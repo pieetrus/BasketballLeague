@@ -1,29 +1,28 @@
-﻿using BasketballLeague.Application.PlayerMatches.Commands.CreatePlayerMatch;
-using BasketballLeague.Application.PlayerMatches.Commands.DeletePlayerMatch;
-using BasketballLeague.Application.PlayerMatches.Commands.UpdatePlayerMatch;
-using BasketballLeague.Application.PlayerMatches.Queries.GetPlayerMatchDetail;
-using BasketballLeague.Application.PlayerMatches.Queries.GetPlayerMatchesList;
-using BasketballLeague.Domain.Entities;
+﻿using BasketballLeague.Application.TeamSeasons.Commands.CreateTeamSeason;
+using BasketballLeague.Application.TeamSeasons.Commands.DeleteTeamSeason;
+using BasketballLeague.Application.TeamSeasons.Commands.UpdateTeamSeason;
+using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonDetail;
+using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.WebUI.Controllers
 {
-    public class PlayerMatchController : BaseController
+    public class TeamSeason : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<PlayerMatch>> GetAll()
+        public async Task<ActionResult<TeamSeason>> GetAll()
         {
-            return Ok(await Mediator.Send(new GetPlayerMatchesListQuery()));
+            return Ok(await Mediator.Send(new GetTeamSeasonsListQuery()));
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Division>> Get(int id)
+        public async Task<ActionResult<TeamSeason>> Get(int id)
         {
-            var player = await Mediator.Send(new GetPlayerMatchDetailQuery { Id = id });
+            var player = await Mediator.Send(new GetTeamSeasonDetailQuery { Id = id });
 
             return Ok(player);
         }
@@ -31,7 +30,7 @@ namespace BasketballLeague.WebUI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreatePlayerMatchCommand command)
+        public async Task<IActionResult> Create([FromBody]CreateTeamSeasonCommand command)
         {
             await Mediator.Send(command);
 
@@ -41,7 +40,7 @@ namespace BasketballLeague.WebUI.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdatePlayerMatchCommand command)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateTeamSeasonCommand command)
         {
             command.Id = id;
 
@@ -55,7 +54,7 @@ namespace BasketballLeague.WebUI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
-            await Mediator.Send(new DeletePlayerMatchCommand { Id = id });
+            await Mediator.Send(new DeleteTeamSeasonCommand { Id = id });
 
             return NoContent();
         }

@@ -7,12 +7,12 @@ namespace BasketballLeague.Domain.Entities
     {
         public void Configure(EntityTypeBuilder<PlayerSeason> builder)
         {
-            builder.HasKey(e => e.PlayerSeason1)
+            builder.HasKey(e => e.PlayerSeasonId)
                     .HasName("PK_Player_Season_Player_Season_ID");
 
             builder.ToTable("Player_Season");
 
-            builder.Property(e => e.PlayerSeason1).HasColumnName("Player_Season");
+            builder.Property(e => e.PlayerSeasonId).HasColumnName("Player_Season");
 
             builder.Property(e => e.Ast).HasColumnName("AST");
 
