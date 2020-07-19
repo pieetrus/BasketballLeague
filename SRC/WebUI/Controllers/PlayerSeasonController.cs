@@ -1,11 +1,12 @@
-﻿using BasketballLeague.Application.GetPlayerSeasons.Quieries.GetPlayerSeasonsList;
-using BasketballLeague.Application.PlayerSeasons.Commands.CreatePlayerSeason;
+﻿using BasketballLeague.Application.PlayerSeasons.Commands.CreatePlayerSeason;
 using BasketballLeague.Application.PlayerSeasons.Commands.DeletePlayerSeason;
 using BasketballLeague.Application.PlayerSeasons.Commands.UpdatePlayerSeason;
-using BasketballLeague.Application.PlayerSeasons.Quieries.GetPlayerSeasonDetail;
+using BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonDetail;
+using BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsList;
 using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.WebUI.Controllers
@@ -13,7 +14,7 @@ namespace BasketballLeague.WebUI.Controllers
     public class PlayerSeasonController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<PlayerSeason>> GetAll()
+        public async Task<ActionResult<IEnumerable<PlayerSeasonListDto>>> GetAll()
         {
             return Ok(await Mediator.Send(new GetPlayerSeasonsListQuery()));
         }

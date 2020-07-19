@@ -1,12 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
-namespace BasketballLeague.Domain.Entities
+namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsList
 {
-    public class TeamSeason
+    public class PlayerSeasonListDto
     {
-        public int TeamSeasonId { get; set; }
-        public int TeamId { get; set; }
-        public int SeasonDivisionId { get; set; }
+        public int Id { get; set; }
+
+        public int PlayerId { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public DateTime? Birthdate { get; set; }
+        public string PhotoUrl { get; set; }
+        public int? Height { get; set; }
+        public string Position { get; set; }
+        public string DivisionName { get; set; }
+        public string TeamName { get; set; }
+        public string JerseyNr { get; set; }
+
+
+
+
         public int? Pts { get; private set; }
         public int? Fga { get; private set; }
         public int? Fgm { get; private set; }
@@ -25,14 +38,6 @@ namespace BasketballLeague.Domain.Entities
         public int Tov { get; set; }
         public int Fouls { get; set; }
         public int OffFouls { get; set; }
-        public int? CoachId { get; set; }
-        public int? CapitainId { get; set; }
-        public int RankingPoints { get; set; }
 
-        public virtual Player Capitain { get; set; }
-        public virtual ICollection<PlayerSeason> Players { get; set; }
-        public virtual Coach Coach { get; set; }
-        public virtual SeasonDivision SeasonDivision { get; set; }
-        public virtual Team Team { get; set; }
     }
 }

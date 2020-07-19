@@ -6,6 +6,7 @@ using BasketballLeague.Application.Divisions.Queries.GetDivisionsList;
 using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.WebUI.Controllers
@@ -13,7 +14,7 @@ namespace BasketballLeague.WebUI.Controllers
     public class DivisionController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<Division>> GetAll()
+        public async Task<ActionResult<IEnumerable<Division>>> GetAll()
         {
             return Ok(await Mediator.Send(new GetDivisionsListQuery()));
         }

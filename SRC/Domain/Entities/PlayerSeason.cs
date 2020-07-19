@@ -27,6 +27,8 @@
         public int OffFouls { get; set; }
         
         public virtual Player Player { get; set; }
+        public virtual TeamSeason Team{ get; set; }
+
         public virtual SeasonDivision SeasonDivision { get; set; }
     }
 }

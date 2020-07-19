@@ -48,6 +48,12 @@ namespace BasketballLeague.Domain.Entities
                 .IsUnicode(false)
                 .IsFixedLength();
 
+            builder.HasOne(d => d.Team)
+                .WithMany(p => p.Players)
+                .HasForeignKey(d => d.TeamId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Player_Season_Team_ID_Season_Team_Team_ID");
+
             builder.Property(e => e.OffFouls).HasColumnName("OFF_FOULS");
 
             builder.Property(e => e.Orb).HasColumnName("ORB");

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.PlayerSeasons.Quieries.GetPlayerSeasonDetail
+namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonDetail
 {
     public class GetPlayerSeasonDetailQueryHandler : IRequestHandler<GetPlayerSeasonDetailQuery, PlayerSeason>
     {

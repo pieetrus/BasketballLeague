@@ -1,10 +1,9 @@
-﻿using BasketballLeague.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using System.Collections.Generic;
 
-namespace BasketballLeague.Application.Players.Queries
+namespace BasketballLeague.Application.Players.Queries.GetPlayersList
 {
-    public class GetPlayersListQuery : IRequest<IEnumerable<Player>>
+    public class GetPlayersListQuery : IRequest<IEnumerable<PlayerListDto>>
     {
 
     }

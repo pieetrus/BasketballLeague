@@ -9,7 +9,7 @@ using Position = BasketballLeague.Domain.Common.Postition;
 
 namespace BasketballLeague.Application.Players.Commands.CreatePlayer
 {
-    public class CreatePlayerCommand : IRequest
+    public class CreatePlayerCommand : IRequest<int>
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -19,18 +19,16 @@ namespace BasketballLeague.Application.Players.Commands.CreatePlayer
         public Position Position { get; set; }
 
 
-        public class Handler : IRequestHandler<CreatePlayerCommand>
+        public class Handler : IRequestHandler<CreatePlayerCommand, int>
         {
             private readonly IBasketballLeagueDbContext _context;
-            private readonly IMapper _mapper;
 
             public Handler(IBasketballLeagueDbContext context, IMapper mapper)
             {
                 _context = context;
-                _mapper = mapper;
             }
 
-            public async Task<Unit> Handle(CreatePlayerCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreatePlayerCommand request, CancellationToken cancellationToken)
             {
                 var entity = new Player
                 {
@@ -46,7 +44,7 @@ namespace BasketballLeague.Application.Players.Commands.CreatePlayer
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
-                if (success) return Unit.Value;
+                if (success) return entity.PlayerId;
 
                 throw new Exception("Problem saving changes");
             }

@@ -1,11 +1,12 @@
 ﻿using BasketballLeague.Application.Players.Commands.CreatePlayer;
 using BasketballLeague.Application.Players.Commands.DeletePlayer;
 using BasketballLeague.Application.Players.Commands.UpdatePlayer;
-using BasketballLeague.Application.Players.Queries;
 using BasketballLeague.Application.Players.Queries.GetPlayerDetail;
+using BasketballLeague.Application.Players.Queries.GetPlayersList;
 using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.WebUI.Controllers
@@ -14,7 +15,7 @@ namespace BasketballLeague.WebUI.Controllers
     public class PlayerController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<Player>> GetAll()
+        public async Task<ActionResult<IEnumerable<PlayerListDto>>> GetAll()
         {
             return Ok(await Mediator.Send(new GetPlayersListQuery()));
         }
@@ -34,9 +35,9 @@ namespace BasketballLeague.WebUI.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Create([FromBody]CreatePlayerCommand command)
         {
-            await Mediator.Send(command);
+            var id = await Mediator.Send(command);
 
-            return NoContent();
+            return Ok(id);
         }
 
         [HttpPut("{id}")]
