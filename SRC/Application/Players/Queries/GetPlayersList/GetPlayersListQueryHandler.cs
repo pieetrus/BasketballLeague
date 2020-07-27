@@ -23,9 +23,10 @@ namespace BasketballLeague.Application.Players.Queries.GetPlayersList
 
         public async Task<IEnumerable<PlayerListDto>> Handle(GetPlayersListQuery request, CancellationToken cancellationToken)
         {
-            var players = await _context.Player.OrderBy(x => x.Surname).ToListAsync(cancellationToken);
+            var players = await _context.Player.OrderBy(x => x.Surname.ToUpper()).ToListAsync(cancellationToken);
 
             return _mapper.Map<IEnumerable<Player>, IEnumerable<PlayerListDto>>(players).ToList();
         }
     }
 }
+

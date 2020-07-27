@@ -33,7 +33,7 @@ namespace BasketballLeague.Application.Common.Interfaces
          DbSet<TeamSeason> TeamSeason { get; set; }
          DbSet<Timeout> Timeout { get; set; }
          DbSet<Turnover> Turnover { get; set; }
-         DbSet<User> User { get; set; }
+         DbSet<AppUser> AppUser { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

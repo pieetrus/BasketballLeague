@@ -1,10 +1,11 @@
 ﻿using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasketballLeague.Persistence
 {
-    public class BasketballLeagueDbContext : DbContext, IBasketballLeagueDbContext
+    public class BasketballLeagueDbContext : IdentityDbContext<AppUser>, IBasketballLeagueDbContext
     {
 
         public BasketballLeagueDbContext(DbContextOptions options) : base(options)
@@ -37,11 +38,13 @@ namespace BasketballLeague.Persistence
         public virtual DbSet<TeamSeason> TeamSeason { get; set; }
         public virtual DbSet<Timeout> Timeout { get; set; }
         public virtual DbSet<Turnover> Turnover { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<AppUser> AppUser { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BasketballLeagueDbContext).Assembly);
         }
 
