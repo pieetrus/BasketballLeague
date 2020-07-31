@@ -26,6 +26,7 @@ namespace BasketballLeague.Infrastructure
                 });
 
             services.AddScoped<IJwtGenerator, JwtGenerator>();
+            services.AddScoped<IUserAccessor, UserAccessor>();
 
             return services;
         }

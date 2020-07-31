@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.User.Commands.Register
 {
-    public class RegisterCommand : IRequest<AppUser>
+    public class RegisterCommand : IRequest<Dto.User>
     {
 
         public string DisplayName { get; set; }
@@ -18,24 +18,26 @@ namespace BasketballLeague.Application.User.Commands.Register
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public class Handler : IRequestHandler<RegisterCommand, AppUser>
+        public class Handler : IRequestHandler<RegisterCommand, Dto.User>
         {
             private readonly IBasketballLeagueDbContext _context;
             private readonly UserManager<AppUser> _userManager;
+            private readonly IJwtGenerator _jwtGenerator;
 
-            public Handler(IBasketballLeagueDbContext context, UserManager<AppUser> userManager)
+            public Handler(IBasketballLeagueDbContext context, UserManager<AppUser> userManager, IJwtGenerator jwtGenerator)
             {
                 _context = context;
                 _userManager = userManager;
+                _jwtGenerator = jwtGenerator;
             }
 
-            public async Task<AppUser> Handle(RegisterCommand request, CancellationToken cancellationToken)
+            public async Task<Dto.User> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
                 if(await _context.AppUser.AnyAsync(x => x.Email == request.Email, cancellationToken))
                     throw new BadRequestException("Email already exist");
                 
                 if (await _context.AppUser.AnyAsync(x => x.UserName == request.UserName, cancellationToken))
-                    throw new BadRequestException("UserName already exist");
+                    throw new BadRequestException("Username already exist");
 
                 var user = new AppUser
                 {
@@ -48,10 +50,12 @@ namespace BasketballLeague.Application.User.Commands.Register
 
                 if (result.Succeeded)
                 {
-                    return new AppUser
+                    return new Dto.User
                     {
                         DisplayName = user.DisplayName,
-                        UserName = user.UserName,
+                        Username = user.UserName,
+                        Token = _jwtGenerator.CreateToken(user),
+                        Image = null
                     };
                 }
 

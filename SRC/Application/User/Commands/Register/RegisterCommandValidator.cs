@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using BasketballLeague.Application.Common.Validators;
+using FluentValidation;
 
 namespace BasketballLeague.Application.User.Commands.Register
 {
@@ -7,8 +8,8 @@ namespace BasketballLeague.Application.User.Commands.Register
         public RegisterCommandValidator()
         {
             RuleFor(x => x.DisplayName).NotEmpty();
-            RuleFor(x => x.Email).NotEmpty();
-            RuleFor(x => x.Password).NotEmpty();
+            RuleFor(x => x.Email).NotEmpty().EmailAddress();
+            RuleFor(x => x.Password).Password();
             RuleFor(x => x.UserName).NotEmpty();
         }
     }

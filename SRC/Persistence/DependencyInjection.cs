@@ -23,7 +23,7 @@ namespace BasketballLeague.Persistence
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequiredLength = 5;
+                options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
