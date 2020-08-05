@@ -10,7 +10,6 @@ namespace BasketballLeague.Persistence.Configurations
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.Property(e => e.Bio)
-                .IsRequired()
                 .HasMaxLength(300);
 
             builder.Property(e => e.DisplayName)
