@@ -29,7 +29,7 @@ namespace BasketballLeague.API
         {
             services.AddPersistence(Configuration);
             services.AddApplication();
-            services.AddInfrastructure();
+            services.AddInfrastructure(Configuration);
 
             services.AddControllers(opt =>
                 {

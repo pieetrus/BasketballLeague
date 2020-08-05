@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BasketballLeague.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BasketballLeague.Domain.Entities
+namespace BasketballLeague.Persistence.Configurations
 {
     public class FreeThrowConfiguration : IEntityTypeConfiguration<FreeThrow>
     {

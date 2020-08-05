@@ -39,6 +39,7 @@ namespace BasketballLeague.Persistence
         public virtual DbSet<Timeout> Timeout { get; set; }
         public virtual DbSet<Turnover> Turnover { get; set; }
         public virtual DbSet<AppUser> AppUser { get; set; }
+        public virtual DbSet<Photo> Photos { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

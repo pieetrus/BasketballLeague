@@ -34,7 +34,8 @@ namespace BasketballLeague.Application.Common.Interfaces
          DbSet<Timeout> Timeout { get; set; }
          DbSet<Turnover> Turnover { get; set; }
          DbSet<AppUser> AppUser { get; set; }
+         DbSet<Photo> Photos { get; set; }
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

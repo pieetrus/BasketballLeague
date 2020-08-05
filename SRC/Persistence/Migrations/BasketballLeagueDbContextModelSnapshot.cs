@@ -27,12 +27,18 @@ namespace BasketballLeague.Persistence.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Bio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(35)")
+                        .HasMaxLength(35);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
@@ -64,6 +70,9 @@ namespace BasketballLeague.Persistence.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("PlayerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -83,6 +92,10 @@ namespace BasketballLeague.Persistence.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("PlayerId")
+                        .IsUnique()
+                        .HasFilter("[PlayerId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -393,6 +406,27 @@ namespace BasketballLeague.Persistence.Migrations
                     b.HasIndex("TeamHomeId");
 
                     b.ToTable("Match");
+                });
+
+            modelBuilder.Entity("BasketballLeague.Domain.Entities.Photo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("BasketballLeague.Domain.Entities.Player", b =>
@@ -1385,6 +1419,14 @@ namespace BasketballLeague.Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("BasketballLeague.Domain.Entities.AppUser", b =>
+                {
+                    b.HasOne("BasketballLeague.Domain.Entities.Player", "Player")
+                        .WithOne("AppUser")
+                        .HasForeignKey("BasketballLeague.Domain.Entities.AppUser", "PlayerId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
             modelBuilder.Entity("BasketballLeague.Domain.Entities.Assist", b =>
                 {
                     b.HasOne("BasketballLeague.Domain.Entities.FreeThrow", "FreeThrow")
@@ -1506,6 +1548,13 @@ namespace BasketballLeague.Persistence.Migrations
                         .HasForeignKey("TeamHomeId")
                         .HasConstraintName("FK_Match_Team_Home_ID_Team_Team_ID")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BasketballLeague.Domain.Entities.Photo", b =>
+                {
+                    b.HasOne("BasketballLeague.Domain.Entities.AppUser", null)
+                        .WithMany("Photos")
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("BasketballLeague.Domain.Entities.PlayerMatch", b =>

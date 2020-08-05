@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,9 +34,9 @@ namespace BasketballLeague.Application.User.Commands.Register
 
             public async Task<Dto.User> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
-                if(await _context.AppUser.AnyAsync(x => x.Email == request.Email, cancellationToken))
+                if (await _context.AppUser.AnyAsync(x => x.Email == request.Email, cancellationToken))
                     throw new BadRequestException("Email already exist");
-                
+
                 if (await _context.AppUser.AnyAsync(x => x.UserName == request.UserName, cancellationToken))
                     throw new BadRequestException("Username already exist");
 
@@ -55,7 +56,7 @@ namespace BasketballLeague.Application.User.Commands.Register
                         DisplayName = user.DisplayName,
                         Username = user.UserName,
                         Token = _jwtGenerator.CreateToken(user),
-                        Image = null
+                        Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
                     };
                 }
 
