@@ -31,7 +31,7 @@ namespace BasketballLeague.Application.Matches.Commands.UpdateMatch
             public async Task<Unit> Handle(UpdateMatchCommand request, CancellationToken cancellationToken)
             {
                 var entity = await _context.Match
-                    .SingleOrDefaultAsync(x => x.MatchId == request.Id, cancellationToken);
+                    .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
                 if (entity == null)
                 {

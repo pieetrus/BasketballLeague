@@ -15,7 +15,7 @@ namespace BasketballLeague.Domain.Entities
                      .HasName("UQ_Turnover_Incident_ID")
                      .IsUnique();
 
-            builder.Property(e => e.TurnoverId).HasColumnName("Turnover_ID");
+            builder.Property(e => e.Id).HasColumnName("Turnover_ID");
 
             builder.Property(e => e.IncidentId).HasColumnName("Incident_ID");
 

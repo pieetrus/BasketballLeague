@@ -20,7 +20,7 @@ namespace BasketballLeague.Application.JumpBalls.Commands.DeleteJumpBall
 
         public async Task<Unit> Handle(DeleteJumpBallCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.JumpBall.JumpBallId == request.Id);
+            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.JumpBall.Id == request.Id);
 
             if (entity == null)
             {

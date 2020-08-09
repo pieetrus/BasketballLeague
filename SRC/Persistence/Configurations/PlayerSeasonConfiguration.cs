@@ -8,12 +8,12 @@ namespace BasketballLeague.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<PlayerSeason> builder)
         {
-            builder.HasKey(e => e.PlayerSeasonId)
+            builder.HasKey(e => e.Id)
                     .HasName("PK_Player_Season_Player_Season_ID");
 
             builder.ToTable("Player_Season");
 
-            builder.Property(e => e.PlayerSeasonId).HasColumnName("Player_Season");
+            builder.Property(e => e.Id).HasColumnName("Player_Season");
 
             builder.Property(e => e.Ast).HasColumnName("AST");
 

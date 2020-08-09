@@ -2,7 +2,7 @@
 {
     public class Steal
     {
-        public int StealId { get; set; }
+        public int Id { get; set; }
         public int TurnoverId { get; set; }
         public int PlayerId { get; set; }
 

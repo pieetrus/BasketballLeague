@@ -2,7 +2,7 @@
 {
     public class FreeThrow
     {
-        public int FreeThrowId { get; set; }
+        public int Id { get; set; }
         public int FoulId { get; set; }
         public int PlayerShooterId { get; set; }
         public int AccurateShots { get; set; }

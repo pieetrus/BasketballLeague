@@ -32,7 +32,7 @@ namespace BasketballLeague.Application.Players.Commands.UpdatePlayer
             public async Task<Unit> Handle(UpdatePlayerCommand request, CancellationToken cancellationToken)
             {
                 var entity = await _context.Player
-                    .SingleOrDefaultAsync(x => x.PlayerId == request.Id, cancellationToken);
+                    .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
                 if (entity == null)
                 {

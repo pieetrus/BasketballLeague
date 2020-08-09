@@ -12,7 +12,7 @@ namespace BasketballLeague.Persistence.Configurations
                     .HasName("UQ_Timeout_Incident_ID")
                     .IsUnique();
 
-            builder.Property(e => e.TimeoutId).HasColumnName("Timeout_ID");
+            builder.Property(e => e.Id).HasColumnName("Timeout_ID");
 
             builder.Property(e => e.IncidentId).HasColumnName("Incident_ID");
 

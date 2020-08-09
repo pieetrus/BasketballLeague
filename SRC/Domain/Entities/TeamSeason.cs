@@ -4,7 +4,7 @@ namespace BasketballLeague.Domain.Entities
 {
     public class TeamSeason
     {
-        public int TeamSeasonId { get; set; }
+        public int Id { get; set; }
         public int TeamId { get; set; }
         public int SeasonDivisionId { get; set; }
         public int? Pts { get; private set; }

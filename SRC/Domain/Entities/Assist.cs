@@ -2,7 +2,7 @@
 {
     public class Assist
     {
-        public int AssistId { get; set; }
+        public int Id { get; set; }
         public int? ShotId { get; set; }
         public int? FreeThrowId { get; set; }
         public int PlayerId { get; set; }

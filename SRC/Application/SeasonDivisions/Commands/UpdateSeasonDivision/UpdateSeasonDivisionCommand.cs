@@ -28,7 +28,7 @@ namespace BasketballLeague.Application.SeasonDivisions.Commands.UpdateSeasonDivi
             public async Task<Unit> Handle(UpdateSeasonDivisionCommand request, CancellationToken cancellationToken)
             {
                 var entity = await _context.SeasonDivision
-                    .SingleOrDefaultAsync(x => x.SeasonDivisionId == request.Id, cancellationToken);
+                    .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
                 if (entity == null)
                 {

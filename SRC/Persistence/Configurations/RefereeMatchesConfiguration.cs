@@ -8,12 +8,12 @@ namespace BasketballLeague.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<RefereeMatches> builder)
         {
-            builder.HasKey(e => new { e.RefereeId, e.MatchId })
+            builder.HasKey(e => new { RefereeId = e.Id, e.MatchId })
                      .HasName("PK_Referee_Matches_Referee_ID_Match_ID");
 
             builder.ToTable("Referee_Matches");
 
-            builder.Property(e => e.RefereeId)
+            builder.Property(e => e.Id)
                 .HasColumnName("Referee_ID")
                 .ValueGeneratedOnAdd();
 
@@ -27,7 +27,7 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.HasOne(d => d.Referee)
                 .WithMany(p => p.RefereeMatches)
-                .HasForeignKey(d => d.RefereeId)
+                .HasForeignKey(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Referee_Matches_Referee_ID_Referee_Referee_ID");
         }

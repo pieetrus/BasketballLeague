@@ -21,7 +21,7 @@ namespace BasketballLeague.Application.PlayerMatches.Queries.GetPlayerMatchDetai
             var entity = await _context.PlayerMatch
                 .Include(x => x.Player)
                 .Include(x => x.Match)
-                .FirstOrDefaultAsync(x => x.PlayerMatchId == request.Id);
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (entity == null)
             {

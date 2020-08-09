@@ -8,7 +8,7 @@ namespace BasketballLeague.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Season> builder)
         {
-            builder.Property(e => e.SeasonId).HasColumnName("Season_ID");
+            builder.Property(e => e.Id).HasColumnName("Season_ID");
 
             builder.Property(e => e.EndDate)
                 .HasColumnName("End_date")

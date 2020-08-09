@@ -10,7 +10,7 @@ namespace BasketballLeague.Persistence.Configurations
         {
             builder.ToTable("Season_Division");
 
-            builder.Property(e => e.SeasonDivisionId).HasColumnName("Season_Division_ID");
+            builder.Property(e => e.Id).HasColumnName("Season_Division_ID");
 
             builder.Property(e => e.DivisionId).HasColumnName("Division_ID");
 

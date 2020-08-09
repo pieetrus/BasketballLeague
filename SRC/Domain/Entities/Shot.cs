@@ -4,7 +4,7 @@ namespace BasketballLeague.Domain.Entities
 {
     public class Shot
     {
-        public int ShotId { get; set; }
+        public int Id { get; set; }
         public int IncidentId { get; set; }
         public int PlayerId { get; set; }
         public ShotType ShotType { get; set; }

@@ -21,7 +21,7 @@ namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonDeta
             var entity = await _context.PlayerSeason
                 .Include(x => x.Player)
                 .Include(x => x.SeasonDivision)
-                .FirstOrDefaultAsync(x => x.PlayerSeasonId == request.Id);
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (entity == null)
             {

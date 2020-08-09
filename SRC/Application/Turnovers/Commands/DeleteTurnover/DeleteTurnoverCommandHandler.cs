@@ -20,7 +20,7 @@ namespace BasketballLeague.Application.Turnovers.Commands.DeleteTurnover
 
         public async Task<Unit> Handle(DeleteTurnoverCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Turnover.TurnoverId == request.Id);
+            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Turnover.Id == request.Id);
 
             if (entity == null)
             {

@@ -13,7 +13,7 @@ namespace BasketballLeague.Persistence.Configurations
                     .HasName("UQ_Assist_Shot_ID")
                     .IsUnique();
 
-            builder.Property(e => e.AssistId).HasColumnName("Assist_ID");
+            builder.Property(e => e.Id).HasColumnName("Assist_ID");
 
             builder.Property(e => e.FreeThrowId).HasColumnName("Free_Throw_ID");
 

@@ -4,7 +4,7 @@ namespace BasketballLeague.Domain.Entities
 {
     public class Incident
     {
-        public int IncidentId { get; set; }
+        public int Id { get; set; }
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }

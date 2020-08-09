@@ -2,7 +2,7 @@
 {
     public class Timeout
     {
-        public int TimeoutId { get; set; }
+        public int Id { get; set; }
         public int IncidentId { get; set; }
         public int TeamId { get; set; }
 

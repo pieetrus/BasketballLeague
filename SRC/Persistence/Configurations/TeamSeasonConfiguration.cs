@@ -14,7 +14,7 @@ namespace BasketballLeague.Persistence.Configurations
                 .HasName("UQ_Team_Season_Player_ID_Season_Division_ID")
                 .IsUnique();
 
-            builder.Property(e => e.TeamSeasonId).HasColumnName("Team_Season_ID");
+            builder.Property(e => e.Id).HasColumnName("Team_Season_ID");
 
             builder.Property(e => e.Ast).HasColumnName("AST");
 

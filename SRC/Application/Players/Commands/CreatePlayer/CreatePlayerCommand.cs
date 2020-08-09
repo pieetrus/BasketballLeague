@@ -44,7 +44,7 @@ namespace BasketballLeague.Application.Players.Commands.CreatePlayer
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
-                if (success) return entity.PlayerId;
+                if (success) return entity.Id;
 
                 throw new Exception("Problem saving changes");
             }

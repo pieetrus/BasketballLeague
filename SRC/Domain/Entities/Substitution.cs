@@ -2,7 +2,7 @@
 {
     public class Substitution
     {
-        public int SubstitutionId { get; set; }
+        public int Id { get; set; }
         public int IncidentId { get; set; }
         public int PlayerInId { get; set; }
         public int PlayerOutId { get; set; }

@@ -14,7 +14,7 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.ToTable("Jump_Ball");
 
-            builder.Property(e => e.JumpBallId).HasColumnName("Jump_Ball_ID");
+            builder.Property(e => e.Id).HasColumnName("Jump_Ball_ID");
 
             builder.Property(e => e.IncidentId).HasColumnName("Incident_ID");
 

@@ -20,7 +20,7 @@ namespace BasketballLeague.Application.Substitutions.Commands.DeleteSubstitution
 
         public async Task<Unit> Handle(DeleteSubstitutionCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Substitution.SubstitutionId == request.Id);
+            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Substitution.Id == request.Id);
 
             if (entity == null)
             {

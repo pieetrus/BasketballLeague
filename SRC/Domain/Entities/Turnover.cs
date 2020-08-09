@@ -4,7 +4,7 @@ namespace BasketballLeague.Domain.Entities
 {
     public class Turnover
     {
-        public int TurnoverId { get; set; }
+        public int Id { get; set; }
         public int IncidentId { get; set; }
         public int PlayerId { get; set; }
         public TurnoverType TurnoverType { get; set; }

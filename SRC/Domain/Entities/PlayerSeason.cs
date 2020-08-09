@@ -2,7 +2,7 @@
 {
     public class PlayerSeason
     {
-        public int PlayerSeasonId { get; set; }
+        public int Id { get; set; }
         public int PlayerId { get; set; }
         public int SeasonDivisionId { get; set; }
         public int? TeamId { get; set; }
@@ -25,9 +25,9 @@
         public int Tov { get; set; }
         public int Fouls { get; set; }
         public int OffFouls { get; set; }
-        
+
         public virtual Player Player { get; set; }
-        public virtual TeamSeason Team{ get; set; }
+        public virtual TeamSeason Team { get; set; }
 
         public virtual SeasonDivision SeasonDivision { get; set; }
     }

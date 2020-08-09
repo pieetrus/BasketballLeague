@@ -5,7 +5,7 @@ namespace BasketballLeague.Domain.Entities
 {
     public class Foul
     {
-        public int FoulId { get; set; }
+        public int Id { get; set; }
         public int IncidentId { get; set; }
         public int? PlayerWhoFouledId { get; set; }
         public int? PlayerWhoWasFouledId { get; set; }

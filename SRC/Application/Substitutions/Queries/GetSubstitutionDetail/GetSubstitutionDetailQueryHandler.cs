@@ -21,7 +21,7 @@ namespace BasketballLeague.Application.Substitutions.Queries.GetSubstitutionDeta
         {
             var entity = await _context.Substitution
                 .Include(x => x.Incident)
-                .FirstOrDefaultAsync(x => x.SubstitutionId == request.Id, cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {

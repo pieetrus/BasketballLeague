@@ -23,7 +23,7 @@ namespace BasketballLeague.Application.Fouls.Queries.GetFoulDetail
                 .Include(x => x.PlayerWhoWasFouled)
                 .Include(x => x.Incident)
                 .ThenInclude(x => x.Match)
-                .FirstOrDefaultAsync(x => x.FoulId == request.Id);
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (entity == null)
             {

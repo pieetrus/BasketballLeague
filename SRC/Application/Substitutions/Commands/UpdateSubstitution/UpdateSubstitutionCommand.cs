@@ -31,7 +31,7 @@ namespace BasketballLeague.Application.Substitutions.Commands.UpdateSubstitution
 
             public async Task<Unit> Handle(UpdateSubstitutionCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _context.Substitution.Include(x => x.Incident).FirstOrDefaultAsync(x => x.SubstitutionId == request.Id);
+                var entity = await _context.Substitution.Include(x => x.Incident).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 entity.Incident.MatchId = request.MatchId ?? entity.Incident.MatchId;
                 entity.Incident.Minutes = request.Minutes ?? entity.Incident.Minutes;

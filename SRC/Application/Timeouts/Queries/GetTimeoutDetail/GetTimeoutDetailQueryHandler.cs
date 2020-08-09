@@ -21,7 +21,7 @@ namespace BasketballLeague.Application.Timeouts.Queries.GetTimeoutDetail
         {
             var entity = await _context.Timeout
                 .Include(x => x.Incident)
-                .FirstOrDefaultAsync(x => x.TimeoutId == request.Id, cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {

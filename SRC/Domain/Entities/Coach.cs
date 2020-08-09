@@ -5,7 +5,7 @@ namespace BasketballLeague.Domain.Entities
 {
     public class Coach
     {
-        public int CoachId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime? Birthdate { get; set; }

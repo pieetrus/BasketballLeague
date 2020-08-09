@@ -23,7 +23,7 @@ namespace BasketballLeague.Persistence.Migrations
                 defaultValue: "");
 
             migrationBuilder.AddColumn<int>(
-                name: "PlayerId",
+                name: "Id",
                 table: "AspNetUsers",
                 nullable: true);
 
@@ -50,9 +50,9 @@ namespace BasketballLeague.Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_PlayerId",
                 table: "AspNetUsers",
-                column: "PlayerId",
+                column: "Id",
                 unique: true,
-                filter: "[PlayerId] IS NOT NULL");
+                filter: "[Id] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_AppUserId",
@@ -62,7 +62,7 @@ namespace BasketballLeague.Persistence.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_Player_PlayerId",
                 table: "AspNetUsers",
-                column: "PlayerId",
+                column: "Id",
                 principalTable: "Player",
                 principalColumn: "Player_ID");
         }
@@ -85,7 +85,7 @@ namespace BasketballLeague.Persistence.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "PlayerId",
+                name: "Id",
                 table: "AspNetUsers");
 
             migrationBuilder.AlterColumn<string>(

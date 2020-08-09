@@ -30,7 +30,7 @@ namespace BasketballLeague.Application.Referees.Commands.UpdateReferee
             public async Task<Unit> Handle(UpdateRefereeCommand request, CancellationToken cancellationToken)
             {
                 var entity = await _context.Referee
-                    .SingleOrDefaultAsync(x => x.RefereeId == request.Id, cancellationToken);
+                    .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
                 if (entity == null)
                 {

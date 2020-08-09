@@ -20,7 +20,7 @@ namespace BasketballLeague.Application.Shots.Queries.GetShotDetail
         {
             var entity = await _context.Shot
                 .Include(x => x.Incident)
-                .FirstOrDefaultAsync(x => x.ShotId == request.Id, cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {

@@ -10,7 +10,7 @@ namespace BasketballLeague.Application.TeamSeasons.Commands.CreateTeamSeason
                 .NotEmpty();
             RuleFor(x => x.TeamId)
                 .NotEmpty();
-            //RuleFor(x => x.CoachId)
+            //RuleFor(x => x.Id)
             //    .NotEmpty();
             //RuleFor(x => x.CapitainId)
             //    .NotEmpty();

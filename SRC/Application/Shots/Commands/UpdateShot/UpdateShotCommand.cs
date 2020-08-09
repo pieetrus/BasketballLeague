@@ -37,7 +37,7 @@ namespace BasketballLeague.Application.Shots.Commands.UpdateShot
 
             public async Task<Unit> Handle(UpdateShotCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _context.Shot.Include(x => x.Incident).FirstOrDefaultAsync(x => x.ShotId == request.Id);
+                var entity = await _context.Shot.Include(x => x.Incident).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 if (entity == null)
                 {

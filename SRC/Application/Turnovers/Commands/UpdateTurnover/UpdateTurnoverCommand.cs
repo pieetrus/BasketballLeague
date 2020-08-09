@@ -33,7 +33,7 @@ namespace BasketballLeague.Application.Turnovers.Commands.UpdateTimeout
 
             public async Task<Unit> Handle(UpdateTurnoverCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _context.Turnover.Include(x => x.Incident).FirstOrDefaultAsync(x => x.TurnoverId == request.Id);
+                var entity = await _context.Turnover.Include(x => x.Incident).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 if (entity == null)
                 {

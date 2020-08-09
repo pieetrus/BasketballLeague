@@ -14,7 +14,7 @@ namespace BasketballLeague.Persistence.Configurations
                 .HasName("UQ_Team_Match_Team_ID_Match_ID")
                 .IsUnique();
 
-            builder.Property(e => e.TeamMatchId).HasColumnName("Team_Match_ID");
+            builder.Property(e => e.Id).HasColumnName("Team_Match_ID");
 
             builder.Property(e => e.Ast).HasColumnName("AST");
 

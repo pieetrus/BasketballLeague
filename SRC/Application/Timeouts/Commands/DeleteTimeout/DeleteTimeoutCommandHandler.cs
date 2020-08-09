@@ -20,7 +20,7 @@ namespace BasketballLeague.Application.Timeouts.Commands.DeleteTimeout
 
         public async Task<Unit> Handle(DeleteTimeoutCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Timeout.TimeoutId == request.Id);
+            var entity = await _context.Incident.FirstOrDefaultAsync(x => x.Timeout.Id == request.Id);
 
             if (entity == null)
             {

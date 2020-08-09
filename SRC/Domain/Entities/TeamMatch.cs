@@ -2,7 +2,7 @@
 {
     public class TeamMatch
     {
-        public int TeamMatchId { get; set; }
+        public int Id { get; set; }
         public int TeamId { get; set; }
         public int MatchId { get; set; }
         public int? Pts { get; private set; }

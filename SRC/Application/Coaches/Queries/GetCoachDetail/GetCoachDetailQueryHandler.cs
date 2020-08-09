@@ -21,7 +21,7 @@ namespace BasketballLeague.Application.Coaches.Queries.GetCoachDetail
         {
             var entity = await _context.Coach
                 .Include(x => x.TeamSeasons)
-                .FirstOrDefaultAsync(x => x.CoachId == request.Id, cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {

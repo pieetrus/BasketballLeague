@@ -5,7 +5,7 @@ namespace BasketballLeague.Domain.Entities
 {
     public class Referee
     {
-        public int RefereeId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string JerseyNr { get; set; }

@@ -12,7 +12,7 @@ namespace BasketballLeague.Persistence.Configurations
                     .HasName("UQ_Steal_Turnover_ID")
                     .IsUnique();
 
-            builder.Property(e => e.StealId).HasColumnName("Steal_ID");
+            builder.Property(e => e.Id).HasColumnName("Steal_ID");
 
             builder.Property(e => e.PlayerId).HasColumnName("Player_ID");
 

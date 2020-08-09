@@ -38,7 +38,7 @@ namespace BasketballLeague.Application.Fouls.Commands.UpdateFoul
             {
                 var entity = await _context.Foul
                     .Include(x => x.Incident)
-                    .SingleOrDefaultAsync(x => x.FoulId == request.Id, cancellationToken);
+                    .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
                 if (entity == null)
                 {

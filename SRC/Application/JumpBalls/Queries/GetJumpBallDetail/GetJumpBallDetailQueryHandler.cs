@@ -21,7 +21,7 @@ namespace BasketballLeague.Application.JumpBalls.Queries.GetJumpBallDetail
         {
             var entity = await _context.JumpBall
                 .Include(x => x.Incident)
-                .FirstOrDefaultAsync(x => x.JumpBallId == request.Id, cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {

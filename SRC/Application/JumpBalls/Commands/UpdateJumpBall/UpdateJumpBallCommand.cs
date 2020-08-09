@@ -31,7 +31,7 @@ namespace BasketballLeague.Application.JumpBalls.Commands.UpdateJumpBall
 
             public async Task<Unit> Handle(UpdateJumpBallCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _context.JumpBall.Include(x => x.Incident).FirstOrDefaultAsync(x => x.JumpBallId == request.Id);
+                var entity = await _context.JumpBall.Include(x => x.Incident).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 entity.Incident.MatchId = request.MatchId ?? entity.Incident.MatchId;
                 entity.Incident.Minutes = request.Minutes ?? entity.Incident.Minutes;

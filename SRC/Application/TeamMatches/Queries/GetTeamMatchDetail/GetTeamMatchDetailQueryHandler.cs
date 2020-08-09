@@ -23,7 +23,7 @@ namespace BasketballLeague.Application.TeamMatches.Queries.GetTeamMatchDetail
             var entity = await _context.TeamMatch
                 .Include(x => x.Team)
                 .Include(x => x.Match)
-                .FirstOrDefaultAsync(x => x.TeamMatchId == request.Id, cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {

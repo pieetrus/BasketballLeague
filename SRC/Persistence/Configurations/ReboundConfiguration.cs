@@ -16,7 +16,7 @@ namespace BasketballLeague.Persistence.Configurations
                      .HasName("UQ_Rebound_Incident_ID")
                      .IsUnique();
 
-            builder.Property(e => e.ReboundId).HasColumnName("Rebound_ID");
+            builder.Property(e => e.Id).HasColumnName("Rebound_ID");
 
             builder.Property(e => e.IncidentId).HasColumnName("Incident_ID");
 

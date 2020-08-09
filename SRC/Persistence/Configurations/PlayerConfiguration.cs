@@ -12,7 +12,7 @@ namespace BasketballLeague.Persistence.Configurations
              .Property(e => e.Position)
              .HasConversion<int>();
 
-            builder.Property(e => e.PlayerId).HasColumnName("Player_ID");
+            builder.Property(e => e.Id).HasColumnName("Player_ID");
 
             builder.Property(e => e.Birthdate).HasColumnType("date");
 

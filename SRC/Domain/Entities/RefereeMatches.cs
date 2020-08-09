@@ -2,7 +2,7 @@
 {
     public class RefereeMatches
     {
-        public int RefereeId { get; set; }
+        public int Id { get; set; }
         public int MatchId { get; set; }
 
         public virtual Match Match { get; set; }

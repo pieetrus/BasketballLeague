@@ -10,7 +10,7 @@ namespace BasketballLeague.Persistence.Configurations
         {
             builder.ToTable("Free_Throw");
 
-            builder.Property(e => e.FreeThrowId).HasColumnName("Free_Throw_ID");
+            builder.Property(e => e.Id).HasColumnName("Free_Throw_ID");
 
             builder.Property(e => e.FoulId).HasColumnName("Foul_ID");
 

@@ -2,7 +2,7 @@
 {
     public class Block
     {
-        public int BlockId { get; set; }
+        public int Id { get; set; }
         public int ShotId { get; set; }
         public int PlayerId { get; set; }
 

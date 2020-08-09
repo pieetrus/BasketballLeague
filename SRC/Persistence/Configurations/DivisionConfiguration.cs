@@ -8,7 +8,7 @@ namespace BasketballLeague.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Division> builder)
         {
-            builder.Property(e => e.DivisionId).HasColumnName("Division_ID");
+            builder.Property(e => e.Id).HasColumnName("Division_ID");
 
             builder.Property(e => e.Name)
                 .IsRequired()
