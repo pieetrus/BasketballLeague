@@ -23,11 +23,19 @@ namespace BasketballLeague.Application.Players.Queries.GetPlayersList
 
         public async Task<IEnumerable<PlayerListDto>> Handle(GetPlayersListQuery request, CancellationToken cancellationToken)
         {
-            var players = await _context.Player
+            var queryable = _context.Player
                 .Include(x => x.PlayerSeasons)
                 .ThenInclude(x => x.Team.Team)
                 .OrderBy(x => x.Surname.ToUpper())
-                .ToListAsync(cancellationToken);
+                .AsQueryable();
+
+            if (request.SurnameLetter != null)
+            {
+                queryable = queryable.Where(x => x.Surname.StartsWith(request.SurnameLetter.ToUpper()));
+            }
+
+            var players = await queryable.ToListAsync(cancellationToken);
+
 
             return _mapper.Map<IEnumerable<Player>, IEnumerable<PlayerListDto>>(players).ToList();
         }

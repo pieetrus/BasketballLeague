@@ -15,9 +15,9 @@ namespace BasketballLeague.API.Controllers
     public class PlayerController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlayerListDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<PlayerListDto>>> GetAll(string surnameLetter)
         {
-            return Ok(await Mediator.Send(new GetPlayersListQuery()));
+            return Ok(await Mediator.Send(new GetPlayersListQuery(surnameLetter)));
         }
 
         [HttpGet("{id}")]
@@ -33,7 +33,7 @@ namespace BasketballLeague.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreatePlayerCommand command)
+        public async Task<IActionResult> Create([FromBody] CreatePlayerCommand command)
         {
             var id = await Mediator.Send(command);
 
