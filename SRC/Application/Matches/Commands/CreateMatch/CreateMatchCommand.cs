@@ -1,6 +1,7 @@
 ﻿using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,12 +10,12 @@ namespace BasketballLeague.Application.Matches.Commands.CreateMatch
 {
     public class CreateMatchCommand : IRequest
     {
-        public int SeasonDivisionId { get; set; }
+        public int DivisionId { get; set; }
         public int TeamHomeId { get; set; }
         public int TeamGuestId { get; set; }
         public int? Attendance { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public bool? Ended { get; set; }
 
         public class Handler : IRequestHandler<CreateMatchCommand>
         {
@@ -25,18 +26,28 @@ namespace BasketballLeague.Application.Matches.Commands.CreateMatch
                 _context = context;
             }
 
-
             public async Task<Unit> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
             {
 
+                var seasonDivision = await
+                    _context.SeasonDivision.
+                        Include(x => x.Season)
+                        .FirstOrDefaultAsync(x =>
+                        x.DivisionId == request.DivisionId
+                        && x.Season.StartDate <= request.StartDate &&
+                        x.Season.EndDate >= request.StartDate, cancellationToken);
+
+                if (seasonDivision == null)
+                    throw new Exception("Matches cannot be scheduled for this season yet. Firstly create season.");
+
                 var entity = new Match
                 {
-                    SeasonDivisionId = request.SeasonDivisionId,
+                    SeasonDivisionId = seasonDivision.Id,
                     TeamHomeId = request.TeamHomeId,
                     TeamGuestId = request.TeamGuestId,
                     Attendance = request.Attendance ?? 0,
                     StartDate = request.StartDate,
-                    EndDate = request.EndDate
+                    Ended = request.Ended ?? false
                 };
 
                 _context.Match.Add(entity);

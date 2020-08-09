@@ -23,7 +23,8 @@ namespace BasketballLeague.Application.Matches.Queries.GetMatchesList
 
         public async Task<IEnumerable<Match>> Handle(GetMatchesListQuery request, CancellationToken cancellationToken)
         {
-            var matches = await _context.Match.ToListAsync(cancellationToken);
+            var matches = await _context.Match
+                .ToListAsync(cancellationToken);
 
             return matches;
         }

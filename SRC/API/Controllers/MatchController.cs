@@ -1,6 +1,7 @@
 ﻿using BasketballLeague.Application.Matches.Commands.CreateMatch;
 using BasketballLeague.Application.Matches.Commands.DeleteMatch;
 using BasketballLeague.Application.Matches.Commands.UpdateMatch;
+using BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList;
 using BasketballLeague.Application.Matches.Queries.GetMatchDetail;
 using BasketballLeague.Application.Matches.Queries.GetMatchesList;
 using BasketballLeague.Domain.Entities;
@@ -18,6 +19,12 @@ namespace BasketballLeague.API.Controllers
             return Ok(await Mediator.Send(new GetMatchesListQuery()));
         }
 
+        [HttpGet("detailed")]
+        public async Task<ActionResult<MatchListDto>> GetAllDetailed()
+        {
+            return Ok(await Mediator.Send(new GetDetailedMatchesListQuery()));
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -31,7 +38,7 @@ namespace BasketballLeague.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreateMatchCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateMatchCommand command)
         {
             await Mediator.Send(command);
 

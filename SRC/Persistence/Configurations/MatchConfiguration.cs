@@ -10,10 +10,6 @@ namespace BasketballLeague.Persistence.Configurations
         {
             builder.Property(e => e.Id).HasColumnName("Match_ID");
 
-            builder.Property(e => e.EndDate)
-                .HasColumnName("End_Date")
-                .HasColumnType("smalldatetime");
-
             builder.Property(e => e.SeasonDivisionId).HasColumnName("Season_Division_ID");
 
             builder.Property(e => e.StartDate)

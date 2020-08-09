@@ -11,7 +11,7 @@ namespace BasketballLeague.Domain.Entities
         public int TeamGuestId { get; set; }
         public int Attendance { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public bool Ended { get; set; }
 
         public virtual SeasonDivision SeasonDivision { get; set; }
         public virtual Team TeamGuest { get; set; }

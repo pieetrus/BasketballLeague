@@ -6,7 +6,7 @@ namespace BasketballLeague.Application.Matches.Commands.CreateMatch
     {
         public CreateMatchCommandValidator()
         {
-            RuleFor(x => x.SeasonDivisionId)
+            RuleFor(x => x.DivisionId)
                 .NotEmpty();
             RuleFor(x => x.TeamGuestId)
                 .NotEmpty();

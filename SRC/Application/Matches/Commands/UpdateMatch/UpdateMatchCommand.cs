@@ -17,7 +17,7 @@ namespace BasketballLeague.Application.Matches.Commands.UpdateMatch
         public int? TeamGuestId { get; set; }
         public int? Attendance { get; set; }
         public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public bool? Ended { get; set; }
 
         public class Handler : IRequestHandler<UpdateMatchCommand>
         {
@@ -43,7 +43,7 @@ namespace BasketballLeague.Application.Matches.Commands.UpdateMatch
                 entity.TeamGuestId = request.TeamGuestId ?? entity.TeamGuestId;
                 entity.Attendance = request.Attendance ?? entity.Attendance;
                 entity.StartDate = request.StartDate ?? entity.StartDate;
-                entity.EndDate = request.EndDate ?? entity.EndDate;
+                entity.Ended = request.Ended ?? entity.Ended;
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
