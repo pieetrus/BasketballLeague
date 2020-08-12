@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BasketballLeague.Domain.Entities
+﻿namespace BasketballLeague.Domain.Entities
 {
     public class TeamMatch
     {
@@ -30,9 +28,10 @@ namespace BasketballLeague.Domain.Entities
         public int OffFouls { get; set; }
 
         //public virtual Match Match { get; set; }
-        public virtual ICollection<Match> MatchesHome { get; set; }
-        public virtual ICollection<Match> MatchesAway { get; set; }
-
+        //public virtual ICollection<Match> MatchesHome { get; set; }
+        //public virtual ICollection<Match> MatchesAway { get; set; }
+        public virtual Match MatchHome { get; set; }
+        public virtual Match MatchAway { get; set; }
         public virtual Team Team { get; set; }
     }
 }

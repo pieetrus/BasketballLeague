@@ -72,15 +72,15 @@ namespace BasketballLeague.Persistence.Configurations
                 .HasColumnName("TRB")
                 .HasComputedColumnSql("([ORB]+[DRB])");
 
-            builder.HasMany(d => d.MatchesHome)
+            builder.HasOne(d => d.MatchHome)
                 .WithOne(p => p.TeamHome)
-                .HasForeignKey(d => d.TeamHomeId)
+                .HasForeignKey<Match>(d => d.TeamHomeId)
                 .OnDelete(DeleteBehavior.Cascade);
             //.HasConstraintName("FK_Team_Match_Match_ID_Match_ID");
 
-            builder.HasMany(d => d.MatchesAway)
+            builder.HasOne(d => d.MatchAway)
                 .WithOne(p => p.TeamGuest)
-                .HasForeignKey(d => d.TeamGuestId)
+                .HasForeignKey<Match>(d => d.TeamGuestId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(d => d.Team)

@@ -23,10 +23,11 @@ namespace BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed
         public async Task<MatchDetailedDto> Handle(GetMatchDetailDetailedQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Match
-                .Include(x => x.SeasonDivision).ThenInclude(x => x.Division)
-                .Include(x => x.TeamGuest).ThenInclude(x => x.Team)
                 .Include(x => x.TeamHome).ThenInclude(x => x.Team)
-                .Include(x => x.PlayerMatches).ThenInclude(x => x.Player)
+                .Include(x => x.TeamGuest).ThenInclude(x => x.Team)
+                .Include(x => x.SeasonDivision).ThenInclude(x => x.Division)
+                .Include(x => x.TeamSeasonHome).ThenInclude(x => x.Players).ThenInclude(x => x.Player)
+                .Include(x => x.TeamSeasonGuest).ThenInclude(x => x.Players).ThenInclude(x => x.Player)
                 .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)

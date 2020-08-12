@@ -31,6 +31,8 @@ namespace BasketballLeague.Domain.Entities
 
         public virtual Player Capitain { get; set; }
         public virtual ICollection<PlayerSeason> Players { get; set; }
+        public virtual ICollection<Match> MatchesHome { get; set; }
+        public virtual ICollection<Match> MatchesAway { get; set; }
         public virtual Coach Coach { get; set; }
         public virtual SeasonDivision SeasonDivision { get; set; }
         public virtual Team Team { get; set; }
