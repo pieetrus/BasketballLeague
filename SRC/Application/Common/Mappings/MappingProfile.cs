@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using BasketballLeague.Application.Matches.Queries.GetMatchesList;
+using BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList;
+using BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed;
 using BasketballLeague.Application.Players.Queries.GetPlayersList;
 using BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsList;
 using BasketballLeague.Application.Teams;
@@ -27,10 +28,20 @@ namespace BasketballLeague.Application.Common.Mappings
             CreateMap<Team, TeamPlayerList>();
 
             CreateMap<Match, MatchListDto>()
-                .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Name))
-                .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Name))
+                .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team.Name))
+                .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team.Name))
                 .ForMember(x => x.Division, x => x.MapFrom(x => x.SeasonDivision.Division.Name));
 
+            CreateMap<Match, MatchDetailedDto>()
+                .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team.Name))
+                .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team.Name))
+                .ForMember(x => x.Division, x => x.MapFrom(x => x.SeasonDivision.Division.Name))
+                .ForMember(x => x.TeamHomePlayers,
+                    y => y.MapFrom(x =>
+                        x.PlayerMatches.Where(playerMatch => playerMatch.Player.TeamId == x.TeamHomeId)))
+                .ForMember(x => x.TeamGuestPlayers,
+                    y => y.MapFrom(
+                        x => x.PlayerMatches.Where(playerMatch => playerMatch.Player.TeamId == x.TeamGuestId)));
 
 
         }

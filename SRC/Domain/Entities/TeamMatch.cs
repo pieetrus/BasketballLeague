@@ -1,10 +1,11 @@
-﻿namespace BasketballLeague.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace BasketballLeague.Domain.Entities
 {
     public class TeamMatch
     {
         public int Id { get; set; }
         public int TeamId { get; set; }
-        public int MatchId { get; set; }
         public int? Pts { get; private set; }
         public int? Fga { get; private set; }
         public int? Fgm { get; private set; }
@@ -28,7 +29,10 @@
         public int PointsFromTurnovers { get; set; }
         public int OffFouls { get; set; }
 
-        public virtual Match Match { get; set; }
+        //public virtual Match Match { get; set; }
+        public virtual ICollection<Match> MatchesHome { get; set; }
+        public virtual ICollection<Match> MatchesAway { get; set; }
+
         public virtual Team Team { get; set; }
     }
 }

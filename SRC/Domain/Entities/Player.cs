@@ -20,7 +20,6 @@ namespace BasketballLeague.Domain.Entities
         public virtual ICollection<Foul> Fouls { get; set; }
         public virtual ICollection<Foul> FoulsOn { get; set; }
         public virtual ICollection<FreeThrow> FreeThrows { get; set; }
-        public virtual ICollection<PlayerMatch> PlayerMatches { get; set; }
         public virtual ICollection<PlayerSeason> PlayerSeasons { get; set; }
         public virtual ICollection<Rebound> Rebounds { get; set; }
         public virtual ICollection<Shot> Shots { get; set; }

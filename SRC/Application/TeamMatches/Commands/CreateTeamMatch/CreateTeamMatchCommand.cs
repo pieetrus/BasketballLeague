@@ -45,7 +45,7 @@ namespace BasketballLeague.Application.TeamMatches.Commands.CreateTeamMatch
                 var entity = new TeamMatch
                 {
                     TeamId = request.TeamId,
-                    MatchId = request.MatchId,
+                    //MatchId = request.MatchId,
                     Fg3a = request.Fg3a,
                     Fg3m = request.Fg3m,
                     Fg2a = request.Fg2a,

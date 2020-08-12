@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BasketballLeague.Application.Common.Interfaces;
-using BasketballLeague.Application.Matches.Queries.GetMatchesList;
 using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +26,7 @@ namespace BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList
         {
             var matches = await _context.Match
                 .Include(x => x.SeasonDivision).ThenInclude(x => x.Division)
-                .Include(x => x.TeamHome)
+                .Include(x => x.TeamHome).ThenInclude(x => x.Team)
                 .ToListAsync(cancellationToken);
 
             return _mapper.Map<IEnumerable<Match>, IEnumerable<MatchListDto>>(matches).ToList();

@@ -52,7 +52,7 @@ namespace BasketballLeague.Application.TeamMatches.Commands.UpdateTeamMatch
                 }
 
                 entity.TeamId = request.TeamId ?? entity.TeamId;
-                entity.MatchId = request.MatchId ?? entity.MatchId;
+                //entity.MatchId = request.MatchId ?? entity.MatchId;
                 entity.Fg3a = request.Fg3a ?? entity.Fg3a;
                 entity.Fg3m = request.Fg3m ?? entity.Fg3m;
                 entity.Fg2a = request.Fg2a ?? entity.Fg2a;

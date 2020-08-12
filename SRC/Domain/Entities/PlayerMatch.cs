@@ -24,7 +24,7 @@
         public int Fouls { get; set; }
         public int OffFouls { get; set; }
 
-        public virtual Match Match { get; set; }
-        public virtual Player Player { get; set; }
+        public Match Match { get; set; }
+        public PlayerSeason Player { get; set; }
     }
 }

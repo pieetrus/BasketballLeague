@@ -3,6 +3,7 @@ using BasketballLeague.Application.Matches.Commands.DeleteMatch;
 using BasketballLeague.Application.Matches.Commands.UpdateMatch;
 using BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList;
 using BasketballLeague.Application.Matches.Queries.GetMatchDetail;
+using BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed;
 using BasketballLeague.Application.Matches.Queries.GetMatchesList;
 using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +32,16 @@ namespace BasketballLeague.API.Controllers
         public async Task<ActionResult<Match>> Get(int id)
         {
             var player = await Mediator.Send(new GetMatchDetailQuery { Id = id });
+
+            return Ok(player);
+        }
+
+        [HttpGet("detailed/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<MatchDetailedDto>> GetDetailed(int id)
+        {
+            var player = await Mediator.Send(new GetMatchDetailDetailedQuery { Id = id });
 
             return Ok(player);
         }

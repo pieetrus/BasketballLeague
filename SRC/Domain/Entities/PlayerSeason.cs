@@ -1,4 +1,6 @@
-﻿namespace BasketballLeague.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace BasketballLeague.Domain.Entities
 {
     public class PlayerSeason
     {
@@ -28,7 +30,7 @@
 
         public virtual Player Player { get; set; }
         public virtual TeamSeason Team { get; set; }
-
         public virtual SeasonDivision SeasonDivision { get; set; }
+        public virtual ICollection<PlayerMatch> PlayerMatches { get; set; }
     }
 }

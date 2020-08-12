@@ -2,6 +2,7 @@
 using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,12 +18,13 @@ namespace BasketballLeague.Application.Matches.Queries.GetMatchDetail
         }
         public async Task<Match> Handle(GetMatchDetailQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Match.FindAsync(request.Id);
+            var entity = await _context.Match
+                //.Include(x => x.PlayerMatches)
+                //.Include(x => x.TeamMatches)
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)
-            {
                 throw new NotFoundException(nameof(Match), request.Id);
-            }
 
             return entity;
         }

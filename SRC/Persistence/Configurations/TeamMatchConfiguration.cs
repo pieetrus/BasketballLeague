@@ -10,9 +10,9 @@ namespace BasketballLeague.Persistence.Configurations
         {
             builder.ToTable("Team_Match");
 
-            builder.HasIndex(e => new { e.TeamId, e.MatchId })
-                .HasName("UQ_Team_Match_Team_ID_Match_ID")
-                .IsUnique();
+            //builder.HasIndex(e => new { e.TeamId, e.MatchId })
+            //    .HasName("UQ_Team_Match_Team_ID_Match_ID")
+            //    .IsUnique();
 
             builder.Property(e => e.Id).HasColumnName("Team_Match_ID");
 
@@ -48,7 +48,7 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.Property(e => e.Ftm).HasColumnName("FTM");
 
-            builder.Property(e => e.MatchId).HasColumnName("Match_ID");
+            //builder.Property(e => e.MatchId).HasColumnName("Match_ID");
 
             builder.Property(e => e.OffFouls).HasColumnName("OFF_FOULS");
 
@@ -72,11 +72,16 @@ namespace BasketballLeague.Persistence.Configurations
                 .HasColumnName("TRB")
                 .HasComputedColumnSql("([ORB]+[DRB])");
 
-            builder.HasOne(d => d.Match)
-                .WithMany(p => p.TeamMatches)
-                .HasForeignKey(d => d.MatchId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_Team_Match_Match_ID_Match_ID");
+            builder.HasMany(d => d.MatchesHome)
+                .WithOne(p => p.TeamHome)
+                .HasForeignKey(d => d.TeamHomeId)
+                .OnDelete(DeleteBehavior.Cascade);
+            //.HasConstraintName("FK_Team_Match_Match_ID_Match_ID");
+
+            builder.HasMany(d => d.MatchesAway)
+                .WithOne(p => p.TeamGuest)
+                .HasForeignKey(d => d.TeamGuestId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(d => d.Team)
                 .WithMany(p => p.TeamMatches)

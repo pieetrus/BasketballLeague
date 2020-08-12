@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BasketballLeague.Application.Matches.Queries.GetMatchesList
+namespace BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList
 {
     public class MatchListDto
     {
