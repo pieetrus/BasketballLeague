@@ -37,8 +37,8 @@ namespace BasketballLeague.Application.Referees.Commands.UpdateReferee
                     throw new NotFoundException(nameof(Referee), request.Id);
                 }
 
-                entity.Name = request.Name ?? entity.Name;
-                entity.Surname = request.Surname ?? entity.Surname;
+                entity.Name = request.Name ?? entity.Name.Trim();
+                entity.Surname = request.Surname ?? entity.Surname.Trim();
                 entity.JerseyNr = request.JerseyNr ?? entity.JerseyNr;
                 entity.Birthdate = request.Birthdate ?? entity.Birthdate;
                 entity.PhotoUrl = request.PhotoUrl ?? entity.PhotoUrl;

@@ -8,7 +8,6 @@ namespace BasketballLeague.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Photo> builder)
         {
-
         }
     }
 }

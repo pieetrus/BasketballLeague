@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Teams.Commands.CreateTeam
 {
-    public class CreateTeamCommand : IRequest
+    public class CreateTeamCommand : IRequest<int>
     {
         public string Name { get; set; }
         public string ShortName { get; set; }
-        public string LogoUrl { get; set; }
 
 
-        public class Handler : IRequestHandler<CreateTeamCommand>
+        public class Handler : IRequestHandler<CreateTeamCommand, int>
         {
             private readonly IBasketballLeagueDbContext _context;
 
@@ -23,13 +22,12 @@ namespace BasketballLeague.Application.Teams.Commands.CreateTeam
                 _context = context;
             }
 
-            public async Task<Unit> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
             {
                 var entity = new Team
                 {
                     Name = request.Name,
                     ShortName = request.ShortName,
-                    LogoUrl = request.LogoUrl
                 };
 
 
@@ -37,7 +35,7 @@ namespace BasketballLeague.Application.Teams.Commands.CreateTeam
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
-                if (success) return Unit.Value;
+                if (success) return entity.Id;
 
                 throw new Exception("Problem saving changes");
             }

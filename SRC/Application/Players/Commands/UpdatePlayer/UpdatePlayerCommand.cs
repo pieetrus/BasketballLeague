@@ -39,8 +39,8 @@ namespace BasketballLeague.Application.Players.Commands.UpdatePlayer
                     throw new NotFoundException(nameof(Player), request.Id);
                 }
 
-                entity.Name = request.Name ?? entity.Name;
-                entity.Surname = request.Surname ?? entity.Surname;
+                entity.Name = request.Name ?? entity.Name.Trim();
+                entity.Surname = request.Surname ?? entity.Surname.Trim();
                 entity.Birthdate = request.Birthdate ?? entity.Birthdate;
                 entity.PhotoUrl = request.PhotoUrl ?? entity.PhotoUrl;
                 entity.Height = request.Height ?? entity.Height;

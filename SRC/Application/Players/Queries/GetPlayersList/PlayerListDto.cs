@@ -14,7 +14,7 @@ namespace BasketballLeague.Application.Players.Queries.GetPlayersList
         public string PhotoUrl { get; set; }
         public int? Height { get; set; }
         public string Position { get; set; }
-        public ICollection<TeamPlayerList> Teams { get; set; }
+        public ICollection<TeamDto> Teams { get; set; }
 
     }
 }

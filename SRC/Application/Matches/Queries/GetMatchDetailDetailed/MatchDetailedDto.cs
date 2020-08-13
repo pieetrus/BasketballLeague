@@ -1,4 +1,5 @@
 ﻿using BasketballLeague.Application.PlayerMatches;
+using BasketballLeague.Application.Teams;
 using System;
 using System.Collections.Generic;
 
@@ -8,8 +9,8 @@ namespace BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed
     {
         public int Id { get; set; }
         public string Division { get; set; }
-        public string TeamHome { get; set; }
-        public string TeamGuest { get; set; }
+        public TeamDto TeamHome { get; set; }
+        public TeamDto TeamGuest { get; set; }
         public IEnumerable<PlayerBeforeMatchDto> TeamHomePlayers { get; set; }
         public IEnumerable<PlayerBeforeMatchDto> TeamGuestPlayers { get; set; }
         public int Attendance { get; set; }

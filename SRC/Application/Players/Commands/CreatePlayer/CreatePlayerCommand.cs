@@ -32,8 +32,8 @@ namespace BasketballLeague.Application.Players.Commands.CreatePlayer
             {
                 var entity = new Player
                 {
-                    Name = request.Name,
-                    Surname = request.Surname,
+                    Name = request.Name.Trim(),
+                    Surname = request.Surname.Trim(),
                     Birthdate = request.Birthdate,
                     PhotoUrl = request.PhotoUrl,
                     Height = request.Height,

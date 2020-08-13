@@ -8,15 +8,15 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.Photos.DeletePhoto
+namespace BasketballLeague.Application.Photos.DeleteProfilePhoto
 {
 
-    public class DeletePhotoCommand : IRequest<Unit>
+    public class DeleteProfilePhotoCommand : IRequest<Unit>
     {
         public string Id { get; set; }
     }
 
-    public class Handler : IRequestHandler<DeletePhotoCommand, Unit>
+    public class Handler : IRequestHandler<DeleteProfilePhotoCommand, Unit>
     {
         private readonly IBasketballLeagueDbContext _context;
         private readonly IUserAccessor _userAccessor;
@@ -29,7 +29,7 @@ namespace BasketballLeague.Application.Photos.DeletePhoto
             _photoAccessor = photoAccessor;
         }
 
-        public async Task<Unit> Handle(DeletePhotoCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteProfilePhotoCommand request, CancellationToken cancellationToken)
         {
 
             var user = await _context.AppUser

@@ -5,11 +5,6 @@ namespace BasketballLeague.Domain.Entities
 {
     public class AppUser : IdentityUser
     {
-        public AppUser()
-        {
-            Photos = new HashSet<Photo>();
-        }
-
         public string DisplayName { get; set; }
 
         public int? PlayerId { get; set; }

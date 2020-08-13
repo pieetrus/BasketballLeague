@@ -37,7 +37,6 @@ namespace BasketballLeague.Application.Teams.Commands.UpdateTeam
 
                 entity.Name = request.Name ?? entity.Name;
                 entity.ShortName = request.ShortName ?? entity.ShortName;
-                entity.LogoUrl = request.LogoUrl ?? entity.LogoUrl;
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

@@ -8,14 +8,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.Photos.SetMain
+namespace BasketballLeague.Application.Photos.SetMainProfilePhoto
 {
-    public class SetMainCommand : IRequest<Unit>
+    public class SetMainProfilePhotoCommand : IRequest<Unit>
     {
         public string Id { get; set; }
     }
 
-    public class Handler : IRequestHandler<SetMainCommand, Unit>
+    public class Handler : IRequestHandler<SetMainProfilePhotoCommand, Unit>
     {
         private readonly IBasketballLeagueDbContext _context;
         private readonly IUserAccessor _userAccessor;
@@ -26,7 +26,7 @@ namespace BasketballLeague.Application.Photos.SetMain
             _userAccessor = userAccessor;
         }
 
-        public async Task<Unit> Handle(SetMainCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(SetMainProfilePhotoCommand request, CancellationToken cancellationToken)
         {
 
             var user = await _context.AppUser

@@ -4,12 +4,13 @@ using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Teams.Queries.GetTeamsList
 {
-    public class GetTeamsListQueryHandler : IRequestHandler<GetTeamsListQuery, IEnumerable<Team>>
+    public class GetTeamsListQueryHandler : IRequestHandler<GetTeamsListQuery, IEnumerable<TeamDto>>
     {
 
         private readonly IBasketballLeagueDbContext _context;
@@ -21,11 +22,11 @@ namespace BasketballLeague.Application.Teams.Queries.GetTeamsList
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Team>> Handle(GetTeamsListQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TeamDto>> Handle(GetTeamsListQuery request, CancellationToken cancellationToken)
         {
-            var teams = await _context.Team.ToListAsync(cancellationToken);
+            var teams = await _context.Team.Include(x => x.Logo).ToListAsync(cancellationToken);
 
-            return teams;
+            return _mapper.Map<IEnumerable<Team>, IEnumerable<TeamDto>>(teams).ToList();
         }
     }
 }

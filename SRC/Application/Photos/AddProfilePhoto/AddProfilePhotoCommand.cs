@@ -8,14 +8,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.Photos.AddPhoto
+namespace BasketballLeague.Application.Photos.AddProfilePhoto
 {
-    public class AddPhotoCommand : IRequest<Photo>
+    public class AddProfilePhotoCommand : IRequest<Photo>
     {
         public IFormFile File { get; set; }
     }
 
-    public class Handler : IRequestHandler<AddPhotoCommand, Photo>
+    public class Handler : IRequestHandler<AddProfilePhotoCommand, Photo>
     {
         private readonly IBasketballLeagueDbContext _context;
         private readonly IUserAccessor _userAccessor;
@@ -28,7 +28,7 @@ namespace BasketballLeague.Application.Photos.AddPhoto
             _photoAccessor = photoAccessor;
         }
 
-        public async Task<Photo> Handle(AddPhotoCommand request, CancellationToken cancellationToken)
+        public async Task<Photo> Handle(AddProfilePhotoCommand request, CancellationToken cancellationToken)
         {
             var photoUploadResult = _photoAccessor.AddPhoto(request.File);
 

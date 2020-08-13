@@ -7,5 +7,7 @@
         public string Surname { get; set; }
         public string JerseyNr { get; set; }
         public string Position { get; set; }
+        public int Height { get; set; }
+
     }
 }

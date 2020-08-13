@@ -4,14 +4,16 @@ using BasketballLeague.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BasketballLeague.Persistence.Migrations
 {
     [DbContext(typeof(BasketballLeagueDbContext))]
-    partial class BasketballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200813184747_AddTeamIdToPhotoEntity")]
+    partial class AddTeamIdToPhotoEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -425,7 +427,7 @@ namespace BasketballLeague.Persistence.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<string>("Url")
@@ -436,8 +438,7 @@ namespace BasketballLeague.Persistence.Migrations
                     b.HasIndex("AppUserId");
 
                     b.HasIndex("TeamId")
-                        .IsUnique()
-                        .HasFilter("[TeamId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Photos");
                 });
@@ -1569,7 +1570,9 @@ namespace BasketballLeague.Persistence.Migrations
 
                     b.HasOne("BasketballLeague.Domain.Entities.Team", "Team")
                         .WithOne("Logo")
-                        .HasForeignKey("BasketballLeague.Domain.Entities.Photo", "TeamId");
+                        .HasForeignKey("BasketballLeague.Domain.Entities.Photo", "TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BasketballLeague.Domain.Entities.PlayerMatch", b =>

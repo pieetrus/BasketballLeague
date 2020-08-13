@@ -7,8 +7,8 @@ namespace BasketballLeague.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
-        public string LogoUrl { get; set; }
 
+        public Photo Logo { get; set; }
         public virtual ICollection<Rebound> Rebounds { get; set; }
         public virtual ICollection<SeasonDivision> SeasonDivisions { get; set; }
         public virtual ICollection<TeamMatch> TeamMatches { get; set; }

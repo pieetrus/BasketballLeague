@@ -31,9 +31,11 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.Name, x => x.MapFrom(playerMatch => playerMatch.Player.Name))
                 .ForMember(x => x.Surname, x => x.MapFrom(playerMatch => playerMatch.Player.Surname))
                 .ForMember(x => x.JerseyNr, x => x.MapFrom(playerMatch => playerMatch.JerseyNr))
-                .ForMember(x => x.Position, x => x.MapFrom(playerMatch => playerMatch.Player.Position));
+                .ForMember(x => x.Position, x => x.MapFrom(playerMatch => playerMatch.Player.Position))
+                .ForMember(x => x.Height, x => x.MapFrom(playerMatch => playerMatch.Player.Height));
 
-            CreateMap<Team, TeamPlayerList>();
+            CreateMap<Team, TeamDto>()
+                .ForMember(x => x.LogoUrl, x => x.MapFrom(x => x.Logo.Url));
 
             CreateMap<Match, MatchListDto>()
                 .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team.Name))
@@ -41,8 +43,8 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.Division, x => x.MapFrom(x => x.SeasonDivision.Division.Name));
 
             CreateMap<Match, MatchDetailedDto>()
-                .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team.Name))
-                .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team.Name))
+                .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team))
+                .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team))
                 .ForMember(x => x.Division, x => x.MapFrom(x => x.SeasonDivision.Division.Name))
                 .ForMember(x => x.TeamHomePlayers,
                     y => y.MapFrom(x =>

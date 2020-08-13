@@ -28,8 +28,8 @@ namespace BasketballLeague.Application.Referees.Commands.CreateReferee
             {
                 var entity = new Referee
                 {
-                    Name = request.Name,
-                    Surname = request.Surname,
+                    Name = request.Name.Trim(),
+                    Surname = request.Surname.Trim(),
                     JerseyNr = request.JerseyNr,
                     Birthdate = request.Birthdate,
                     PhotoUrl = request.PhotoUrl

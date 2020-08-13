@@ -14,10 +14,6 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.Property(e => e.Id).HasColumnName("Team_ID");
 
-            builder.Property(e => e.LogoUrl)
-                .HasColumnName("Logo_URL")
-                .HasMaxLength(300)
-                .IsUnicode(false);
 
             builder.Property(e => e.Name)
                 .IsRequired()
@@ -29,6 +25,10 @@ namespace BasketballLeague.Persistence.Configurations
                 .HasMaxLength(3)
                 .IsUnicode(false)
                 .IsFixedLength();
+
+            builder.HasOne(x => x.Logo)
+                .WithOne(x => x.Team)
+                .HasForeignKey<Photo>(x => x.TeamId);
         }
     }
 }
