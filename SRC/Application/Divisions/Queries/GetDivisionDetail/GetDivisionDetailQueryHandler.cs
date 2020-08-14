@@ -1,4 +1,5 @@
-﻿using BasketballLeague.Application.Common.Exceptions;
+﻿using AutoMapper;
+using BasketballLeague.Application.Common.Exceptions;
 using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
 using MediatR;
@@ -7,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Divisions.Queries.GetDivisionDetail
 {
-    public class GetDivisionDetailQueryHandler : IRequestHandler<GetDivisionDetailQuery, Division>
+    public class GetDivisionDetailQueryHandler : IRequestHandler<GetDivisionDetailQuery, DivisionDto>
     {
         private readonly IBasketballLeagueDbContext _context;
+        private readonly IMapper _mapper;
 
-        public GetDivisionDetailQueryHandler(IBasketballLeagueDbContext context)
+        public GetDivisionDetailQueryHandler(IBasketballLeagueDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-        public async Task<Division> Handle(GetDivisionDetailQuery request, CancellationToken cancellationToken)
+        public async Task<DivisionDto> Handle(GetDivisionDetailQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Division.FindAsync(request.Id);
 
@@ -24,7 +27,7 @@ namespace BasketballLeague.Application.Divisions.Queries.GetDivisionDetail
                 throw new NotFoundException(nameof(Division), request.Id);
             }
 
-            return entity;
+            return _mapper.Map<Division, DivisionDto>(entity); ;
         }
     }
 }

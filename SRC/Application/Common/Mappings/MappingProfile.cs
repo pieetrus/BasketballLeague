@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using BasketballLeague.Application.Divisions;
 using BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList;
 using BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed;
 using BasketballLeague.Application.PlayerMatches;
 using BasketballLeague.Application.Players.Queries.GetPlayersList;
 using BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsList;
+using BasketballLeague.Application.Seasons;
 using BasketballLeague.Application.Teams;
 using BasketballLeague.Domain.Entities;
 using System.Linq;
@@ -51,6 +53,12 @@ namespace BasketballLeague.Application.Common.Mappings
                         x.TeamSeasonHome.Players))
                 .ForMember(x => x.TeamGuestPlayers,
                     y => y.MapFrom(x => x.TeamSeasonGuest.Players));
+
+            CreateMap<Season, SeasonDto>()
+                .ForMember(x => x.Divisions, x => x.MapFrom(x => x.SeasonDivisions.Select(x => x.Division)));
+
+
+            CreateMap<Division, DivisionDto>();
 
 
         }

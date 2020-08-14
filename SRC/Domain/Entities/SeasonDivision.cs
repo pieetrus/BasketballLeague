@@ -11,7 +11,7 @@ namespace BasketballLeague.Domain.Entities
 
         public virtual Division Division { get; set; }
         public virtual Season Season { get; set; }
-        public virtual Team WinnerSeasonDivisionTeam { get; set; }
+        public virtual Team WinnerSeasonDivisionTeam { get; set; } // Maybe Team Season????
         public virtual ICollection<Match> Matches { get; set; }
         public virtual ICollection<PlayerSeason> PlayerSeasons { get; set; }
         public virtual ICollection<TeamSeason> TeamSeasons { get; set; }

@@ -1,11 +1,12 @@
-﻿using BasketballLeague.Application.Seasons.Commands.CreateSeason;
+﻿using BasketballLeague.Application.Seasons;
+using BasketballLeague.Application.Seasons.Commands.CreateSeason;
 using BasketballLeague.Application.Seasons.Commands.DeleteSeason;
 using BasketballLeague.Application.Seasons.Commands.UpdateSeason;
 using BasketballLeague.Application.Seasons.Queries.GetSeasonDetail;
 using BasketballLeague.Application.Seasons.Queries.GetSeasonsList;
-using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.API.Controllers
@@ -13,7 +14,7 @@ namespace BasketballLeague.API.Controllers
     public class SeasonController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<Season>> GetAll()
+        public async Task<ActionResult<IEnumerable<SeasonDto>>> GetAll()
         {
             return Ok(await Mediator.Send(new GetSeasonListQuery()));
         }
@@ -21,7 +22,7 @@ namespace BasketballLeague.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Player>> Get(int id)
+        public async Task<ActionResult<SeasonDto>> Get(int id)
         {
             var player = await Mediator.Send(new GetSeasonDetailQuery { Id = id });
 
@@ -31,7 +32,7 @@ namespace BasketballLeague.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreateSeasonCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateSeasonCommand command)
         {
             await Mediator.Send(command);
 

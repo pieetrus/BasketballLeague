@@ -1,10 +1,9 @@
-﻿using BasketballLeague.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 
 namespace BasketballLeague.Application.Divisions.Queries.GetDivisionDetail
 {
 
-    public class GetDivisionDetailQuery : IRequest<Division>
+    public class GetDivisionDetailQuery : IRequest<DivisionDto>
     {
         public int Id { get; set; }
     }

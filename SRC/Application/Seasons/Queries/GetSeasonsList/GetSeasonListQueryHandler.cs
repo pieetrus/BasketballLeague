@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Seasons.Queries.GetSeasonsList
 {
-    public class GetSeasonListQueryHandler : IRequestHandler<GetSeasonListQuery, IEnumerable<Season>>
+    public class GetSeasonListQueryHandler : IRequestHandler<GetSeasonListQuery, IEnumerable<SeasonDto>>
     {
         private readonly IBasketballLeagueDbContext _context;
         private readonly IMapper _mapper;
@@ -20,11 +20,14 @@ namespace BasketballLeague.Application.Seasons.Queries.GetSeasonsList
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Season>> Handle(GetSeasonListQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<SeasonDto>> Handle(GetSeasonListQuery request, CancellationToken cancellationToken)
         {
-            var seasons = await _context.Season.Include(x => x.SeasonDivisions).ThenInclude(x => x.Division).ToListAsync(cancellationToken);
+            var seasons =
+                await _context.Season
+                    .Include(x => x.SeasonDivisions).ThenInclude(x => x.Division)
+                    .ToListAsync(cancellationToken);
 
-            return seasons;
+            return _mapper.Map<IEnumerable<Season>, IEnumerable<SeasonDto>>(seasons);
         }
     }
 }

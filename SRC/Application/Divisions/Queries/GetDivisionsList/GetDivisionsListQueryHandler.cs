@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Divisions.Queries.GetDivisionsList
 {
-    public class GetDivisionsListQueryHandler : IRequestHandler<GetDivisionsListQuery, IEnumerable<Division>>
+    public class GetDivisionsListQueryHandler : IRequestHandler<GetDivisionsListQuery, IEnumerable<DivisionDto>>
     {
 
         private readonly IBasketballLeagueDbContext _context;
@@ -21,11 +21,11 @@ namespace BasketballLeague.Application.Divisions.Queries.GetDivisionsList
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Division>> Handle(GetDivisionsListQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<DivisionDto>> Handle(GetDivisionsListQuery request, CancellationToken cancellationToken)
         {
             var divisions = await _context.Division.ToListAsync(cancellationToken);
 
-            return divisions;
+            return _mapper.Map<IEnumerable<Division>, IEnumerable<DivisionDto>>(divisions);
         }
     }
 }
