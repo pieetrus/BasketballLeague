@@ -12,6 +12,8 @@ namespace BasketballLeague.Application.Divisions.Commands.CreateDivision
             RuleFor(x => x.ShortName)
                 .MaximumLength(6).WithMessage("Short name max length is 6")
                 .NotEmpty().WithMessage("Name field is required");
+
+            RuleFor(x => x.Level).NotEmpty();
         }
     }
 }

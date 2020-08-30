@@ -4,6 +4,7 @@ using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace BasketballLeague.Application.Divisions.Queries.GetDivisionsList
 
         public async Task<IEnumerable<DivisionDto>> Handle(GetDivisionsListQuery request, CancellationToken cancellationToken)
         {
-            var divisions = await _context.Division.ToListAsync(cancellationToken);
+            var divisions = await _context.Division.OrderBy(x => x.Level).ToListAsync(cancellationToken);
 
             return _mapper.Map<IEnumerable<Division>, IEnumerable<DivisionDto>>(divisions);
         }

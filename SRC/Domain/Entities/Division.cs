@@ -7,6 +7,7 @@ namespace BasketballLeague.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
+        public int Level { get; set; }
 
         public virtual ICollection<SeasonDivision> SeasonDivisions { get; set; }
     }

@@ -14,6 +14,8 @@ namespace BasketballLeague.Application.Divisions.Commands.UpdateDivision
         public int Id { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
+        public int? Level { get; set; }
+
 
         public class Handler : IRequestHandler<UpdateDivisionCommand>
         {
@@ -36,6 +38,8 @@ namespace BasketballLeague.Application.Divisions.Commands.UpdateDivision
 
                 entity.Name = request.Name ?? entity.Name;
                 entity.ShortName = request.ShortName ?? entity.ShortName;
+                entity.Level = request.Level ?? entity.Level;
+
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

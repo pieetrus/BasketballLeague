@@ -11,6 +11,7 @@ namespace BasketballLeague.Application.Divisions.Commands.CreateDivision
     {
         public string Name { get; set; }
         public string ShortName { get; set; }
+        public int Level { get; set; }
 
 
         public class Handler : IRequestHandler<CreateDivisionCommand, int>
@@ -28,7 +29,9 @@ namespace BasketballLeague.Application.Divisions.Commands.CreateDivision
                 var entity = new Division
                 {
                     Name = request.Name,
-                    ShortName = request.ShortName
+                    ShortName = request.ShortName,
+                    Level = request.Level
+
                 };
 
                 _context.Division.Add(entity);
