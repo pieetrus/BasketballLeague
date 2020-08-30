@@ -6,7 +6,9 @@ namespace BasketballLeague.Application.TeamSeasons.Commands.CreateTeamSeason
     {
         public CreateTeamSeasonCommandValidator()
         {
-            RuleFor(x => x.SeasonDivisionId)
+            RuleFor(x => x.SeasonId)
+                .NotEmpty();
+            RuleFor(x => x.DivisionId)
                 .NotEmpty();
             RuleFor(x => x.TeamId)
                 .NotEmpty();
@@ -14,18 +16,18 @@ namespace BasketballLeague.Application.TeamSeasons.Commands.CreateTeamSeason
             //    .NotEmpty();
             //RuleFor(x => x.CapitainId)
             //    .NotEmpty();
-            RuleFor(x => x.RankingPoints)
-                .NotEmpty();
+            //RuleFor(x => x.RankingPoints)
+            //    .NotEmpty();
 
 
-            RuleFor(x => x.Fg3m)
-                .LessThanOrEqualTo(x => x.Fg3a);
-            RuleFor(x => x.Fg2m)
-                .LessThanOrEqualTo(x => x.Fg2a);
-            RuleFor(x => x.OffFouls)
-                .LessThanOrEqualTo(x => x.Fouls);
-            RuleFor(x => x.Ftm)
-                .LessThanOrEqualTo(x => x.Fta);
+            //RuleFor(x => x.Fg3m)
+            //    .LessThanOrEqualTo(x => x.Fg3a);
+            //RuleFor(x => x.Fg2m)
+            //    .LessThanOrEqualTo(x => x.Fg2a);
+            //RuleFor(x => x.OffFouls)
+            //    .LessThanOrEqualTo(x => x.Fouls);
+            //RuleFor(x => x.Ftm)
+            //    .LessThanOrEqualTo(x => x.Fta);
         }
     }
 }

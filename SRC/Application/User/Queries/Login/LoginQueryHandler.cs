@@ -12,7 +12,6 @@ namespace BasketballLeague.Application.User.Queries.Login
 {
     public class LoginQueryHandler : IRequestHandler<LoginQuery, Dto.User>
     {
-        private readonly UserManager<AppUser> _userManager;
         private readonly IBasketballLeagueDbContext _context;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IJwtGenerator _jwtGenerator;

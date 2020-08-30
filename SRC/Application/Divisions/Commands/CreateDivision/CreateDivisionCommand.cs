@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Divisions.Commands.CreateDivision
 {
-    public class CreateDivisionCommand : IRequest
+    public class CreateDivisionCommand : IRequest<int>
     {
         public string Name { get; set; }
         public string ShortName { get; set; }
 
 
-        public class Handler : IRequestHandler<CreateDivisionCommand>
+        public class Handler : IRequestHandler<CreateDivisionCommand, int>
         {
             private readonly IBasketballLeagueDbContext _context;
 
@@ -22,7 +22,7 @@ namespace BasketballLeague.Application.Divisions.Commands.CreateDivision
                 _context = context;
             }
 
-            public async Task<Unit> Handle(CreateDivisionCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreateDivisionCommand request, CancellationToken cancellationToken)
             {
 
                 var entity = new Division
@@ -35,7 +35,7 @@ namespace BasketballLeague.Application.Divisions.Commands.CreateDivision
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
-                if (success) return Unit.Value;
+                if (success) return entity.Id;
 
                 throw new Exception("Problem saving changes");
             }
