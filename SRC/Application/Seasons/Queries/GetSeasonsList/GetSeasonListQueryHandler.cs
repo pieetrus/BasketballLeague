@@ -4,6 +4,7 @@ using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,8 +25,15 @@ namespace BasketballLeague.Application.Seasons.Queries.GetSeasonsList
         {
             var seasons =
                 await _context.Season
-                    .Include(x => x.SeasonDivisions).ThenInclude(x => x.Division)
+                    .Include(x => x.SeasonDivisions)
+                    .ThenInclude(x => x.Division)
                     .ToListAsync(cancellationToken);
+
+            foreach (var season in seasons)
+            {
+                season.SeasonDivisions = season.SeasonDivisions.OrderBy(x => x.Division.Level).ToList();
+            }
+
 
             return _mapper.Map<IEnumerable<Season>, IEnumerable<SeasonDto>>(seasons);
         }
