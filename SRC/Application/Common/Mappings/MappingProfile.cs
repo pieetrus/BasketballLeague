@@ -39,6 +39,12 @@ namespace BasketballLeague.Application.Common.Mappings
             CreateMap<Team, TeamDto>()
                 .ForMember(x => x.LogoUrl, x => x.MapFrom(x => x.Logo.Url));
 
+            CreateMap<TeamSeason, TeamDto>()
+                .ForMember(x => x.LogoUrl, x => x.MapFrom(x => x.Team.Logo.Url))
+                .ForMember(x => x.Name, x => x.MapFrom(x => x.Team.Name))
+                .ForMember(x => x.ShortName, x => x.MapFrom(x => x.Team.ShortName));
+
+
             CreateMap<Match, MatchListDto>()
                 .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team.Name))
                 .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team.Name))
