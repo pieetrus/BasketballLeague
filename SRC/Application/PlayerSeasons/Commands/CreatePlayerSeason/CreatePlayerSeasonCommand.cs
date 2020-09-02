@@ -1,6 +1,8 @@
-﻿using BasketballLeague.Application.Common.Interfaces;
+﻿using BasketballLeague.Application.Common.Exceptions;
+using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +12,9 @@ namespace BasketballLeague.Application.PlayerSeasons.Commands.CreatePlayerSeason
     public class CreatePlayerSeasonCommand : IRequest
     {
         public int PlayerId { get; set; }
-        public int SeasonDivisionId { get; set; }
+        public int SeasonId { get; set; }
+        public int DivisionId { get; set; }
+
         public int? TeamId { get; set; }
         public string JerseyNr { get; set; }
 
@@ -28,7 +32,7 @@ namespace BasketballLeague.Application.PlayerSeasons.Commands.CreatePlayerSeason
         public int Tov { get; set; }
         public int Fouls { get; set; }
         public int OffFouls { get; set; }
-        
+
 
         public class Handler : IRequestHandler<CreatePlayerSeasonCommand>
         {
@@ -41,10 +45,18 @@ namespace BasketballLeague.Application.PlayerSeasons.Commands.CreatePlayerSeason
 
             public async Task<Unit> Handle(CreatePlayerSeasonCommand request, CancellationToken cancellationToken)
             {
+                var seasonDivision = await _context.SeasonDivision.FirstOrDefaultAsync(
+                    x => x.SeasonId == request.SeasonId && x.DivisionId == request.DivisionId, cancellationToken);
+
+                if (seasonDivision == null)
+                {
+                    throw new NotFoundException(nameof(SeasonDivision), request.SeasonId);
+                }
+
                 var entity = new PlayerSeason
                 {
                     PlayerId = request.PlayerId,
-                    SeasonDivisionId = request.SeasonDivisionId,
+                    SeasonDivisionId = seasonDivision.Id,
                     TeamId = request.TeamId,
                     JerseyNr = request.JerseyNr,
                     Fg3a = request.Fg3a,

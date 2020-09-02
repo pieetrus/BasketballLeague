@@ -25,6 +25,9 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.Id, x => x.MapFrom(x => x.Id))
                 .ForMember(x => x.TeamName, x => x.MapFrom(x => x.Team.Team.Name))
                 .ForMember(x => x.Name, x => x.MapFrom(x => x.Player.Name))
+                .ForMember(x => x.Surname, x => x.MapFrom(x => x.Player.Surname))
+                .ForMember(x => x.Height, x => x.MapFrom(x => x.Player.Height))
+                .ForMember(x => x.Birthdate, x => x.MapFrom(x => x.Player.Birthdate))
                 .ForMember(x => x.DivisionName, x => x.MapFrom(x => x.SeasonDivision.Division.Name))
                 .ForMember(x => x.Position, x => x.MapFrom(x => x.Player.Position.ToString()));
 

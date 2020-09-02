@@ -14,9 +14,9 @@ namespace BasketballLeague.API.Controllers
     public class PlayerSeasonController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlayerSeasonListDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<PlayerSeasonListDto>>> GetAll(int? seasonId, int? divisionId, int? teamId)
         {
-            return Ok(await Mediator.Send(new GetPlayerSeasonsListQuery()));
+            return Ok(await Mediator.Send(new GetPlayerSeasonsListQuery(seasonId, divisionId, teamId)));
         }
 
         [HttpGet("{id}")]
@@ -32,7 +32,7 @@ namespace BasketballLeague.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreatePlayerSeasonCommand command)
+        public async Task<IActionResult> Create([FromBody] CreatePlayerSeasonCommand command)
         {
             await Mediator.Send(command);
 

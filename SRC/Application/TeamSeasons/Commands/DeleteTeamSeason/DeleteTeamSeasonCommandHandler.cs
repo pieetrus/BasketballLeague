@@ -26,6 +26,8 @@ namespace BasketballLeague.Application.TeamSeasons.Commands.DeleteTeamSeason
                 throw new NotFoundException(nameof(TeamSeason), request.Id);
             }
 
+            _context.TeamSeason.Remove(entity);
+
             var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
             if (success) return Unit.Value;

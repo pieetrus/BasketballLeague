@@ -8,14 +8,16 @@ namespace BasketballLeague.Application.PlayerSeasons.Commands.CreatePlayerSeason
         {
             RuleFor(x => x.PlayerId)
                .NotEmpty();
-            RuleFor(x => x.SeasonDivisionId)
+            RuleFor(x => x.SeasonId)
+                .NotEmpty();
+            RuleFor(x => x.DivisionId)
                 .NotEmpty();
             RuleFor(x => x.TeamId)
                 .NotEmpty();
-            RuleFor(x => x.JerseyNr)
-                .MinimumLength(1)
-                .MaximumLength(2)
-                .NotEmpty();
+            //RuleFor(x => x.JerseyNr)
+            //    .MinimumLength(1)
+            //    .MaximumLength(2)
+            //    .NotEmpty();
 
             RuleFor(x => x.Fg3m)
                 .LessThanOrEqualTo(x => x.Fg3a);
