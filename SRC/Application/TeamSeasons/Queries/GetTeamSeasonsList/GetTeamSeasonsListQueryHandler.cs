@@ -26,12 +26,24 @@ namespace BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList
         {
             var queryable = _context.TeamSeason.Include(x => x.Team).AsQueryable();
 
-            if (request.SeasonId != null && request.DivisionId != null)
+            if (request.SeasonId != null)
             {
                 queryable = queryable
-                    .Where(x => x.SeasonDivision.SeasonId == request.SeasonId.Value &&
-                                x.SeasonDivision.DivisionId == request.DivisionId.Value);
+                    .Where(x => x.SeasonDivision.SeasonId == request.SeasonId);
 
+            }
+
+            if (request.DivisionId != null)
+            {
+                queryable = queryable
+                    .Where(x => x.SeasonDivision.DivisionId == request.DivisionId);
+            }
+
+            if (request.MatchStartDate != null)
+            {
+                queryable = queryable
+                    .Where(x => x.SeasonDivision.Season.StartDate < request.MatchStartDate
+                                && x.SeasonDivision.Season.EndDate > request.MatchStartDate);
             }
 
             var teamSeasons = await queryable.ToListAsync(cancellationToken);

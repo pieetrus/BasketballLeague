@@ -5,6 +5,7 @@ using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonDetail;
 using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.API.Controllers
@@ -12,9 +13,9 @@ namespace BasketballLeague.API.Controllers
     public class TeamSeason : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<TeamSeason>> GetAll(int? seasonId, int? divisionId)
+        public async Task<ActionResult<TeamSeason>> GetAll(int? seasonId, int? divisionId, DateTime? matchStartDate)
         {
-            return Ok(await Mediator.Send(new GetTeamSeasonsListQuery(seasonId, divisionId)));
+            return Ok(await Mediator.Send(new GetTeamSeasonsListQuery(seasonId, divisionId, matchStartDate)));
         }
 
         [HttpGet("{id}")]
