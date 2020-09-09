@@ -92,16 +92,6 @@ namespace BasketballLeague.Persistence.Configurations
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("FK_Team_Season_Team_ID_Team_ID");
 
-
-            builder.HasMany(d => d.MatchesHome)
-                .WithOne(p => p.TeamSeasonHome)
-                .HasForeignKey(d => d.TeamHomeId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasMany(d => d.MatchesAway)
-                .WithOne(p => p.TeamSeasonGuest)
-                .HasForeignKey(d => d.TeamGuestId)
-                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

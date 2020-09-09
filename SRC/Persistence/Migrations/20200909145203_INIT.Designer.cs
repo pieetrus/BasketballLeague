@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BasketballLeague.Persistence.Migrations
 {
     [DbContext(typeof(BasketballLeagueDbContext))]
-    [Migration("20200812213432_ChangedPlayerReferenceInPlayerMatchToPlayerSeasonReference")]
-    partial class ChangedPlayerReferenceInPlayerMatchToPlayerSeasonReference
+    [Migration("20200909145203_INIT")]
+    partial class INIT
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -204,6 +204,9 @@ namespace BasketballLeague.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
@@ -389,21 +392,31 @@ namespace BasketballLeague.Persistence.Migrations
                         .HasColumnName("Start_Date")
                         .HasColumnType("smalldatetime");
 
-                    b.Property<int>("TeamGuestId")
+                    b.Property<int?>("TeamGuestId")
                         .HasColumnName("Team_Guest_ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeamHomeId")
+                    b.Property<int?>("TeamHomeId")
                         .HasColumnName("Team_Home_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamSeasonGuestId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamSeasonHomeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SeasonDivisionId");
 
-                    b.HasIndex("TeamGuestId");
+                    b.HasIndex("TeamGuestId")
+                        .IsUnique()
+                        .HasFilter("[Team_Guest_ID] IS NOT NULL");
 
-                    b.HasIndex("TeamHomeId");
+                    b.HasIndex("TeamHomeId")
+                        .IsUnique()
+                        .HasFilter("[Team_Home_ID] IS NOT NULL");
 
                     b.ToTable("Match");
                 });
@@ -419,12 +432,19 @@ namespace BasketballLeague.Persistence.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("TeamId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("TeamId")
+                        .IsUnique()
+                        .HasFilter("[TeamId] IS NOT NULL");
 
                     b.ToTable("Photos");
                 });
@@ -955,12 +975,6 @@ namespace BasketballLeague.Persistence.Migrations
                         .HasColumnName("Team_ID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("LogoUrl")
-                        .HasColumnName("Logo_URL")
-                        .HasColumnType("varchar(300)")
-                        .HasMaxLength(300)
-                        .IsUnicode(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1530,16 +1544,24 @@ namespace BasketballLeague.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("BasketballLeague.Domain.Entities.TeamMatch", "TeamGuest")
+                        .WithOne("MatchAway")
+                        .HasForeignKey("BasketballLeague.Domain.Entities.Match", "TeamGuestId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("BasketballLeague.Domain.Entities.TeamSeason", "TeamSeasonGuest")
                         .WithMany("MatchesAway")
                         .HasForeignKey("TeamGuestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("BasketballLeague.Domain.Entities.TeamMatch", "TeamHome")
+                        .WithOne("MatchHome")
+                        .HasForeignKey("BasketballLeague.Domain.Entities.Match", "TeamHomeId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("BasketballLeague.Domain.Entities.TeamSeason", "TeamSeasonHome")
                         .WithMany("MatchesHome")
                         .HasForeignKey("TeamHomeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("BasketballLeague.Domain.Entities.Photo", b =>
@@ -1547,6 +1569,10 @@ namespace BasketballLeague.Persistence.Migrations
                     b.HasOne("BasketballLeague.Domain.Entities.AppUser", null)
                         .WithMany("Photos")
                         .HasForeignKey("AppUserId");
+
+                    b.HasOne("BasketballLeague.Domain.Entities.Team", "Team")
+                        .WithOne("Logo")
+                        .HasForeignKey("BasketballLeague.Domain.Entities.Photo", "TeamId");
                 });
 
             modelBuilder.Entity("BasketballLeague.Domain.Entities.PlayerMatch", b =>
@@ -1704,7 +1730,7 @@ namespace BasketballLeague.Persistence.Migrations
                         .WithMany("TeamMatches")
                         .HasForeignKey("TeamId")
                         .HasConstraintName("FK_Team_Match_Team_ID_Team_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -1724,14 +1750,14 @@ namespace BasketballLeague.Persistence.Migrations
                         .WithMany("TeamSeasons")
                         .HasForeignKey("SeasonDivisionId")
                         .HasConstraintName("FK_Team_Season_Season_Division_ID_Season_Division_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BasketballLeague.Domain.Entities.Team", "Team")
                         .WithMany("TeamSeasons")
                         .HasForeignKey("TeamId")
                         .HasConstraintName("FK_Team_Season_Team_ID_Team_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
