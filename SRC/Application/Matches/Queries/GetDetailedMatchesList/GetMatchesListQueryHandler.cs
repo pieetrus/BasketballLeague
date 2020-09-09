@@ -28,6 +28,7 @@ namespace BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList
                 .Include(x => x.SeasonDivision).ThenInclude(x => x.Division)
                 .Include(x => x.TeamHome).ThenInclude(x => x.Team)
                 .Include(x => x.TeamGuest).ThenInclude(x => x.Team)
+                .OrderByDescending(x => x.StartDate)
                 .ToListAsync(cancellationToken);
 
             return _mapper.Map<IEnumerable<Match>, IEnumerable<MatchListDto>>(matches).ToList();
