@@ -3,6 +3,7 @@ using BasketballLeague.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,18 +38,26 @@ namespace BasketballLeague.Application.Seasons.Commands.CreateSeason
                     EndDate = request.EndDate
                 };
 
-                foreach (var divisionId in request.DivisionsId)
+                if (request.DivisionsId.Any())
                 {
-                    var seasonDivision = new SeasonDivision
+                    foreach (var divisionId in request.DivisionsId)
                     {
-                        Season = season,
-                        DivisionId = divisionId,
-                    };
+                        var seasonDivision = new SeasonDivision
+                        {
+                            Season = season,
+                            DivisionId = divisionId,
+                        };
 
-                    newSeasonDivisions.Add(seasonDivision);
+                        newSeasonDivisions.Add(seasonDivision);
+                    }
+                    _context.SeasonDivision.AddRange(newSeasonDivisions);
+
+                }
+                else
+                {
+                    _context.Season.Add(season);
                 }
 
-                _context.SeasonDivision.AddRange(newSeasonDivisions);
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

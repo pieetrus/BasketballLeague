@@ -7,8 +7,8 @@ namespace BasketballLeague.Domain.Entities
     {
         public int Id { get; set; }
         public int SeasonDivisionId { get; set; }
-        public int TeamHomeId { get; set; }
-        public int TeamGuestId { get; set; }
+        public int? TeamHomeId { get; set; }
+        public int? TeamGuestId { get; set; }
         public int TeamSeasonHomeId { get; set; }
         public int TeamSeasonGuestId { get; set; }
         public int Attendance { get; set; }

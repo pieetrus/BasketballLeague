@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int TeamId { get; set; }
+        //public int MatchId { get; set; }
         public int? Pts { get; private set; }
         public int? Fga { get; private set; }
         public int? Fgm { get; private set; }

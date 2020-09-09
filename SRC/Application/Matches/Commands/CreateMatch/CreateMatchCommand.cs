@@ -1,4 +1,5 @@
-﻿using BasketballLeague.Application.Common.Interfaces;
+﻿using BasketballLeague.Application.Common.Exceptions;
+using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -40,11 +41,31 @@ namespace BasketballLeague.Application.Matches.Commands.CreateMatch
                 if (seasonDivision == null)
                     throw new Exception("Matches cannot be scheduled for this season yet. Firstly create season.");
 
+                var teamMatchHome = new TeamMatch { TeamId = request.TeamHomeId };
+                var teamMatchGuest = new TeamMatch { TeamId = request.TeamGuestId };
+
+                _context.TeamMatch.AddRange(teamMatchHome, teamMatchGuest);
+
+                var success = await _context.SaveChangesAsync(cancellationToken) > 0;
+
+                if (!success) throw new Exception("Problem saving changes. Team match entity.");
+
+
+                var teamHome = await _context.TeamSeason.FirstOrDefaultAsync(x => x.Id == request.TeamHomeId, cancellationToken);
+                var teamGuest = await _context.TeamSeason.FirstOrDefaultAsync(x => x.Id == request.TeamGuestId, cancellationToken);
+
+                if (teamHome == null)
+                    throw new NotFoundException(nameof(TeamSeason), request.TeamHomeId);
+                if (teamGuest == null)
+                    throw new NotFoundException(nameof(TeamSeason), request.TeamGuestId);
+
                 var entity = new Match
                 {
                     SeasonDivisionId = seasonDivision.Id,
-                    TeamHomeId = request.TeamHomeId,
-                    TeamGuestId = request.TeamGuestId,
+                    TeamSeasonHomeId = request.TeamHomeId,
+                    TeamSeasonGuestId = request.TeamGuestId,
+                    TeamHomeId = teamMatchHome.Id,
+                    TeamGuestId = teamMatchGuest.Id,
                     Attendance = request.Attendance ?? 0,
                     StartDate = request.StartDate,
                     Ended = request.Ended ?? false
@@ -52,7 +73,7 @@ namespace BasketballLeague.Application.Matches.Commands.CreateMatch
 
                 _context.Match.Add(entity);
 
-                var success = await _context.SaveChangesAsync(cancellationToken) > 0;
+                success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
                 if (success) return Unit.Value;
 
