@@ -41,7 +41,6 @@ namespace BasketballLeague.Persistence
         public virtual DbSet<AppUser> AppUser { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
