@@ -4,6 +4,7 @@ using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,7 +24,22 @@ namespace BasketballLeague.Application.Incidents.Queries.GetIncidentsList
 
         public async Task<IEnumerable<Incident>> Handle(GetIncidentsListQuery request, CancellationToken cancellationToken)
         {
-            var incidents = await _context.Incident.ToListAsync(cancellationToken);
+            var queryable = _context.Incident
+                .Include(x => x.Foul)
+                .Include(x => x.Rebound)
+                .Include(x => x.Shot)
+                .Include(x => x.Turnover)
+                .Include(x => x.Substitution)
+                .Include(x => x.Timeout)
+                .Include(x => x.JumpBall)
+                .AsQueryable();
+
+            // todo add incident dto and shot dto
+
+            if (request.MatchId.HasValue)
+                queryable = queryable.Where(x => x.MatchId == request.MatchId);
+
+            var incidents = await queryable.ToListAsync(cancellationToken);
 
             return incidents;
         }

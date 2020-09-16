@@ -20,14 +20,14 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                 .NotEmpty();
 
             RuleFor(x => x.Quater)
-                .InclusiveBetween(1,4)
+                .InclusiveBetween(1, 4)
                 .NotEmpty();
 
             RuleFor(x => x.PlayerId)
                 .NotEmpty();
 
             RuleFor(x => (int)x.ShotType)
-                .InclusiveBetween(1, 7)
+                .InclusiveBetween(1, 10)
                 .NotEmpty();
 
 
@@ -38,7 +38,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                .Must(x => x == false || x == true);
 
             RuleFor(x => x.Value)
-                .InclusiveBetween(2,3)
+                .InclusiveBetween(2, 3)
                 .NotEmpty();
         }
     }

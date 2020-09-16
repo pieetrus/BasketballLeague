@@ -10,9 +10,9 @@ namespace BasketballLeague.API.Controllers
     public class IncidentController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<Incident>> GetAll()
+        public async Task<ActionResult<Incident>> GetAll(int? matchId)
         {
-            return Ok(await Mediator.Send(new GetIncidentsListQuery()));
+            return Ok(await Mediator.Send(new GetIncidentsListQuery(matchId)));
         }
 
         [HttpGet("{id}")]

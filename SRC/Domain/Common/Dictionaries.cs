@@ -64,9 +64,9 @@ namespace BasketballLeague.Domain.Common
         STEP_BACK_JUMP_SHOT = 4,
         [Description("Pull Up Jump Shot")]
         PULL_UP_JUMP_SHOT = 5,
-        [Description("Layoup")]
+        [Description("Layup")]
         LAYOUP = 6,
-        [Description("Driving Layoup")]
+        [Description("Driving Layup")]
         DRIVING_LAYOUP = 7,
         [Description("Dunk")]
         DUNK = 8,
