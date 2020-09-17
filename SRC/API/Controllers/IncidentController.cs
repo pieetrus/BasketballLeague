@@ -1,4 +1,5 @@
-﻿using BasketballLeague.Application.Incidents.Queries.GetIncidentDetail;
+﻿using BasketballLeague.Application.Incidents.Commands.DeleteIncident;
+using BasketballLeague.Application.Incidents.Queries.GetIncidentDetail;
 using BasketballLeague.Application.Incidents.Queries.GetIncidentsList;
 using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +24,17 @@ namespace BasketballLeague.API.Controllers
             var player = await Mediator.Send(new GetIncidentDetailQuery { Id = id });
 
             return Ok(player);
+        }
+
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await Mediator.Send(new DeleteIncidentCommand { Id = id });
+
+            return NoContent();
         }
     }
 }

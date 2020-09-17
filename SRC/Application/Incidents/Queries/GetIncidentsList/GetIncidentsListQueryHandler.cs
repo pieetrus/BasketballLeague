@@ -39,7 +39,7 @@ namespace BasketballLeague.Application.Incidents.Queries.GetIncidentsList
             if (request.MatchId.HasValue)
                 queryable = queryable.Where(x => x.MatchId == request.MatchId);
 
-            var incidents = await queryable.ToListAsync(cancellationToken);
+            var incidents = await queryable.OrderByDescending(x => x.Quater).ThenBy(x => x.Minutes).ThenBy(x => x.Seconds).ToListAsync(cancellationToken);
 
             return incidents;
         }
