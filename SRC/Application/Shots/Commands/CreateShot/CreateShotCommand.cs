@@ -37,7 +37,6 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
 
             public async Task<int> Handle(CreateShotCommand request, CancellationToken cancellationToken)
             {
-                var player = await _context.PlayerSeason.FirstOrDefaultAsync(x => x.Id == request.PlayerId, cancellationToken);
                 Match match;
                 TeamMatch teamMatch;
                 if (request.IsGuest)
@@ -71,7 +70,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
 
                 var shot = new Shot
                 {
-                    PlayerId = player.PlayerId,
+                    PlayerId = request.PlayerId,
                     ShotType = request.ShotType,
                     IsFastAttack = request.IsFastAttack,
                     IsAccurate = request.IsAccurate,

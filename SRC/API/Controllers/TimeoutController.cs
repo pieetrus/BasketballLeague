@@ -32,11 +32,10 @@ namespace BasketballLeague.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreateTimeoutCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateTimeoutCommand command)
         {
-            await Mediator.Send(command);
-
-            return NoContent();
+            var id = await Mediator.Send(command);
+            return Ok(id);
         }
 
         [HttpPut("{id}")]

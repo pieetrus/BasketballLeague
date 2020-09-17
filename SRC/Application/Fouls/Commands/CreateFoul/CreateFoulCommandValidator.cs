@@ -41,9 +41,6 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                 .MaximumLength(2)
                 .NotEmpty();
 
-            RuleFor(x => x.IncidentType)
-                .NotEmpty();
-
             RuleFor(x => x.Quater)
                 .InclusiveBetween(1, 4)
                 .NotEmpty();

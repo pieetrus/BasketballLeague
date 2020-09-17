@@ -33,12 +33,13 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.Position, x => x.MapFrom(x => x.Player.Position.ToString()));
 
             CreateMap<PlayerSeason, PlayerBeforeMatchDto>()
-                .ForMember(x => x.Id, x => x.MapFrom(playerMatch => playerMatch.Id))
-                .ForMember(x => x.Name, x => x.MapFrom(playerMatch => playerMatch.Player.Name))
-                .ForMember(x => x.Surname, x => x.MapFrom(playerMatch => playerMatch.Player.Surname))
-                .ForMember(x => x.JerseyNr, x => x.MapFrom(playerMatch => playerMatch.JerseyNr))
-                .ForMember(x => x.Position, x => x.MapFrom(playerMatch => playerMatch.Player.Position))
-                .ForMember(x => x.Height, x => x.MapFrom(playerMatch => playerMatch.Player.Height));
+                .ForMember(x => x.Id, x => x.MapFrom(playerSeason => playerSeason.Id))
+                .ForMember(x => x.PlayerId, x => x.MapFrom(playerSeason => playerSeason.Player.Id))
+                .ForMember(x => x.Name, x => x.MapFrom(playerSeason => playerSeason.Player.Name))
+                .ForMember(x => x.Surname, x => x.MapFrom(playerSeason => playerSeason.Player.Surname))
+                .ForMember(x => x.JerseyNr, x => x.MapFrom(playerSeason => playerSeason.JerseyNr))
+                .ForMember(x => x.Position, x => x.MapFrom(playerSeason => playerSeason.Player.Position))
+                .ForMember(x => x.Height, x => x.MapFrom(playerSeason => playerSeason.Player.Height));
 
             CreateMap<Team, TeamDto>()
                 .ForMember(x => x.LogoUrl, x => x.MapFrom(x => x.Logo.Url));

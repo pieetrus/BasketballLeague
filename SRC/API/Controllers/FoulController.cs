@@ -32,11 +32,11 @@ namespace BasketballLeague.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreateFoulCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateFoulCommand command)
         {
-            await Mediator.Send(command);
+            var id = await Mediator.Send(command);
 
-            return NoContent();
+            return Ok(id);
         }
 
         [HttpPut("{id}")]

@@ -3,6 +3,7 @@
     public class PlayerBeforeMatchDto
     {
         public int Id { get; set; }
+        public int PlayerId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string JerseyNr { get; set; }

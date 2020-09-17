@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 {
-    public class CreateFoulCommand : IRequest
+    public class CreateFoulCommand : IRequest<int>
     {
         public int? PlayerWhoFouledId { get; set; }
         public int? PlayerWhoWasFouledId { get; set; }
@@ -19,12 +19,12 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
-        public IncidentType IncidentType { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
+        public bool IsGuest { get; set; }
 
 
-        public class Handler : IRequestHandler<CreateFoulCommand>
+        public class Handler : IRequestHandler<CreateFoulCommand, int>
         {
             private readonly IBasketballLeagueDbContext _context;
 
@@ -33,21 +33,18 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                 _context = context;
             }
 
-            public async Task<Unit> Handle(CreateFoulCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreateFoulCommand request, CancellationToken cancellationToken)
             {
-                if (request.IncidentType != IncidentType.FOUL)
-                {
-                    throw new Exception("Error creating foul incident - bad incident type");
-                }
 
                 var incident = new Incident
                 {
                     MatchId = request.MatchId,
                     Minutes = request.Minutes,
                     Seconds = request.Seconds,
-                    IncidentType = request.IncidentType,
+                    IncidentType = IncidentType.FOUL,
                     Quater = request.Quater,
-                    Flagged = request.Flagged
+                    Flagged = request.Flagged,
+                    IsGuest = request.IsGuest
                 };
 
                 var foul = new Foul
@@ -63,7 +60,7 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
-                if (success) return Unit.Value;
+                if (success) return incident.Id;
 
                 throw new Exception("Problem saving changes");
             }

@@ -8,20 +8,21 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
 {
-    public class CreateTurnoverCommand : IRequest
+    public class CreateTurnoverCommand : IRequest<int>
     {
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
+        public bool IsGuest { get; set; }
 
         public int PlayerId { get; set; }
         public TurnoverType TurnoverType { get; set; }
 
 
 
-        public class Handler : IRequestHandler<CreateTurnoverCommand>
+        public class Handler : IRequestHandler<CreateTurnoverCommand, int>
         {
             private readonly IBasketballLeagueDbContext _context;
 
@@ -30,7 +31,7 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
                 _context = context;
             }
 
-            public async Task<Unit> Handle(CreateTurnoverCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(CreateTurnoverCommand request, CancellationToken cancellationToken)
             {
                 var incident = new Incident
                 {
@@ -39,7 +40,8 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
                     Seconds = request.Seconds,
                     IncidentType = IncidentType.TURNOVER,
                     Quater = request.Quater,
-                    Flagged = request.Flagged
+                    Flagged = request.Flagged,
+                    IsGuest = request.IsGuest
                 };
 
                 var turnover = new Turnover
@@ -55,7 +57,7 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
 
                 if (success)
                 {
-                    return Unit.Value;
+                    return incident.Id;
                 }
 
                 throw new Exception("Error saving changes");
