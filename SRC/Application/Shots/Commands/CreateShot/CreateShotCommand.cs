@@ -1,4 +1,5 @@
-﻿using BasketballLeague.Application.Common.Interfaces;
+﻿using BasketballLeague.Application.Common.Exceptions;
+using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Common;
 using BasketballLeague.Domain.Entities;
 using MediatR;
@@ -22,6 +23,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
         public bool IsFastAttack { get; set; }
         public int Value { get; set; }
         public int? PlayerAssistId { get; set; }
+        public bool IsGuest { get; set; }
 
 
         public class Handler : IRequestHandler<CreateShotCommand, int>
@@ -36,6 +38,25 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
             public async Task<int> Handle(CreateShotCommand request, CancellationToken cancellationToken)
             {
                 var player = await _context.PlayerSeason.FirstOrDefaultAsync(x => x.Id == request.PlayerId, cancellationToken);
+                Match match;
+                TeamMatch teamMatch;
+                if (request.IsGuest)
+                {
+                    match = await _context.Match.Include(x => x.TeamGuest)
+                        .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
+                    teamMatch = match.TeamGuest;
+                }
+                else
+                {
+                    match = await _context.Match.Include(x => x.TeamHome)
+                        .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
+                    teamMatch = match.TeamHome;
+                }
+
+                if (match == null)
+                    throw new NotFoundException(nameof(Match), request.MatchId);
+                if (teamMatch == null)
+                    throw new NotFoundException(nameof(TeamMatch), request.MatchId);
 
                 var incident = new Incident
                 {
@@ -44,7 +65,8 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                     Minutes = request.Minutes,
                     IncidentType = IncidentType.SHOT,
                     Quater = request.Quater,
-                    Flagged = request.Flagged
+                    Flagged = request.Flagged,
+                    IsGuest = request.IsGuest
                 };
 
                 var shot = new Shot
@@ -56,6 +78,17 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                     Value = request.Value,
                     Incident = incident,
                 };
+
+                if (shot.Value == 2)
+                {
+                    teamMatch.Fg2a++;
+                    if (shot.IsAccurate) teamMatch.Fg2m++;
+                }
+                else if (shot.Value == 3)
+                {
+                    teamMatch.Fg3a++;
+                    if (shot.IsAccurate) teamMatch.Fg3m++;
+                }
 
                 if (request.PlayerAssistId.HasValue)
                 {

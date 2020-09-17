@@ -62,7 +62,9 @@ namespace BasketballLeague.Application.Common.Mappings
                     y => y.MapFrom(x =>
                         x.TeamSeasonHome.Players))
                 .ForMember(x => x.TeamGuestPlayers,
-                    y => y.MapFrom(x => x.TeamSeasonGuest.Players));
+                    y => y.MapFrom(x => x.TeamSeasonGuest.Players))
+                .ForMember(x => x.TeamHomePts, x => x.MapFrom(x => x.TeamHome.Pts))
+                .ForMember(x => x.TeamGuestPts, x => x.MapFrom(x => x.TeamGuest.Pts));
 
             CreateMap<Season, SeasonDto>()
                 .ForMember(x => x.Divisions, x => x.MapFrom(x => x.SeasonDivisions.Select(x => x.Division)));

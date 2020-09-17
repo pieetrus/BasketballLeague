@@ -11,6 +11,7 @@ namespace BasketballLeague.Domain.Entities
         public IncidentType IncidentType { get; set; }
         public int Quater { get; set; }
         public bool Flagged { get; set; }
+        public bool IsGuest { get; set; }
 
         public virtual Match Match { get; set; }
         public virtual Foul Foul { get; set; }
