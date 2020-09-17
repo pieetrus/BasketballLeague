@@ -4,14 +4,16 @@ using BasketballLeague.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BasketballLeague.Persistence.Migrations
 {
     [DbContext(typeof(BasketballLeagueDbContext))]
-    partial class BasketballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200917223948_DeleteIncidentFromReboundAndAddRelationWithShot")]
+    partial class DeleteIncidentFromReboundAndAddRelationWithShot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

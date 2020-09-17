@@ -16,5 +16,7 @@ namespace BasketballLeague.Domain.Entities
         public virtual Player Player { get; set; }
         public virtual Assist Assist { get; set; }
         public virtual Block Block { get; set; }
+        public virtual Rebound Rebound { get; set; }
+
     }
 }

@@ -12,13 +12,7 @@ namespace BasketballLeague.Persistence.Configurations
              .Property(e => e.ReboundType)
              .HasConversion<int>();
 
-            builder.HasIndex(e => e.IncidentId)
-                     .HasName("UQ_Rebound_Incident_ID")
-                     .IsUnique();
-
             builder.Property(e => e.Id).HasColumnName("Rebound_ID");
-
-            builder.Property(e => e.IncidentId).HasColumnName("Incident_ID");
 
             builder.Property(e => e.PlayerId).HasColumnName("Player_ID");
 
@@ -26,11 +20,6 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.Property(e => e.TeamId).HasColumnName("Team_ID");
 
-            builder.HasOne(d => d.Incident)
-                .WithOne(p => p.Rebound)
-                .HasForeignKey<Rebound>(d => d.IncidentId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_Rebound_Incident_ID_Incident_Incident_ID");
 
             builder.HasOne(d => d.Player)
                 .WithMany(p => p.Rebounds)
@@ -41,6 +30,15 @@ namespace BasketballLeague.Persistence.Configurations
                 .WithMany(p => p.Rebounds)
                 .HasForeignKey(d => d.TeamId)
                 .HasConstraintName("FK_Rebound_Team_ID_Team_Team_ID");
+
+            builder.HasOne(d => d.FreeThrow)
+                .WithOne(p => p.Rebound)
+                .HasForeignKey<Rebound>(d => d.FreeThrowId);
+
+
+            builder.HasOne(d => d.Shot)
+                .WithOne(p => p.Rebound)
+                .HasForeignKey<Rebound>(d => d.ShotId);
         }
     }
 }

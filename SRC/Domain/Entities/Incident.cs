@@ -15,7 +15,6 @@ namespace BasketballLeague.Domain.Entities
 
         public virtual Match Match { get; set; }
         public virtual Foul Foul { get; set; }
-        public virtual Rebound Rebound { get; set; }
         public virtual Shot Shot { get; set; }
         public virtual Substitution Substitution { get; set; }
         public virtual Timeout Timeout { get; set; }

@@ -25,6 +25,13 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
         public int? PlayerAssistId { get; set; }
         public bool IsGuest { get; set; }
 
+        public ReboundType? ReboundType { get; set; }
+        public int? PlayerReboundId { get; set; }
+        public int? TeamReboundId { get; set; }
+
+
+
+
 
         public class Handler : IRequestHandler<CreateShotCommand, int>
         {
@@ -91,11 +98,23 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
 
                 if (request.PlayerAssistId.HasValue)
                 {
-                    var playerAssist = await _context.PlayerSeason.FirstOrDefaultAsync(x => x.Id == request.PlayerAssistId, cancellationToken);
-
-                    var assist = new Assist { PlayerId = playerAssist.PlayerId, Shot = shot };
+                    var assist = new Assist { PlayerId = request.PlayerAssistId.Value, Shot = shot };
 
                     _context.Assist.Add(assist);
+                }
+
+                if (request.PlayerReboundId.HasValue || request.TeamReboundId.HasValue)
+                {
+                    if (request.PlayerReboundId.HasValue)
+                    {
+                        var rebound = new Rebound { PlayerId = request.PlayerReboundId.Value, Shot = shot, ReboundType = request.ReboundType.Value };
+                        _context.Rebound.Add(rebound);
+                    }
+                    else
+                    {
+                        var rebound = new Rebound { PlayerId = request.TeamReboundId.Value, Shot = shot, ReboundType = request.ReboundType.Value };
+                        _context.Rebound.Add(rebound);
+                    }
                 }
 
                 _context.Shot.Add(shot);

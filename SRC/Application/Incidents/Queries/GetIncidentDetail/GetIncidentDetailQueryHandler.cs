@@ -19,8 +19,8 @@ namespace BasketballLeague.Application.Incidents.Queries.GetIncidentDetail
         public async Task<Incident> Handle(GetIncidentDetailQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Incident
-                .Include(x => x.Shot)
-                .Include(x => x.Rebound)
+                .Include(x => x.Shot).ThenInclude(x => x.Rebound)
+                .Include(x => x.Shot).ThenInclude(x => x.Assist)
                 .Include(x => x.Substitution)
                 .Include(x => x.Timeout)
                 .Include(x => x.Foul)

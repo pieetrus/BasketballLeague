@@ -25,9 +25,9 @@ namespace BasketballLeague.Application.Incidents.Queries.GetIncidentsList
         public async Task<IEnumerable<Incident>> Handle(GetIncidentsListQuery request, CancellationToken cancellationToken)
         {
             var queryable = _context.Incident
+                .Include(x => x.Shot).ThenInclude(x => x.Rebound)
+                .Include(x => x.Shot).ThenInclude(x => x.Assist)
                 .Include(x => x.Foul)
-                .Include(x => x.Rebound)
-                .Include(x => x.Shot)
                 .Include(x => x.Turnover)
                 .Include(x => x.Substitution)
                 .Include(x => x.Timeout)

@@ -11,5 +11,7 @@
         public virtual Foul Foul { get; set; }
         public virtual Player PlayerShooter { get; set; }
         public virtual Assist Assist { get; set; }
+        public virtual Rebound Rebound { get; set; }
+
     }
 }
