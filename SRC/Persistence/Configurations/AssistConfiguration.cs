@@ -21,7 +21,7 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.Property(e => e.ShotId).HasColumnName("Shot_ID");
 
-            builder.HasOne(d => d.FreeThrow)
+            builder.HasOne(d => d.FreeThrows)
                     .WithOne(p => p.Assist)
                     .HasForeignKey<Assist>(d => d.FreeThrowId)
                     .HasConstraintName("FK_Assist_Free_Throw_ID_Free_Throw_Free_Throw_ID");

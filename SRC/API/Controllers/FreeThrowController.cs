@@ -13,7 +13,7 @@ namespace BasketballLeague.API.Controllers
     public class FreeThrowController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<FreeThrow>> GetAll()
+        public async Task<ActionResult<FreeThrows>> GetAll()
         {
             return Ok(await Mediator.Send(new GetFreeThrowsListQuery()));
         }
@@ -21,7 +21,7 @@ namespace BasketballLeague.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<FreeThrow>> Get(int id)
+        public async Task<ActionResult<FreeThrows>> Get(int id)
         {
             var player = await Mediator.Send(new GetFreeThrowDetailQuery { Id = id });
 

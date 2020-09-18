@@ -47,7 +47,7 @@ namespace BasketballLeague.Application.FreeThrows.Commands.UpdateFreeThrow
 
                 if (entity == null)
                 {
-                    throw new NotFoundException(nameof(FreeThrow), request.Id);
+                    throw new NotFoundException(nameof(Domain.Entities.FreeThrows), request.Id);
                 }
 
                 entity.Foul.Incident.MatchId = request.MatchId ?? entity.Foul.Incident.MatchId;

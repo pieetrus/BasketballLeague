@@ -13,7 +13,7 @@ namespace BasketballLeague.Application.Common.Interfaces
         DbSet<Coach> Coach { get; set; }
         DbSet<Division> Division { get; set; }
         DbSet<Foul> Foul { get; set; }
-        DbSet<FreeThrow> FreeThrow { get; set; }
+        DbSet<Domain.Entities.FreeThrows> FreeThrow { get; set; }
         DbSet<Incident> Incident { get; set; }
         DbSet<JumpBall> JumpBall { get; set; }
         DbSet<Match> Match { get; set; }

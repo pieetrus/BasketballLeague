@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BasketballLeague.Persistence.Configurations
 {
-    public class FreeThrowConfiguration : IEntityTypeConfiguration<FreeThrow>
+    public class FreeThrowConfiguration : IEntityTypeConfiguration<FreeThrows>
     {
-        public void Configure(EntityTypeBuilder<FreeThrow> builder)
+        public void Configure(EntityTypeBuilder<FreeThrows> builder)
         {
             builder.ToTable("Free_Throw");
 
@@ -17,8 +17,8 @@ namespace BasketballLeague.Persistence.Configurations
             builder.Property(e => e.PlayerShooterId).HasColumnName("Player_Shooter_ID");
 
             builder.HasOne(d => d.Foul)
-                .WithMany(p => p.FreeThrows)
-                .HasForeignKey(d => d.FoulId)
+                .WithOne(p => p.FreeThrows)
+                .HasForeignKey<FreeThrows>(d => d.FoulId)
                 .OnDelete(DeleteBehavior.Cascade) // cascade ??
                 .HasConstraintName("FK_Free_Throw_Foul_ID_Foul_Foul_ID");
 

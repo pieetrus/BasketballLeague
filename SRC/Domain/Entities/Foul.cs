@@ -1,5 +1,4 @@
 ﻿using BasketballLeague.Domain.Common;
-using System.Collections.Generic;
 
 namespace BasketballLeague.Domain.Entities
 {
@@ -18,6 +17,6 @@ namespace BasketballLeague.Domain.Entities
         public virtual Incident Incident { get; set; }
         public virtual Player PlayerWhoFouled { get; set; }
         public virtual Player PlayerWhoWasFouled { get; set; }
-        public virtual ICollection<FreeThrow> FreeThrows { get; set; }
+        public virtual FreeThrows FreeThrows { get; set; }
     }
 }

@@ -14,6 +14,6 @@ namespace BasketballLeague.Domain.Entities
         public virtual Player Player { get; set; }
         public virtual Team Team { get; set; }
         public virtual Shot Shot { get; set; }
-        public virtual FreeThrow FreeThrow { get; set; }
+        public virtual FreeThrows FreeThrows { get; set; }
     }
 }

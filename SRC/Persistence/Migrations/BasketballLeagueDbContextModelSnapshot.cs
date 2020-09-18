@@ -270,7 +270,7 @@ namespace BasketballLeague.Persistence.Migrations
                     b.ToTable("Foul");
                 });
 
-            modelBuilder.Entity("BasketballLeague.Domain.Entities.FreeThrow", b =>
+            modelBuilder.Entity("BasketballLeague.Domain.Entities.FreeThrows", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -294,7 +294,8 @@ namespace BasketballLeague.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FoulId");
+                    b.HasIndex("FoulId")
+                        .IsUnique();
 
                     b.HasIndex("PlayerShooterId");
 
@@ -333,9 +334,6 @@ namespace BasketballLeague.Persistence.Migrations
                     b.Property<int>("Quater")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReboundId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Seconds")
                         .IsRequired()
                         .HasColumnType("char(2)")
@@ -346,8 +344,6 @@ namespace BasketballLeague.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MatchId");
-
-                    b.HasIndex("ReboundId");
 
                     b.ToTable("Incident");
                 });
@@ -1451,7 +1447,7 @@ namespace BasketballLeague.Persistence.Migrations
 
             modelBuilder.Entity("BasketballLeague.Domain.Entities.Assist", b =>
                 {
-                    b.HasOne("BasketballLeague.Domain.Entities.FreeThrow", "FreeThrow")
+                    b.HasOne("BasketballLeague.Domain.Entities.FreeThrows", "FreeThrows")
                         .WithOne("Assist")
                         .HasForeignKey("BasketballLeague.Domain.Entities.Assist", "FreeThrowId")
                         .HasConstraintName("FK_Assist_Free_Throw_ID_Free_Throw_Free_Throw_ID");
@@ -1514,11 +1510,11 @@ namespace BasketballLeague.Persistence.Migrations
                         .HasConstraintName("FK_Foul_Team_ID_Team_Team_ID");
                 });
 
-            modelBuilder.Entity("BasketballLeague.Domain.Entities.FreeThrow", b =>
+            modelBuilder.Entity("BasketballLeague.Domain.Entities.FreeThrows", b =>
                 {
                     b.HasOne("BasketballLeague.Domain.Entities.Foul", "Foul")
-                        .WithMany("FreeThrows")
-                        .HasForeignKey("FoulId")
+                        .WithOne("FreeThrows")
+                        .HasForeignKey("BasketballLeague.Domain.Entities.FreeThrows", "FoulId")
                         .HasConstraintName("FK_Free_Throw_Foul_ID_Foul_Foul_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1538,10 +1534,6 @@ namespace BasketballLeague.Persistence.Migrations
                         .HasConstraintName("FK_Incident_Match_ID_Match_Match_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("BasketballLeague.Domain.Entities.Rebound", "Rebound")
-                        .WithMany()
-                        .HasForeignKey("ReboundId");
                 });
 
             modelBuilder.Entity("BasketballLeague.Domain.Entities.JumpBall", b =>
@@ -1637,7 +1629,7 @@ namespace BasketballLeague.Persistence.Migrations
 
             modelBuilder.Entity("BasketballLeague.Domain.Entities.Rebound", b =>
                 {
-                    b.HasOne("BasketballLeague.Domain.Entities.FreeThrow", "FreeThrow")
+                    b.HasOne("BasketballLeague.Domain.Entities.FreeThrows", "FreeThrows")
                         .WithOne("Rebound")
                         .HasForeignKey("BasketballLeague.Domain.Entities.Rebound", "FreeThrowId");
 

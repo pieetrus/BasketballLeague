@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.FreeThrows.Queries.GetFreeThrowDetail
 {
-    public class GetFreeThrowDetailQueryHandler : IRequestHandler<GetFreeThrowDetailQuery, FreeThrow>
+    public class GetFreeThrowDetailQueryHandler : IRequestHandler<GetFreeThrowDetailQuery, Domain.Entities.FreeThrows>
     {
         private readonly IBasketballLeagueDbContext _context;
 
@@ -16,7 +16,7 @@ namespace BasketballLeague.Application.FreeThrows.Queries.GetFreeThrowDetail
         {
             _context = context;
         }
-        public async Task<FreeThrow> Handle(GetFreeThrowDetailQuery request, CancellationToken cancellationToken)
+        public async Task<Domain.Entities.FreeThrows> Handle(GetFreeThrowDetailQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.FreeThrow
                 .Include(x => x.PlayerShooter)
@@ -26,7 +26,7 @@ namespace BasketballLeague.Application.FreeThrows.Queries.GetFreeThrowDetail
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(FreeThrow), request.Id);
+                throw new NotFoundException(nameof(Domain.Entities.FreeThrows), request.Id);
             }
 
             return entity;

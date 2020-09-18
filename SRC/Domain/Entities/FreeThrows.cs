@@ -1,6 +1,6 @@
 ﻿namespace BasketballLeague.Domain.Entities
 {
-    public class FreeThrow
+    public class FreeThrows
     {
         public int Id { get; set; }
         public int FoulId { get; set; }

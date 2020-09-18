@@ -58,7 +58,7 @@ namespace BasketballLeague.Application.FreeThrows.Commands.CreateFreeThrow
                     Incident = incident
                 };
 
-                var freeThrow = new FreeThrow
+                var freeThrow = new Domain.Entities.FreeThrows
                 {
                     PlayerShooterId = request.PlayerShooterId,
                     AccurateShots = request.AccurateShots,

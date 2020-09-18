@@ -31,7 +31,7 @@ namespace BasketballLeague.Persistence.Configurations
                 .HasForeignKey(d => d.TeamId)
                 .HasConstraintName("FK_Rebound_Team_ID_Team_Team_ID");
 
-            builder.HasOne(d => d.FreeThrow)
+            builder.HasOne(d => d.FreeThrows)
                 .WithOne(p => p.Rebound)
                 .HasForeignKey<Rebound>(d => d.FreeThrowId);
 
