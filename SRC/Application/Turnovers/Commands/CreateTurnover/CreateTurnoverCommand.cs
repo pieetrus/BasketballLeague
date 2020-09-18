@@ -18,6 +18,8 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
         public bool IsGuest { get; set; }
 
         public int PlayerId { get; set; }
+        public int? PlayerStealId { get; set; }
+
         public TurnoverType TurnoverType { get; set; }
 
 
@@ -50,6 +52,13 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
                     TurnoverType = request.TurnoverType,
                     Incident = incident
                 };
+
+                if (request.PlayerStealId.HasValue)
+                {
+                    var steal = new Steal { PlayerId = request.PlayerStealId.Value, Turnover = turnover };
+
+                    _context.Steal.Add(steal);
+                }
 
                 _context.Turnover.Add(turnover);
 

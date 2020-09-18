@@ -28,7 +28,7 @@ namespace BasketballLeague.Application.Incidents.Queries.GetIncidentsList
                 .Include(x => x.Shot).ThenInclude(x => x.Rebound)
                 .Include(x => x.Shot).ThenInclude(x => x.Assist)
                 .Include(x => x.Foul)
-                .Include(x => x.Turnover)
+                .Include(x => x.Turnover).ThenInclude(x => x.Steal)
                 .Include(x => x.Substitution)
                 .Include(x => x.Timeout)
                 .Include(x => x.JumpBall)

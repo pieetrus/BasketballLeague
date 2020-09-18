@@ -112,7 +112,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                     }
                     else
                     {
-                        var rebound = new Rebound { PlayerId = request.TeamReboundId.Value, Shot = shot, ReboundType = request.ReboundType.Value };
+                        var rebound = new Rebound { TeamId = request.TeamReboundId.Value, Shot = shot, ReboundType = request.ReboundType.Value };
                         _context.Rebound.Add(rebound);
                     }
                 }
