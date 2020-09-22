@@ -4,7 +4,6 @@ using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,6 +45,36 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
             public async Task<int> Handle(CreateFoulCommand request, CancellationToken cancellationToken)
             {
+                Match match;
+                TeamMatch teamMatch;
+                if (request.IsGuest)
+                {
+                    match = await _context.Match.Include(x => x.TeamGuest)
+                        .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
+                    teamMatch = match.TeamGuest;
+                }
+                else
+                {
+                    match = await _context.Match.Include(x => x.TeamHome)
+                        .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
+                    teamMatch = match.TeamHome;
+                }
+
+                switch (request.Quater)
+                {
+                    case 1:
+                        teamMatch.Fouls1Qtr++;
+                        break;
+                    case 2:
+                        teamMatch.Fouls2Qtr++;
+                        break;
+                    case 3:
+                        teamMatch.Fouls3Qtr++;
+                        break;
+                    case 4:
+                        teamMatch.Fouls4Qtr++;
+                        break;
+                }
 
                 var incident = new Incident
                 {
@@ -69,22 +98,9 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
                 if (request.AccurateShots.HasValue && request.Attempts.HasValue)
                 {
-                    TeamMatch match;
-                    if (request.IsGuest) // check if foul was from guest player
-                    {
-                        match = _context.Match
-                            .Include(x => x.TeamHome)
-                            .FirstOrDefault(x => x.Id == request.MatchId).TeamHome;
-                    }
-                    else
-                    {
-                        match = _context.Match
-                            .Include(x => x.TeamGuest)
-                            .FirstOrDefault(x => x.Id == request.MatchId).TeamGuest;
-                    }
 
-                    match.Fta += request.Attempts.Value;
-                    match.Ftm += request.AccurateShots.Value;
+                    teamMatch.Fta += request.Attempts.Value;
+                    teamMatch.Ftm += request.AccurateShots.Value;
 
                     var freeThrow = new Domain.Entities.FreeThrows
                     {

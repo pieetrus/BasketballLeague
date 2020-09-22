@@ -18,5 +18,6 @@ namespace BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed
         public int Attendance { get; set; }
         public DateTime StartDate { get; set; }
         public bool Ended { get; set; }
+
     }
 }

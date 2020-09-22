@@ -1,7 +1,9 @@
-﻿using BasketballLeague.Application.Common.Interfaces;
+﻿using BasketballLeague.Application.Common.Exceptions;
+using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Common;
 using BasketballLeague.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,6 +35,32 @@ namespace BasketballLeague.Application.Timeouts.Commands.CreateTimeout
 
             public async Task<int> Handle(CreateTimeoutCommand request, CancellationToken cancellationToken)
             {
+                Match match;
+                TeamMatch teamMatch;
+                if (request.IsGuest)
+                {
+                    match = await _context.Match.Include(x => x.TeamGuest)
+                        .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
+                    teamMatch = match.TeamGuest;
+                }
+                else
+                {
+                    match = await _context.Match.Include(x => x.TeamHome)
+                        .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
+                    teamMatch = match.TeamHome;
+                }
+
+                if (match == null)
+                    throw new NotFoundException(nameof(Match), request.MatchId);
+                if (teamMatch == null)
+                    throw new NotFoundException(nameof(TeamMatch), request.MatchId);
+
+                if (request.Quater < 3) teamMatch.Timeouts1Half++;
+                else teamMatch.Timeouts2Half++;
+
+                if (teamMatch.Timeouts1Half > 2) throw new Exception("To many 1 half timeouts");
+                if (teamMatch.Timeouts2Half > 3) throw new Exception("To many 2 half timeouts");
+
                 var incident = new Incident
                 {
                     MatchId = request.MatchId,

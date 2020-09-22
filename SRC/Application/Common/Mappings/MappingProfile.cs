@@ -65,7 +65,20 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.TeamGuestPlayers,
                     y => y.MapFrom(x => x.TeamSeasonGuest.Players))
                 .ForMember(x => x.TeamHomePts, x => x.MapFrom(x => x.TeamHome.Pts))
-                .ForMember(x => x.TeamGuestPts, x => x.MapFrom(x => x.TeamGuest.Pts));
+                .ForMember(x => x.TeamGuestPts, x => x.MapFrom(x => x.TeamGuest.Pts))
+                .ForPath(x => x.TeamGuest.Fouls1Qtr, x => x.MapFrom(x => x.TeamGuest.Fouls1Qtr))
+                .ForPath(x => x.TeamGuest.Fouls2Qtr, x => x.MapFrom(x => x.TeamGuest.Fouls2Qtr))
+                .ForPath(x => x.TeamGuest.Fouls3Qtr, x => x.MapFrom(x => x.TeamGuest.Fouls3Qtr))
+                .ForPath(x => x.TeamGuest.Fouls4Qtr, x => x.MapFrom(x => x.TeamGuest.Fouls4Qtr))
+                .ForPath(x => x.TeamGuest.Timeouts1Half, x => x.MapFrom(x => x.TeamGuest.Timeouts1Half))
+                .ForPath(x => x.TeamGuest.Timeouts2Half, x => x.MapFrom(x => x.TeamGuest.Timeouts2Half))
+                .ForPath(x => x.TeamHome.Fouls1Qtr, x => x.MapFrom(x => x.TeamHome.Fouls1Qtr))
+                .ForPath(x => x.TeamHome.Fouls2Qtr, x => x.MapFrom(x => x.TeamHome.Fouls2Qtr))
+                .ForPath(x => x.TeamHome.Fouls3Qtr, x => x.MapFrom(x => x.TeamHome.Fouls3Qtr))
+                .ForPath(x => x.TeamHome.Fouls4Qtr, x => x.MapFrom(x => x.TeamHome.Fouls4Qtr))
+                .ForPath(x => x.TeamHome.Timeouts1Half, x => x.MapFrom(x => x.TeamHome.Timeouts1Half))
+                .ForPath(x => x.TeamHome.Timeouts2Half, x => x.MapFrom(x => x.TeamHome.Timeouts2Half))
+                ;
 
             CreateMap<Season, SeasonDto>()
                 .ForMember(x => x.Divisions, x => x.MapFrom(x => x.SeasonDivisions.Select(x => x.Division)));
