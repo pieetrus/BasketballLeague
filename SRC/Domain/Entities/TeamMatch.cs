@@ -28,6 +28,13 @@
         public int PointsFromTurnovers { get; set; }
         public int OffFouls { get; set; }
 
+        public int? Fouls1Qtr { get; set; }
+        public int? Fouls2Qtr { get; set; }
+        public int? Fouls3Qtr { get; set; }
+        public int? Fouls4Qtr { get; set; }
+        public int? Timeouts1Half { get; set; }
+        public int? Timeouts2Half { get; set; }
+
         //public virtual Match Match { get; set; }
         //public virtual ICollection<Match> MatchesHome { get; set; }
         //public virtual ICollection<Match> MatchesAway { get; set; }
