@@ -24,7 +24,10 @@ namespace BasketballLeague.Application.Matches.Commands.EndMatch
 
             public async Task<Unit> Handle(EndMatchCommand request, CancellationToken cancellationToken)
             {
-                var match = await _context.Match.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+                var match = await _context.Match
+                    .Include(x => x.PlayerMatches)
+                    .Include(x => x.Incidents)
+                    .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
 
                 if (match == null)
                     throw new NotFoundException(nameof(Match), request.Id);
