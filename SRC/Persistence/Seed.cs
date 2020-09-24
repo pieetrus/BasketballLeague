@@ -264,7 +264,7 @@ namespace BasketballLeague.Persistence
                     new Match
                     {
                         StartDate = new DateTime(2020, 09, 16), Attendance = 400, SeasonDivision = seasonDivisions[0], TeamHome = new TeamMatch{Team = teams[1]}, TeamGuest = new TeamMatch{Team = teams[0]}, TeamSeasonGuest = teamSeasons[0],
-                        TeamSeasonHome =  teamSeasons[1], Ended = true
+                        TeamSeasonHome =  teamSeasons[1], Ended = false
                     }
                 }; // 2 create team matches also
 

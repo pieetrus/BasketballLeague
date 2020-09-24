@@ -1,5 +1,6 @@
 ﻿using BasketballLeague.Application.Matches.Commands.CreateMatch;
 using BasketballLeague.Application.Matches.Commands.DeleteMatch;
+using BasketballLeague.Application.Matches.Commands.EndMatch;
 using BasketballLeague.Application.Matches.Commands.UpdateMatch;
 using BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList;
 using BasketballLeague.Application.Matches.Queries.GetMatchDetail;
@@ -50,6 +51,16 @@ namespace BasketballLeague.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Create([FromBody] CreateMatchCommand command)
+        {
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpPost("end")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> EndMatch([FromBody] EndMatchCommand command)
         {
             await Mediator.Send(command);
 
