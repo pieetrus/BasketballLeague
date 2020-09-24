@@ -10,7 +10,7 @@ namespace BasketballLeague.Persistence.Configurations
         {
             builder.ToTable("Player_Match");
 
-            builder.HasIndex(e => new { e.PlayerId, e.MatchId })
+            builder.HasIndex(e => new { PlayerId = e.PlayerSeasonId, e.MatchId })
                 .HasName("UQ_Player_Match_Player_ID_Match_ID")
                 .IsUnique();
 
@@ -50,7 +50,7 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.Property(e => e.Orb).HasColumnName("ORB");
 
-            builder.Property(e => e.PlayerId).HasColumnName("Player_ID");
+            builder.Property(e => e.PlayerSeasonId).HasColumnName("Player_ID");
 
             builder.Property(e => e.Pts)
                 .HasColumnName("PTS")
@@ -70,9 +70,9 @@ namespace BasketballLeague.Persistence.Configurations
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Player_Match_Match_ID_Match_ID");
 
-            builder.HasOne(d => d.Player)
+            builder.HasOne(d => d.PlayerSeason)
                 .WithMany(p => p.PlayerMatches)
-                .HasForeignKey(d => d.PlayerId)
+                .HasForeignKey(d => d.PlayerSeasonId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Player_Match_Player_ID_Player_ID");
 

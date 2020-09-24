@@ -18,9 +18,9 @@ namespace BasketballLeague.Domain.Common
 
     public enum ReboundType
     {
-        [Description("Offensive Rebound Player")]
+        [Description("Offensive Rebound PlayerSeason")]
         PLAYER_OFF = 1,
-        [Description("Defensive Rebound Player")]
+        [Description("Defensive Rebound PlayerSeason")]
         PLAYER_DEF = 2,
         [Description("Offensive Rebound Team")]
         TEAM_OFF = 3,

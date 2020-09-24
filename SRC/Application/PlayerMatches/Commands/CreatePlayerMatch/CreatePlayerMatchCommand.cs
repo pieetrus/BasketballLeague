@@ -40,7 +40,7 @@ namespace BasketballLeague.Application.PlayerMatches.Commands.CreatePlayerMatch
             {
                 var entity = new PlayerMatch
                 {
-                    PlayerId = request.PlayerId,
+                    PlayerSeasonId = request.PlayerId,
                     MatchId = request.MatchId,
                     Fg3a = request.Fg3a,
                     Fg3m = request.Fg3m,

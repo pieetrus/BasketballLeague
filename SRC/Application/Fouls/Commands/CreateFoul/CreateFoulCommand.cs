@@ -16,7 +16,6 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
         public int? CoachId { get; set; }
         public FoulType FoulType { get; set; }
 
-
         public int MatchId { get; set; }
         public string Minutes { get; set; }
         public string Seconds { get; set; }
@@ -87,6 +86,37 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                     IsGuest = request.IsGuest
                 };
 
+                var playerMatchWhoFouled = await _context.PlayerMatch.Include(x => x.PlayerSeason).FirstOrDefaultAsync(
+                    x => x.PlayerSeason.PlayerId == request.PlayerWhoFouledId && x.MatchId == request.MatchId, cancellationToken);
+
+                var playerMatchWhoWasFouled = await _context.PlayerMatch.Include(x => x.PlayerSeason).FirstOrDefaultAsync(
+                    x => x.PlayerSeason.PlayerId == request.PlayerWhoWasFouledId && x.MatchId == request.MatchId, cancellationToken);
+
+                if (playerMatchWhoFouled == null)
+                {
+                    var playerSeason =
+                        await _context.PlayerSeason.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerWhoFouledId,
+                            cancellationToken);
+
+                    playerMatchWhoFouled = new PlayerMatch
+                    { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+                }
+
+                if (playerMatchWhoWasFouled == null)
+                {
+                    var playerSeason =
+                        await _context.PlayerSeason.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerWhoWasFouledId,
+                            cancellationToken);
+
+                    playerMatchWhoWasFouled = new PlayerMatch
+                    { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+                }
+
+                if (request.FoulType == FoulType.OFFENSIVE)
+                    playerMatchWhoFouled.OffFouls++;
+                playerMatchWhoFouled.Fouls++;
+
+
                 var foul = new Foul
                 {
                     PlayerWhoFouledId = request.PlayerWhoFouledId,
@@ -102,6 +132,9 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                     teamMatch.Fta += request.Attempts.Value;
                     teamMatch.Ftm += request.AccurateShots.Value;
 
+                    playerMatchWhoWasFouled.Fta = request.Attempts.Value;
+                    playerMatchWhoWasFouled.Ftm = request.AccurateShots.Value;
+
                     var freeThrow = new Domain.Entities.FreeThrows
                     {
                         AccurateShots = request.AccurateShots.Value,
@@ -116,6 +149,23 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                     {
                         var assist = new Assist { FreeThrows = freeThrow, PlayerId = request.PlayerAssistId.Value };
 
+                        var playerMatchAssist = await _context.PlayerMatch.Include(x => x.PlayerSeason).FirstOrDefaultAsync(
+                            x => x.PlayerSeason.PlayerId == request.PlayerAssistId && x.MatchId == request.MatchId, cancellationToken);
+
+                        if (playerMatchAssist == null)
+                        {
+                            var playerSeason =
+                                await _context.PlayerSeason.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerAssistId,
+                                    cancellationToken);
+
+                            playerMatchAssist = new PlayerMatch
+                            { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+                        }
+
+                        playerMatchAssist.Ast++;
+
+                        if (playerMatchAssist.Id == 0)
+                            _context.PlayerMatch.Add(playerMatchAssist);
                         _context.Assist.Add(assist);
                     }
 
@@ -126,14 +176,49 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                             FreeThrows = freeThrow,
                             ReboundType = request.ReboundType.Value
                         };
-                        if (request.PlayerReboundId.HasValue) rebound.PlayerId = request.PlayerReboundId.Value;
-                        else rebound.TeamId = request.TeamReboundId.Value;
+
+
+                        if (request.PlayerReboundId.HasValue)
+                        {
+                            rebound.PlayerId = request.PlayerReboundId.Value;
+
+                            var playerMatchRebound = await _context.PlayerMatch.Include(x => x.PlayerSeason).FirstOrDefaultAsync(
+                                x => x.PlayerSeason.PlayerId == request.PlayerReboundId && x.MatchId == request.MatchId, cancellationToken);
+
+                            if (playerMatchRebound == null)
+                            {
+                                var playerSeason =
+                                    await _context.PlayerSeason.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerReboundId,
+                                        cancellationToken);
+
+                                playerMatchRebound = new PlayerMatch
+                                { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+                            }
+
+                            if (request.ReboundType == Domain.Common.ReboundType.PLAYER_DEF) playerMatchRebound.Drb++;
+                            else playerMatchRebound.Orb++;
+
+                            if (playerMatchRebound.Id == 0)
+                                _context.PlayerMatch.Add(playerMatchRebound);
+                        }
+                        else
+                        {
+                            rebound.TeamId = request.TeamReboundId.Value;
+
+                            if (request.ReboundType == Domain.Common.ReboundType.TEAM_DEF) teamMatch.Drb++;
+                            else teamMatch.Orb++;
+                        }
 
                         _context.Rebound.Add(rebound);
                     }
                 }
 
                 _context.Foul.Add(foul);
+
+                if (playerMatchWhoWasFouled.Id == 0)
+                    _context.PlayerMatch.Add(playerMatchWhoWasFouled);
+                if (playerMatchWhoFouled.Id == 0)
+                    _context.PlayerMatch.Add(playerMatchWhoFouled);
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 

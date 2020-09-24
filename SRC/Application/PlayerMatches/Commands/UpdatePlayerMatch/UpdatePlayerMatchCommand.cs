@@ -46,7 +46,7 @@ namespace BasketballLeague.Application.PlayerMatches.Commands.UpdatePlayerMatch
                     throw new NotFoundException(nameof(PlayerMatch), request.Id);
                 }
 
-                entity.PlayerId = request.PlayerId ?? entity.PlayerId;
+                entity.PlayerSeasonId = request.PlayerId ?? entity.PlayerSeasonId;
                 entity.MatchId = request.MatchId ?? entity.MatchId;
                 entity.Fg3a = request.Fg3a ?? entity.Fg3a;
                 entity.Fg3m = request.Fg3m ?? entity.Fg3m;

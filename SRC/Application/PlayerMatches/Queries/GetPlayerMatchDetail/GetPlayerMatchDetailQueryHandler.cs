@@ -19,7 +19,7 @@ namespace BasketballLeague.Application.PlayerMatches.Queries.GetPlayerMatchDetai
         public async Task<PlayerMatch> Handle(GetPlayerMatchDetailQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.PlayerMatch
-                .Include(x => x.Player)
+                .Include(x => x.PlayerSeason)
                 .Include(x => x.Match)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
 

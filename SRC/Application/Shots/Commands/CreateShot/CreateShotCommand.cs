@@ -86,10 +86,26 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                 };
 
                 var playerMatch =
-                   await _context.PlayerMatch.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerId && x.MatchId == request.MatchId, cancellationToken);
+                   await _context.PlayerMatch
+                       .Include(x => x.PlayerSeason)
+                       .FirstOrDefaultAsync(x => x.PlayerSeason.PlayerId == request.PlayerId && x.MatchId == request.MatchId, cancellationToken);
 
                 if (playerMatch == null)
-                    playerMatch = new PlayerMatch { MatchId = request.MatchId, PlayerId = request.PlayerId, Fg2a = 0, Fg2m = 0, Fg3a = 0, Fg3m = 0 };
+                {
+                    var playerSeason =
+                        await _context.PlayerSeason
+                            .FirstOrDefaultAsync(x => x.PlayerId == request.PlayerId, cancellationToken);
+
+                    playerMatch = new PlayerMatch
+                    {
+                        MatchId = request.MatchId,
+                        PlayerSeasonId = playerSeason.Id,
+                        Fg2a = 0,
+                        Fg2m = 0,
+                        Fg3a = 0,
+                        Fg3m = 0
+                    };
+                }
 
                 if (shot.Value == 2)
                 {
@@ -117,14 +133,26 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                     var assist = new Assist { PlayerId = request.PlayerAssistId.Value, Shot = shot };
 
                     var playerMatchAssist =
-                        await _context.PlayerMatch.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerAssistId.Value && x.MatchId == request.MatchId, cancellationToken);
+                        await _context.PlayerMatch.Include(x => x.PlayerSeason).FirstOrDefaultAsync(x => x.PlayerSeason.PlayerId == request.PlayerAssistId.Value && x.MatchId == request.MatchId, cancellationToken);
 
                     if (playerMatchAssist == null)
-                        playerMatchAssist = new PlayerMatch { MatchId = request.MatchId, PlayerId = request.PlayerAssistId.Value, Ast = 0 };
+                    {
+                        var playerSeason =
+                            await _context.PlayerSeason
+                                .FirstOrDefaultAsync(x => x.PlayerId == request.PlayerAssistId, cancellationToken);
+
+                        playerMatchAssist = new PlayerMatch
+                        { MatchId = request.MatchId, PlayerSeasonId = playerSeason.Id, Ast = 0 };
+                    }
 
                     playerMatchAssist.Ast++;
 
-                    _context.PlayerMatch.AddRange(playerMatch, playerMatchAssist);
+                    if (playerMatch.Id == 0)
+                        _context.PlayerMatch.Add(playerMatch);
+                    if (playerMatchAssist.Id == 0)
+                        _context.PlayerMatch.Add(playerMatchAssist);
+
+
                     _context.Assist.Add(assist);
                 }
 
@@ -134,15 +162,27 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                     {
                         var rebound = new Rebound { PlayerId = request.PlayerReboundId.Value, Shot = shot, ReboundType = request.ReboundType.Value };
                         var playerMatchRebound =
-                            await _context.PlayerMatch.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerReboundId.Value && x.MatchId == request.MatchId, cancellationToken);
+                            await _context.PlayerMatch.Include(x => x.PlayerSeason).FirstOrDefaultAsync(x => x.PlayerSeason.PlayerId == request.PlayerReboundId.Value && x.MatchId == request.MatchId, cancellationToken);
 
                         if (playerMatchRebound == null)
-                            playerMatchRebound = new PlayerMatch { MatchId = request.MatchId, PlayerId = request.PlayerReboundId.Value, Drb = 0, Orb = 0 };
-
+                        {
+                            var playerSeason =
+                                await _context.PlayerSeason
+                                    .FirstOrDefaultAsync(x => x.PlayerId == request.PlayerReboundId, cancellationToken);
+                            playerMatchRebound = new PlayerMatch
+                            {
+                                MatchId = request.MatchId,
+                                PlayerSeasonId = playerSeason.Id,
+                                Drb = 0,
+                                Orb = 0
+                            };
+                        }
                         if (request.ReboundType == Domain.Common.ReboundType.PLAYER_DEF) playerMatchRebound.Drb++;
                         else playerMatchRebound.Orb++;
 
-                        _context.PlayerMatch.Add(playerMatchRebound);
+                        if (playerMatchRebound.Id == 0)
+                            _context.PlayerMatch.Add(playerMatchRebound);
+
                         _context.Rebound.Add(rebound);
                     }
                     else

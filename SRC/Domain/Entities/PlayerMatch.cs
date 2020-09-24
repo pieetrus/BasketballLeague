@@ -3,7 +3,8 @@
     public class PlayerMatch
     {
         public int Id { get; set; }
-        public int PlayerId { get; set; }
+        public int PlayerSeasonId { get; set; }
+        //public int PlayerId { get; set; }
         public int MatchId { get; set; }
         public int? Pts { get; private set; }
         public int? Fga { get; private set; }
@@ -25,6 +26,8 @@
         public int OffFouls { get; set; }
 
         public Match Match { get; set; }
-        public PlayerSeason Player { get; set; }
+        public PlayerSeason PlayerSeason { get; set; }
+        //public Player Player { get; set; }
+
     }
 }
