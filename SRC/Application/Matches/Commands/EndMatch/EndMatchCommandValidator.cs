@@ -2,7 +2,7 @@
 
 namespace BasketballLeague.Application.Matches.Commands.EndMatch
 {
-    class EndMatchCommandValidator : AbstractValidator<EndMatchCommand>
+    public class EndMatchCommandValidator : AbstractValidator<EndMatchCommand>
     {
         public EndMatchCommandValidator()
         {

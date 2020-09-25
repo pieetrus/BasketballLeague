@@ -13,6 +13,7 @@ namespace BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed
         public TeamDto TeamGuest { get; set; }
         public IEnumerable<PlayerBeforeMatchDto> TeamHomePlayers { get; set; }
         public IEnumerable<PlayerBeforeMatchDto> TeamGuestPlayers { get; set; }
+        public List<int> PlayersInGameIds { get; set; }
         public int TeamHomePts { get; set; }
         public int TeamGuestPts { get; set; }
         public int Attendance { get; set; }

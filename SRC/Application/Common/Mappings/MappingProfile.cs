@@ -78,6 +78,7 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForPath(x => x.TeamHome.Fouls4Qtr, x => x.MapFrom(x => x.TeamHome.Fouls4Qtr))
                 .ForPath(x => x.TeamHome.Timeouts1Half, x => x.MapFrom(x => x.TeamHome.Timeouts1Half))
                 .ForPath(x => x.TeamHome.Timeouts2Half, x => x.MapFrom(x => x.TeamHome.Timeouts2Half))
+                .ForMember(x => x.PlayersInGameIds, x => x.MapFrom(x => x.PlayerMatches.Select(x => x.PlayerSeasonId)))
                 ;
 
             CreateMap<Season, SeasonDto>()

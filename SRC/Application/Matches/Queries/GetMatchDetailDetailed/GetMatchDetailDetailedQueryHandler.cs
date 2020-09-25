@@ -28,6 +28,7 @@ namespace BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed
                 .Include(x => x.SeasonDivision).ThenInclude(x => x.Division)
                 .Include(x => x.TeamSeasonHome).ThenInclude(x => x.Players).ThenInclude(x => x.Player)
                 .Include(x => x.TeamSeasonGuest).ThenInclude(x => x.Players).ThenInclude(x => x.Player)
+                .Include(x => x.PlayerMatches)
                 .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (entity == null)
