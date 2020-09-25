@@ -2,6 +2,7 @@
 using BasketballLeague.Domain.Common;
 using BasketballLeague.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,6 +36,24 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
 
             public async Task<int> Handle(CreateTurnoverCommand request, CancellationToken cancellationToken)
             {
+
+                var playerMatchTurnover = await _context.PlayerMatch
+                    .Include(x => x.PlayerSeason)
+                    .FirstOrDefaultAsync(x => x.PlayerSeason.PlayerId == request.PlayerId && x.MatchId == request.MatchId, cancellationToken);
+
+                if (playerMatchTurnover == null)
+                {
+                    var playerSeason =
+                        await _context.PlayerSeason.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerId,
+                            cancellationToken);
+
+                    playerMatchTurnover = new PlayerMatch { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+
+                    _context.PlayerMatch.Add(playerMatchTurnover);
+                }
+
+                playerMatchTurnover.Tov++;
+
                 var incident = new Incident
                 {
                     MatchId = request.MatchId,
@@ -55,6 +74,23 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
 
                 if (request.PlayerStealId.HasValue)
                 {
+                    var playerMatchSteal = await _context.PlayerMatch
+                        .Include(x => x.PlayerSeason)
+                        .FirstOrDefaultAsync(x => x.PlayerSeason.PlayerId == request.PlayerStealId && x.MatchId == request.MatchId, cancellationToken);
+
+                    if (playerMatchSteal == null)
+                    {
+                        var playerSeason =
+                            await _context.PlayerSeason.FirstOrDefaultAsync(x => x.PlayerId == request.PlayerStealId,
+                                cancellationToken);
+
+                        playerMatchSteal = new PlayerMatch { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+
+                        _context.PlayerMatch.Add(playerMatchSteal);
+                    }
+
+                    playerMatchSteal.Stl++;
+
                     var steal = new Steal { PlayerId = request.PlayerStealId.Value, Turnover = turnover };
 
                     _context.Steal.Add(steal);
