@@ -46,13 +46,13 @@ namespace BasketballLeague.Application.Matches.Commands.StartMatch
 
                 foreach (var playerSeasonId in request.TeamHomePlayerSeasonIds)
                 {
-                    var playerMatch = new PlayerMatch { PlayerSeasonId = playerSeasonId, MatchId = request.Id };
+                    var playerMatch = new PlayerMatch { PlayerSeasonId = playerSeasonId, MatchId = request.Id, IsGuest = false };
                     playerMatchList.Add(playerMatch);
                 }
 
                 foreach (var playerSeasonId in request.TeamGuestPlayerSeasonIds)
                 {
-                    var playerMatch = new PlayerMatch { PlayerSeasonId = playerSeasonId, MatchId = request.Id };
+                    var playerMatch = new PlayerMatch { PlayerSeasonId = playerSeasonId, MatchId = request.Id, IsGuest = true };
                     playerMatchList.Add(playerMatch);
                 }
 
