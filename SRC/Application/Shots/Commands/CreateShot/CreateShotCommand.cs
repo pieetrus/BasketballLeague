@@ -100,11 +100,9 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                     {
                         MatchId = request.MatchId,
                         PlayerSeasonId = playerSeason.Id,
-                        Fg2a = 0,
-                        Fg2m = 0,
-                        Fg3a = 0,
-                        Fg3m = 0
+
                     };
+                    _context.PlayerMatch.Add(playerMatch);
                 }
 
                 if (shot.Value == 2)
@@ -142,15 +140,12 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                                 .FirstOrDefaultAsync(x => x.PlayerId == request.PlayerAssistId, cancellationToken);
 
                         playerMatchAssist = new PlayerMatch
-                        { MatchId = request.MatchId, PlayerSeasonId = playerSeason.Id, Ast = 0 };
+                        { MatchId = request.MatchId, PlayerSeasonId = playerSeason.Id };
+                        _context.PlayerMatch.Add(playerMatchAssist);
                     }
 
                     playerMatchAssist.Ast++;
 
-                    if (playerMatch.Id == 0)
-                        _context.PlayerMatch.Add(playerMatch);
-                    if (playerMatchAssist.Id == 0)
-                        _context.PlayerMatch.Add(playerMatchAssist);
 
 
                     _context.Assist.Add(assist);
@@ -173,17 +168,12 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                             {
                                 MatchId = request.MatchId,
                                 PlayerSeasonId = playerSeason.Id,
-                                Drb = 0,
-                                Orb = 0
                             };
+                            _context.PlayerMatch.Add(playerMatchRebound);
                         }
                         if (request.ReboundType == Domain.Common.ReboundType.PLAYER_DEF) playerMatchRebound.Drb++;
                         else playerMatchRebound.Orb++;
 
-                        if (playerMatchRebound.Id == 0)
-                            _context.PlayerMatch.Add(playerMatchRebound);
-
-                        _context.Rebound.Add(rebound);
                     }
                     else
                     {

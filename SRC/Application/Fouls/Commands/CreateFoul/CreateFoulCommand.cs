@@ -100,6 +100,7 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
                     playerMatchWhoFouled = new PlayerMatch
                     { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+                    _context.PlayerMatch.Add(playerMatchWhoFouled);
                 }
 
                 if (playerMatchWhoWasFouled == null)
@@ -110,7 +111,9 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
                     playerMatchWhoWasFouled = new PlayerMatch
                     { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+                    _context.PlayerMatch.Add(playerMatchWhoWasFouled);
                 }
+
 
                 if (request.FoulType == FoulType.OFFENSIVE)
                     playerMatchWhoFouled.OffFouls++;
@@ -160,12 +163,11 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
                             playerMatchAssist = new PlayerMatch
                             { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+                            _context.PlayerMatch.Add(playerMatchAssist);
                         }
 
                         playerMatchAssist.Ast++;
 
-                        if (playerMatchAssist.Id == 0)
-                            _context.PlayerMatch.Add(playerMatchAssist);
                         _context.Assist.Add(assist);
                     }
 
@@ -193,13 +195,11 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
                                 playerMatchRebound = new PlayerMatch
                                 { PlayerSeasonId = playerSeason.Id, MatchId = request.MatchId };
+                                _context.PlayerMatch.Add(playerMatchRebound);
                             }
 
                             if (request.ReboundType == Domain.Common.ReboundType.PLAYER_DEF) playerMatchRebound.Drb++;
                             else playerMatchRebound.Orb++;
-
-                            if (playerMatchRebound.Id == 0)
-                                _context.PlayerMatch.Add(playerMatchRebound);
                         }
                         else
                         {
@@ -215,10 +215,7 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
                 _context.Foul.Add(foul);
 
-                if (playerMatchWhoWasFouled.Id == 0)
-                    _context.PlayerMatch.Add(playerMatchWhoWasFouled);
-                if (playerMatchWhoFouled.Id == 0)
-                    _context.PlayerMatch.Add(playerMatchWhoFouled);
+
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;
 
