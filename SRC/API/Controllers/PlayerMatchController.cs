@@ -1,4 +1,5 @@
-﻿using BasketballLeague.Application.PlayerMatches.Commands.CreatePlayerMatch;
+﻿using BasketballLeague.Application.PlayerMatches;
+using BasketballLeague.Application.PlayerMatches.Commands.CreatePlayerMatch;
 using BasketballLeague.Application.PlayerMatches.Commands.DeletePlayerMatch;
 using BasketballLeague.Application.PlayerMatches.Commands.UpdatePlayerMatch;
 using BasketballLeague.Application.PlayerMatches.Queries.GetPlayerMatchDetail;
@@ -6,6 +7,7 @@ using BasketballLeague.Application.PlayerMatches.Queries.GetPlayerMatchesList;
 using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.API.Controllers
@@ -13,9 +15,9 @@ namespace BasketballLeague.API.Controllers
     public class PlayerMatchController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<PlayerMatch>> GetAll()
+        public async Task<ActionResult<IEnumerable<PlayerMatchDto>>> GetAll(int? matchId)
         {
-            return Ok(await Mediator.Send(new GetPlayerMatchesListQuery()));
+            return Ok(await Mediator.Send(new GetPlayerMatchesListQuery(matchId)));
         }
 
         [HttpGet("{id}")]
@@ -31,7 +33,7 @@ namespace BasketballLeague.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Create([FromBody]CreatePlayerMatchCommand command)
+        public async Task<IActionResult> Create([FromBody] CreatePlayerMatchCommand command)
         {
             await Mediator.Send(command);
 

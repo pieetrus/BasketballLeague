@@ -47,13 +47,32 @@ namespace BasketballLeague.Application.Common.Mappings
             CreateMap<TeamSeason, TeamDto>()
                 .ForMember(x => x.LogoUrl, x => x.MapFrom(x => x.Team.Logo.Url))
                 .ForMember(x => x.Name, x => x.MapFrom(x => x.Team.Name))
-                .ForMember(x => x.ShortName, x => x.MapFrom(x => x.Team.ShortName));
+                .ForMember(x => x.ShortName, x => x.MapFrom(x => x.Team.ShortName))
+                ;
 
 
             CreateMap<Match, MatchListDto>()
-                .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team.Name))
-                .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team.Name))
-                .ForMember(x => x.Division, x => x.MapFrom(x => x.SeasonDivision.Division.Name));
+                .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team))
+                .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team))
+                .ForMember(x => x.Division, x => x.MapFrom(x => x.SeasonDivision.Division.Name))
+                .ForPath(x => x.TeamGuest.Fouls1Qtr, x => x.MapFrom(x => x.TeamGuest.Fouls1Qtr))
+                .ForPath(x => x.TeamGuest.Fouls2Qtr, x => x.MapFrom(x => x.TeamGuest.Fouls2Qtr))
+                .ForPath(x => x.TeamGuest.Fouls3Qtr, x => x.MapFrom(x => x.TeamGuest.Fouls3Qtr))
+                .ForPath(x => x.TeamGuest.Fouls4Qtr, x => x.MapFrom(x => x.TeamGuest.Fouls4Qtr))
+                .ForPath(x => x.TeamGuest.Timeouts1Half, x => x.MapFrom(x => x.TeamGuest.Timeouts1Half))
+                .ForPath(x => x.TeamGuest.Timeouts2Half, x => x.MapFrom(x => x.TeamGuest.Timeouts2Half))
+                .ForPath(x => x.TeamHome.Fouls1Qtr, x => x.MapFrom(x => x.TeamHome.Fouls1Qtr))
+                .ForPath(x => x.TeamHome.Fouls2Qtr, x => x.MapFrom(x => x.TeamHome.Fouls2Qtr))
+                .ForPath(x => x.TeamHome.Fouls3Qtr, x => x.MapFrom(x => x.TeamHome.Fouls3Qtr))
+                .ForPath(x => x.TeamHome.Fouls4Qtr, x => x.MapFrom(x => x.TeamHome.Fouls4Qtr))
+                .ForPath(x => x.TeamHome.Timeouts1Half, x => x.MapFrom(x => x.TeamHome.Timeouts1Half))
+                .ForPath(x => x.TeamHome.Timeouts2Half, x => x.MapFrom(x => x.TeamHome.Timeouts2Half))
+                .ForPath(x => x.TeamHome.LogoUrl, x => x.MapFrom(x => x.TeamHome.Team.Logo.Url))
+                .ForPath(x => x.TeamGuest.LogoUrl, x => x.MapFrom(x => x.TeamGuest.Team.Logo.Url))
+                .ForMember(x => x.LastIncidentMinutes, x => x.MapFrom(x => x.Incidents.LastOrDefault().Minutes))
+                .ForMember(x => x.LastIncidentSeconds, x => x.MapFrom(x => x.Incidents.LastOrDefault().Seconds))
+                .ForMember(x => x.LastIncidentQuater, x => x.MapFrom(x => x.Incidents.LastOrDefault().Quater))
+                ;
 
             CreateMap<Match, MatchDetailedDto>()
                 .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team))
@@ -79,6 +98,9 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForPath(x => x.TeamHome.Timeouts1Half, x => x.MapFrom(x => x.TeamHome.Timeouts1Half))
                 .ForPath(x => x.TeamHome.Timeouts2Half, x => x.MapFrom(x => x.TeamHome.Timeouts2Half))
                 .ForMember(x => x.PlayersInGameIds, x => x.MapFrom(x => x.PlayerMatches.Select(x => x.PlayerSeasonId)))
+                .ForMember(x => x.LastIncidentMinutes, x => x.MapFrom(x => x.Incidents.LastOrDefault().Minutes))
+                .ForMember(x => x.LastIncidentSeconds, x => x.MapFrom(x => x.Incidents.LastOrDefault().Seconds))
+                .ForMember(x => x.LastIncidentQuater, x => x.MapFrom(x => x.Incidents.LastOrDefault().Quater))
                 ;
 
             CreateMap<Season, SeasonDto>()
@@ -91,6 +113,9 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team.Name))
                 .ForMember(x => x.TeamSeasonGuest, x => x.MapFrom(x => x.TeamSeasonGuest.Team.Name))
                 .ForMember(x => x.TeamSeasonHome, x => x.MapFrom(x => x.TeamSeasonHome.Team.Name));
+
+            CreateMap<PlayerMatch, PlayerMatchDto>()
+                .ForMember(x => x.Player, x => x.MapFrom(x => x.PlayerSeason));
 
         }
     }

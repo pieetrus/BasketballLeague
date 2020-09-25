@@ -26,8 +26,9 @@ namespace BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList
         {
             var matches = await _context.Match
                 .Include(x => x.SeasonDivision).ThenInclude(x => x.Division)
-                .Include(x => x.TeamHome).ThenInclude(x => x.Team)
-                .Include(x => x.TeamGuest).ThenInclude(x => x.Team)
+                .Include(x => x.TeamHome).ThenInclude(x => x.Team).ThenInclude(x => x.Logo)
+                .Include(x => x.TeamGuest).ThenInclude(x => x.Team).ThenInclude(x => x.Logo)
+                .Include(x => x.Incidents)
                 .OrderByDescending(x => x.StartDate)
                 .ToListAsync(cancellationToken);
 

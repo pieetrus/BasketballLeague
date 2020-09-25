@@ -4,12 +4,13 @@ using BasketballLeague.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.PlayerMatches.Queries.GetPlayerMatchesList
 {
-    public class GetPlayerMatchesListQueryHandler : IRequestHandler<GetPlayerMatchesListQuery, IEnumerable<PlayerMatch>>
+    public class GetPlayerMatchesListQueryHandler : IRequestHandler<GetPlayerMatchesListQuery, IEnumerable<PlayerMatchDto>>
     {
 
         private readonly IBasketballLeagueDbContext _context;
@@ -21,11 +22,20 @@ namespace BasketballLeague.Application.PlayerMatches.Queries.GetPlayerMatchesLis
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<PlayerMatch>> Handle(GetPlayerMatchesListQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<PlayerMatchDto>> Handle(GetPlayerMatchesListQuery request, CancellationToken cancellationToken)
         {
-            var teams = await _context.PlayerMatch.ToListAsync(cancellationToken);
+            var queryable = _context.PlayerMatch
+                .Include(x => x.PlayerSeason).ThenInclude(x => x.Player)
+                .AsQueryable();
 
-            return teams;
+            if (request.MatchId != null)
+            {
+                queryable = queryable.Where(x => x.MatchId == request.MatchId);
+            }
+
+            var players = await queryable.ToListAsync(cancellationToken);
+
+            return _mapper.Map<IEnumerable<PlayerMatch>, IEnumerable<PlayerMatchDto>>(players).ToList();
         }
     }
 }

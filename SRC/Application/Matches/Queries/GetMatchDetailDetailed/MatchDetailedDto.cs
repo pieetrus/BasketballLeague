@@ -16,6 +16,9 @@ namespace BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed
         public List<int> PlayersInGameIds { get; set; }
         public int TeamHomePts { get; set; }
         public int TeamGuestPts { get; set; }
+        public string LastIncidentMinutes { get; set; }
+        public string LastIncidentSeconds { get; set; }
+        public int LastIncidentQuater { get; set; }
         public int Attendance { get; set; }
         public DateTime StartDate { get; set; }
         public bool Started { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasketballLeague.Application.Teams;
+using System;
 
 namespace BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList
 {
@@ -6,8 +7,11 @@ namespace BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList
     {
         public int Id { get; set; }
         public string Division { get; set; }
-        public string TeamHome { get; set; }
-        public string TeamGuest { get; set; }
+        public TeamDto TeamHome { get; set; }
+        public TeamDto TeamGuest { get; set; }
+        public string LastIncidentMinutes { get; set; }
+        public string LastIncidentSeconds { get; set; }
+        public int LastIncidentQuater { get; set; }
         public int TeamHomePts { get; set; }
         public int TeamGuestPts { get; set; }
         public int Attendance { get; set; }
