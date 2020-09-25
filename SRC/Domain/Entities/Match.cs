@@ -13,7 +13,11 @@ namespace BasketballLeague.Domain.Entities
         public int TeamSeasonGuestId { get; set; }
         public int Attendance { get; set; }
         public DateTime StartDate { get; set; }
+        public bool Started { get; set; }
         public bool Ended { get; set; }
+        public string TeamHomeJerseyColor { get; set; }
+        public string TeamGuestJerseyColor { get; set; }
+
 
         public SeasonDivision SeasonDivision { get; set; }
         public virtual TeamMatch TeamGuest { get; set; }
