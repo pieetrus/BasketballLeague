@@ -46,7 +46,7 @@ namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsLis
 
             }
 
-            var playerSeasons = await queryable.ToListAsync(cancellationToken);
+            var playerSeasons = await queryable.OrderByDescending(x => x.Pts).ToListAsync(cancellationToken);
 
             return _mapper.Map<IEnumerable<PlayerSeason>, IEnumerable<PlayerSeasonListDto>>(playerSeasons);
         }

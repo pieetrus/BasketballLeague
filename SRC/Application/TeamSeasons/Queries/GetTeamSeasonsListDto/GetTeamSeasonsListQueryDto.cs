@@ -3,11 +3,11 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 
-namespace BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList
+namespace BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsListDto
 {
-    public class GetTeamSeasonsListQuery : IRequest<IEnumerable<TeamDto>>
+    public class GetTeamSeasonsListQueryDto : IRequest<IEnumerable<TeamDto>>
     {
-        public GetTeamSeasonsListQuery(int? seasonId, int? divisionId, DateTime? matchStartDate)
+        public GetTeamSeasonsListQueryDto(int? seasonId, int? divisionId, DateTime? matchStartDate)
         {
             SeasonId = seasonId;
             DivisionId = divisionId;

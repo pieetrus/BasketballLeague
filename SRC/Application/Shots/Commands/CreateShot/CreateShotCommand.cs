@@ -145,8 +145,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                     }
 
                     playerMatchAssist.Ast++;
-
-
+                    teamMatch.Ast++;
 
                     _context.Assist.Add(assist);
                 }
@@ -171,8 +170,16 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                             };
                             _context.PlayerMatch.Add(playerMatchRebound);
                         }
-                        if (request.ReboundType == Domain.Common.ReboundType.PLAYER_DEF) playerMatchRebound.Drb++;
-                        else playerMatchRebound.Orb++;
+                        if (request.ReboundType == Domain.Common.ReboundType.PLAYER_DEF)
+                        {
+                            playerMatchRebound.Drb++;
+                            teamMatch.Drb++;
+                        }
+                        else
+                        {
+                            playerMatchRebound.Orb++;
+                            teamMatch.Orb++;
+                        }
 
                     }
                     else

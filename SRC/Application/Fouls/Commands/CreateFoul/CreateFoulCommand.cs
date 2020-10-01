@@ -44,34 +44,36 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
             public async Task<int> Handle(CreateFoulCommand request, CancellationToken cancellationToken)
             {
-                Match match;
-                TeamMatch teamMatch;
+                Match match = await _context.Match
+                    .Include(x => x.TeamGuest)
+                    .Include(x => x.TeamHome)
+                    .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
+                TeamMatch teamMatchWhoFouled;
+                TeamMatch teamMatchWhoWasFouled;
                 if (request.IsGuest)
                 {
-                    match = await _context.Match.Include(x => x.TeamGuest)
-                        .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
-                    teamMatch = match.TeamGuest;
+                    teamMatchWhoFouled = match.TeamGuest;
+                    teamMatchWhoWasFouled = match.TeamHome;
                 }
                 else
                 {
-                    match = await _context.Match.Include(x => x.TeamHome)
-                        .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
-                    teamMatch = match.TeamHome;
+                    teamMatchWhoFouled = match.TeamHome;
+                    teamMatchWhoWasFouled = match.TeamGuest;
                 }
 
                 switch (request.Quater)
                 {
                     case 1:
-                        teamMatch.Fouls1Qtr++;
+                        teamMatchWhoFouled.Fouls1Qtr++;
                         break;
                     case 2:
-                        teamMatch.Fouls2Qtr++;
+                        teamMatchWhoFouled.Fouls2Qtr++;
                         break;
                     case 3:
-                        teamMatch.Fouls3Qtr++;
+                        teamMatchWhoFouled.Fouls3Qtr++;
                         break;
                     case 4:
-                        teamMatch.Fouls4Qtr++;
+                        teamMatchWhoFouled.Fouls4Qtr++;
                         break;
                 }
 
@@ -116,8 +118,12 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
 
 
                 if (request.FoulType == FoulType.OFFENSIVE)
+                {
                     playerMatchWhoFouled.OffFouls++;
+                    teamMatchWhoFouled.OffFouls++;
+                }
                 playerMatchWhoFouled.Fouls++;
+                teamMatchWhoFouled.Fouls++;
 
 
                 var foul = new Foul
@@ -132,8 +138,8 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                 if (request.AccurateShots.HasValue && request.Attempts.HasValue)
                 {
 
-                    teamMatch.Fta += request.Attempts.Value;
-                    teamMatch.Ftm += request.AccurateShots.Value;
+                    teamMatchWhoWasFouled.Fta += request.Attempts.Value;
+                    teamMatchWhoWasFouled.Ftm += request.AccurateShots.Value;
 
                     playerMatchWhoWasFouled.Fta = request.Attempts.Value;
                     playerMatchWhoWasFouled.Ftm = request.AccurateShots.Value;
@@ -167,6 +173,7 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                         }
 
                         playerMatchAssist.Ast++;
+                        teamMatchWhoWasFouled.Ast++;
 
                         _context.Assist.Add(assist);
                     }
@@ -198,15 +205,23 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                                 _context.PlayerMatch.Add(playerMatchRebound);
                             }
 
-                            if (request.ReboundType == Domain.Common.ReboundType.PLAYER_DEF) playerMatchRebound.Drb++;
-                            else playerMatchRebound.Orb++;
+                            if (request.ReboundType == Domain.Common.ReboundType.PLAYER_DEF)
+                            {
+                                playerMatchRebound.Drb++;
+                                teamMatchWhoFouled.Drb++;
+                            }
+                            else
+                            {
+                                playerMatchRebound.Orb++;
+                                teamMatchWhoWasFouled.Orb++;
+                            }
                         }
                         else
                         {
                             rebound.TeamId = request.TeamReboundId.Value;
 
-                            if (request.ReboundType == Domain.Common.ReboundType.TEAM_DEF) teamMatch.Drb++;
-                            else teamMatch.Orb++;
+                            if (request.ReboundType == Domain.Common.ReboundType.TEAM_DEF) teamMatchWhoFouled.Drb++;
+                            else teamMatchWhoWasFouled.Orb++;
                         }
 
                         _context.Rebound.Add(rebound);

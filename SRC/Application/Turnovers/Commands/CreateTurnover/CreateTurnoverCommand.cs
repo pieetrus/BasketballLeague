@@ -36,10 +36,26 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
 
             public async Task<int> Handle(CreateTurnoverCommand request, CancellationToken cancellationToken)
             {
-
                 var playerMatchTurnover = await _context.PlayerMatch
                     .Include(x => x.PlayerSeason)
                     .FirstOrDefaultAsync(x => x.PlayerSeason.PlayerId == request.PlayerId && x.MatchId == request.MatchId, cancellationToken);
+
+                Match match = await _context.Match
+                    .Include(x => x.TeamGuest)
+                    .Include(x => x.TeamHome)
+                    .FirstOrDefaultAsync(x => x.Id == request.MatchId, cancellationToken);
+                TeamMatch teamMatchWhoTurnover;
+                TeamMatch teamMatchWhoSteal;
+                if (request.IsGuest)
+                {
+                    teamMatchWhoTurnover = match.TeamGuest;
+                    teamMatchWhoSteal = match.TeamHome;
+                }
+                else
+                {
+                    teamMatchWhoTurnover = match.TeamHome;
+                    teamMatchWhoSteal = match.TeamGuest;
+                }
 
                 if (playerMatchTurnover == null)
                 {
@@ -53,6 +69,7 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
                 }
 
                 playerMatchTurnover.Tov++;
+                teamMatchWhoTurnover.Tov++;
 
                 var incident = new Incident
                 {
@@ -90,6 +107,7 @@ namespace BasketballLeague.Application.Turnovers.Commands.CreateTurnover
                     }
 
                     playerMatchSteal.Stl++;
+                    teamMatchWhoSteal.Stl++;
 
                     var steal = new Steal { PlayerId = request.PlayerStealId.Value, Turnover = turnover };
 

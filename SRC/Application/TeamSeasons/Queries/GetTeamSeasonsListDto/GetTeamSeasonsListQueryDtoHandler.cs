@@ -9,20 +9,20 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList
+namespace BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsListDto
 {
-    public class GetTeamSeasonsListQueryHandler : IRequestHandler<GetTeamSeasonsListQuery, IEnumerable<TeamDto>>
+    public class GetTeamSeasonsListQueryDtoHandler : IRequestHandler<GetTeamSeasonsListQueryDto, IEnumerable<TeamDto>>
     {
         private readonly IBasketballLeagueDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetTeamSeasonsListQueryHandler(IBasketballLeagueDbContext context, IMapper mapper)
+        public GetTeamSeasonsListQueryDtoHandler(IBasketballLeagueDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<TeamDto>> Handle(GetTeamSeasonsListQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TeamDto>> Handle(GetTeamSeasonsListQueryDto request, CancellationToken cancellationToken)
         {
             var queryable = _context.TeamSeason.Include(x => x.Team).AsQueryable();
 
