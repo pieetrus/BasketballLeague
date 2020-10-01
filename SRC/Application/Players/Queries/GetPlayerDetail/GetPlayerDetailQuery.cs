@@ -1,9 +1,8 @@
-﻿using BasketballLeague.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 
 namespace BasketballLeague.Application.Players.Queries.GetPlayerDetail
 {
-    public class GetPlayerDetailQuery : IRequest<Player>
+    public class GetPlayerDetailQuery : IRequest<GetPlayerDetailQueryHandler.PlayerDto>
     {
         public int Id { get; set; }
     }

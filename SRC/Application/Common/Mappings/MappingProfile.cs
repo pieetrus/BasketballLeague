@@ -4,10 +4,12 @@ using BasketballLeague.Application.Divisions;
 using BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList;
 using BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed;
 using BasketballLeague.Application.PlayerMatches;
+using BasketballLeague.Application.Players.Queries.GetPlayerDetail;
 using BasketballLeague.Application.Players.Queries.GetPlayersList;
 using BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsList;
 using BasketballLeague.Application.Seasons;
 using BasketballLeague.Application.Teams;
+using BasketballLeague.Domain.Common;
 using BasketballLeague.Domain.Entities;
 using System.Linq;
 
@@ -20,7 +22,11 @@ namespace BasketballLeague.Application.Common.Mappings
             CreateMap<Player, PlayerListDto>()
                 .ForMember(x => x.Id, x => x.MapFrom(x => x.Id))
                 .ForMember(x => x.Teams, x => x.MapFrom(x => x.PlayerSeasons.Select(x => x.Team.Team)))
-                .ForMember(x => x.Position, x => x.MapFrom(x => x.Position.ToString()));
+                .ForMember(x => x.Position, x => x.MapFrom(x => x.Position.GetDescription()));
+
+            CreateMap<Player, GetPlayerDetailQueryHandler.PlayerDto>()
+                .ForMember(x => x.Id, x => x.MapFrom(x => x.Id))
+                .ForMember(x => x.Position, x => x.MapFrom(x => x.Position.GetDescription()));
 
             CreateMap<PlayerSeason, PlayerSeasonListDto>()
                 .ForMember(x => x.Id, x => x.MapFrom(x => x.Id))
@@ -30,7 +36,8 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.Height, x => x.MapFrom(x => x.Player.Height))
                 .ForMember(x => x.Birthdate, x => x.MapFrom(x => x.Player.Birthdate))
                 .ForMember(x => x.DivisionName, x => x.MapFrom(x => x.SeasonDivision.Division.Name))
-                .ForMember(x => x.Position, x => x.MapFrom(x => x.Player.Position.ToString()));
+                .ForMember(x => x.Season, x => x.MapFrom(x => x.SeasonDivision.Season.Name))
+                .ForMember(x => x.Position, x => x.MapFrom(x => x.Player.Position.GetDescription()));
 
             CreateMap<PlayerSeason, PlayerBeforeMatchDto>()
                 .ForMember(x => x.Id, x => x.MapFrom(playerSeason => playerSeason.Id))
@@ -38,7 +45,7 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.Name, x => x.MapFrom(playerSeason => playerSeason.Player.Name))
                 .ForMember(x => x.Surname, x => x.MapFrom(playerSeason => playerSeason.Player.Surname))
                 .ForMember(x => x.JerseyNr, x => x.MapFrom(playerSeason => playerSeason.JerseyNr))
-                .ForMember(x => x.Position, x => x.MapFrom(playerSeason => playerSeason.Player.Position))
+                .ForMember(x => x.Position, x => x.MapFrom(playerSeason => playerSeason.Player.Position.GetDescription()))
                 .ForMember(x => x.Height, x => x.MapFrom(playerSeason => playerSeason.Player.Height));
 
             CreateMap<Team, TeamDto>()

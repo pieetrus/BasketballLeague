@@ -14,9 +14,9 @@ namespace BasketballLeague.API.Controllers
     public class PlayerSeasonController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlayerSeasonListDto>>> GetAll(int? seasonId, int? divisionId, int? teamId)
+        public async Task<ActionResult<IEnumerable<PlayerSeasonListDto>>> GetAll(int? seasonId, int? divisionId, int? teamId, int? playerId)
         {
-            return Ok(await Mediator.Send(new GetPlayerSeasonsListQuery(seasonId, divisionId, teamId)));
+            return Ok(await Mediator.Send(new GetPlayerSeasonsListQuery(seasonId, divisionId, teamId, playerId)));
         }
 
         [HttpGet("{id}")]

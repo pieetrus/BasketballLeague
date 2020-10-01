@@ -27,6 +27,7 @@ namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsLis
             var queryable = _context.PlayerSeason
                 .Include(x => x.Player)
                 .Include(x => x.SeasonDivision).ThenInclude(x => x.Division)
+                .Include(x => x.SeasonDivision).ThenInclude(x => x.Season)
                 .Include(x => x.Team).ThenInclude(x => x.Team)
                 .AsQueryable();
 
@@ -43,6 +44,13 @@ namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsLis
             {
                 queryable = queryable
                     .Where(x => x.TeamId == request.TeamId);
+
+            }
+
+            if (request.PlayerId != null)
+            {
+                queryable = queryable
+                    .Where(x => x.PlayerId == request.PlayerId);
 
             }
 

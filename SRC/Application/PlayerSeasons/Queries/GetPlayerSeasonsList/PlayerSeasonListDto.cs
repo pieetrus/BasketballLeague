@@ -16,6 +16,7 @@ namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsLis
         public string DivisionName { get; set; }
         public string TeamName { get; set; }
         public string JerseyNr { get; set; }
+        public string Season { get; set; }
 
 
 
