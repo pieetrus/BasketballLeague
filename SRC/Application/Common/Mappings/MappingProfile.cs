@@ -9,6 +9,7 @@ using BasketballLeague.Application.Players.Queries.GetPlayersList;
 using BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsList;
 using BasketballLeague.Application.Seasons;
 using BasketballLeague.Application.Teams;
+using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList;
 using BasketballLeague.Domain.Common;
 using BasketballLeague.Domain.Entities;
 using System.Linq;
@@ -55,6 +56,11 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.LogoUrl, x => x.MapFrom(x => x.Team.Logo.Url))
                 .ForMember(x => x.Name, x => x.MapFrom(x => x.Team.Name))
                 .ForMember(x => x.ShortName, x => x.MapFrom(x => x.Team.ShortName))
+                ;
+
+            CreateMap<TeamSeason, TeamSeasonListDto>()
+                .ForMember(x => x.Division, x => x.MapFrom(x => x.SeasonDivision.Division.Name))
+                .ForMember(x => x.Season, x => x.MapFrom(x => x.SeasonDivision.Season.Name))
                 ;
 
 

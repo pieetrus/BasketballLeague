@@ -1,4 +1,5 @@
-﻿using BasketballLeague.Application.TeamSeasons.Commands.CreateTeamSeason;
+﻿using BasketballLeague.Application.Teams;
+using BasketballLeague.Application.TeamSeasons.Commands.CreateTeamSeason;
 using BasketballLeague.Application.TeamSeasons.Commands.DeleteTeamSeason;
 using BasketballLeague.Application.TeamSeasons.Commands.UpdateTeamSeason;
 using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonDetail;
@@ -14,15 +15,15 @@ namespace BasketballLeague.API.Controllers
     public class TeamSeason : BaseController
     {
         [HttpGet("dto")]
-        public async Task<ActionResult<TeamSeason>> GetAll(int? seasonId, int? divisionId, DateTime? matchStartDate)
+        public async Task<ActionResult<TeamDto>> GetAll(int? seasonId, int? divisionId, DateTime? matchStartDate)
         {
             return Ok(await Mediator.Send(new GetTeamSeasonsListQueryDto(seasonId, divisionId, matchStartDate)));
         }
 
         [HttpGet]
-        public async Task<ActionResult<TeamSeason>> GetAll()
+        public async Task<ActionResult<TeamSeasonListDto>> GetAll(int? teamId)
         {
-            return Ok(await Mediator.Send(new GetTeamSeasonListQuery()));
+            return Ok(await Mediator.Send(new GetTeamSeasonListQuery(teamId)));
         }
 
         [HttpGet("{id}")]
