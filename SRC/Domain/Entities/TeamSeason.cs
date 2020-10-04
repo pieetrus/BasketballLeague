@@ -28,6 +28,8 @@ namespace BasketballLeague.Domain.Entities
         public int? CoachId { get; set; }
         public int? CapitainId { get; set; }
         public int RankingPoints { get; set; }
+        public int Wins { get; set; }
+        public int Lost { get; set; }
 
         public virtual Player Capitain { get; set; }
         public virtual ICollection<PlayerSeason> Players { get; set; }

@@ -5,6 +5,7 @@ using BasketballLeague.Application.TeamSeasons.Commands.UpdateTeamSeason;
 using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonDetail;
 using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList;
 using BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsListDto;
+using BasketballLeague.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.API.Controllers
 {
-    public class TeamSeason : BaseController
+    public class TeamSeasonController : BaseController
     {
         [HttpGet("dto")]
         public async Task<ActionResult<TeamDto>> GetAll(int? seasonId, int? divisionId, DateTime? matchStartDate)

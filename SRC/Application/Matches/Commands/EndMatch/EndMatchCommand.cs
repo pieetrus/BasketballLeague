@@ -92,10 +92,14 @@ namespace BasketballLeague.Application.Matches.Commands.EndMatch
                 if (match.TeamHome.Pts > match.TeamGuest.Pts)
                 {
                     match.TeamSeasonHome.RankingPoints += 2;
+                    match.TeamSeasonHome.Wins++;
+                    match.TeamSeasonGuest.Lost++;
                 }
                 else
                 {
                     match.TeamSeasonGuest.RankingPoints += 2;
+                    match.TeamSeasonGuest.Wins++;
+                    match.TeamSeasonHome.Lost++;
                 }
 
                 var success = await _context.SaveChangesAsync(cancellationToken) > 0;

@@ -39,6 +39,11 @@ namespace BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList
                 queryable = queryable.Where(x => x.SeasonDivision.SeasonId == request.SeasonId);
             }
 
+            if (request.DivisionId.HasValue)
+            {
+                queryable = queryable.Where(x => x.SeasonDivision.DivisionId == request.DivisionId);
+            }
+
             var teamSeasons = await queryable.OrderByDescending(x => x.Pts).ToListAsync(cancellationToken);
 
             return _mapper.Map<IEnumerable<TeamSeason>, IEnumerable<TeamSeasonListDto>>(teamSeasons);

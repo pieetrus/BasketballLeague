@@ -30,6 +30,8 @@ namespace BasketballLeague.Application.TeamSeasons.Queries.GetTeamSeasonsList
         public int RankingPoints { get; set; }
         public string Season { get; set; }
         public string Division { get; set; }
+        public int Wins { get; set; }
+        public int Lost { get; set; }
         public virtual Team Team { get; set; }
     }
 }
