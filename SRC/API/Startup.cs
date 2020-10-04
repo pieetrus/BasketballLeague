@@ -1,4 +1,5 @@
 using BasketballLeague.API.Common;
+using BasketballLeague.API.SignalR;
 using BasketballLeague.Application;
 using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Infrastructure;
@@ -30,7 +31,7 @@ namespace BasketballLeague.API
             services.AddPersistence(Configuration);
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-
+            services.AddSignalR();
             services.AddControllers(opt =>
                 {
                     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
@@ -93,6 +94,7 @@ namespace BasketballLeague.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<IncidenctsHub>("/incidentsHub");
             });
         }
     }
