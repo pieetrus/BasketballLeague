@@ -39,6 +39,10 @@ namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsLis
                                 x.SeasonDivision.DivisionId == request.DivisionId);
 
             }
+            else if (request.SeasonId.HasValue)
+            {
+                queryable = queryable.Where(x => x.SeasonDivision.SeasonId == request.SeasonId);
+            }
 
             if (request.TeamId != null)
             {
@@ -53,6 +57,7 @@ namespace BasketballLeague.Application.PlayerSeasons.Queries.GetPlayerSeasonsLis
                     .Where(x => x.PlayerId == request.PlayerId);
 
             }
+
 
             var playerSeasons = await queryable.OrderByDescending(x => x.Pts).ToListAsync(cancellationToken);
 
