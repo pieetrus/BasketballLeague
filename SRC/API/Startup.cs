@@ -47,7 +47,8 @@ namespace BasketballLeague.API
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
                 });
             });
 
@@ -93,8 +94,8 @@ namespace BasketballLeague.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
                 endpoints.MapHub<IncidenctsHub>("/incidentsHub");
+                endpoints.MapControllers();
             });
         }
     }

@@ -1,8 +1,6 @@
 ﻿using BasketballLeague.Application.Shots.Commands.CreateShot;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BasketballLeague.API.SignalR
@@ -18,13 +16,9 @@ namespace BasketballLeague.API.SignalR
 
         public async Task SendIncident(CreateShotCommand command)
         {
-            var username = Context.User?.Claims?
-                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var incident = await _mediator.Send(command);
 
-
-            var shot = await _mediator.Send(command);
-
-            await Clients.All.SendAsync("ReceiveIncidents", shot);
+            await Clients.All.SendAsync("ReceiveIncident", "success");
         }
 
     }

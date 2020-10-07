@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BasketballLeague.Application.Shots.Commands.CreateShot
 {
-    public class CreateShotCommand : IRequest<int>
+    public class CreateShotCommand : IRequest<Incident>
     {
         public int MatchId { get; set; }
         public string Seconds { get; set; }
@@ -33,7 +33,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
 
 
 
-        public class Handler : IRequestHandler<CreateShotCommand, int>
+        public class Handler : IRequestHandler<CreateShotCommand, Incident>
         {
             private readonly IBasketballLeagueDbContext _context;
 
@@ -42,7 +42,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
                 _context = context;
             }
 
-            public async Task<int> Handle(CreateShotCommand request, CancellationToken cancellationToken)
+            public async Task<Incident> Handle(CreateShotCommand request, CancellationToken cancellationToken)
             {
                 Match match;
                 TeamMatch teamMatch;
@@ -199,7 +199,7 @@ namespace BasketballLeague.Application.Shots.Commands.CreateShot
 
                 if (success)
                 {
-                    return incident.Id;
+                    return incident;
                 }
 
                 throw new Exception("Error saving changes");
