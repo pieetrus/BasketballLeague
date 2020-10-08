@@ -14,11 +14,11 @@ namespace BasketballLeague.API.SignalR
             _mediator = mediator;
         }
 
-        public async Task SendIncident(CreateShotCommand command)
+        public async Task SendShot(CreateShotCommand command)
         {
             var incident = await _mediator.Send(command);
 
-            await Clients.All.SendAsync("ReceiveIncident", "success");
+            await Clients.All.SendAsync("ReceiveShot", incident.Shot.IsAccurate, incident.IsGuest, incident.Shot.Value, incident.MatchId);
         }
 
     }
