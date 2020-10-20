@@ -12,7 +12,6 @@ namespace BasketballLeague.Domain.Entities
         public int? TeamId { get; set; }
         public FoulType FoulType { get; set; }
 
-        public virtual Coach Coach { get; set; }
         public virtual Team Team { get; set; }
         public virtual Incident Incident { get; set; }
         public virtual Player PlayerWhoFouled { get; set; }

@@ -10,7 +10,6 @@ namespace BasketballLeague.Application.Common.Interfaces
     {
         DbSet<Assist> Assist { get; set; }
         DbSet<Block> Block { get; set; }
-        DbSet<Coach> Coach { get; set; }
         DbSet<Division> Division { get; set; }
         DbSet<Foul> Foul { get; set; }
         DbSet<Domain.Entities.FreeThrows> FreeThrow { get; set; }

@@ -31,11 +31,6 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.Property(e => e.PlayerWhoWasFouledId).HasColumnName("Player_Who_Was_Fouled_ID");
 
-            builder.HasOne(d => d.Coach)
-                    .WithMany(p => p.Foul)
-                    .HasForeignKey(d => d.CoachId)
-                    .HasConstraintName("FK_Foul_Coach_ID_Coach_Coach_ID");
-
             builder.HasOne(d => d.Incident)
                 .WithOne(p => p.Foul)
                 .HasForeignKey<Foul>(d => d.IncidentId)

@@ -75,10 +75,6 @@ namespace BasketballLeague.Persistence.Configurations
                 .HasForeignKey(d => d.CapitainId)
                 .HasConstraintName("FK_Team_Season_Capitain_ID_Player_Player_ID");
 
-            builder.HasOne(d => d.Coach)
-                .WithMany(p => p.TeamSeasons)
-                .HasForeignKey(d => d.CoachId)
-                .HasConstraintName("FK_Team_Season_Coach_ID_Coach_Coach_ID");
 
             builder.HasOne(d => d.SeasonDivision)
                 .WithMany(p => p.TeamSeasons)

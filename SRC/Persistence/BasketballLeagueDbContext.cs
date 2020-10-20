@@ -15,7 +15,6 @@ namespace BasketballLeague.Persistence
 
         public virtual DbSet<Assist> Assist { get; set; }
         public virtual DbSet<Block> Block { get; set; }
-        public virtual DbSet<Coach> Coach { get; set; }
         public virtual DbSet<Division> Division { get; set; }
         public virtual DbSet<Foul> Foul { get; set; }
         public virtual DbSet<FreeThrows> FreeThrow { get; set; }
