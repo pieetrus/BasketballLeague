@@ -26,8 +26,6 @@ namespace BasketballLeague.Persistence
         public virtual DbSet<PlayerMatch> PlayerMatch { get; set; }
         public virtual DbSet<PlayerSeason> PlayerSeason { get; set; }
         public virtual DbSet<Rebound> Rebound { get; set; }
-        public virtual DbSet<Referee> Referee { get; set; }
-        public virtual DbSet<RefereeMatches> RefereeMatches { get; set; }
         public virtual DbSet<Season> Season { get; set; }
         public virtual DbSet<SeasonDivision> SeasonDivision { get; set; }
         public virtual DbSet<Shot> Shot { get; set; }

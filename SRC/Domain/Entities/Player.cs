@@ -13,8 +13,6 @@ namespace BasketballLeague.Domain.Entities
         public string PhotoUrl { get; set; }
         public int? Height { get; set; }
         public Postition? Position { get; set; }
-        public AppUser AppUser { get; set; }
-
         public virtual ICollection<Assist> Assists { get; set; }
         public virtual ICollection<Block> Blocks { get; set; }
         public virtual ICollection<Foul> Fouls { get; set; }

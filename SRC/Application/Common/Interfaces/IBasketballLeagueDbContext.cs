@@ -21,8 +21,6 @@ namespace BasketballLeague.Application.Common.Interfaces
         DbSet<PlayerMatch> PlayerMatch { get; set; }
         DbSet<PlayerSeason> PlayerSeason { get; set; }
         DbSet<Rebound> Rebound { get; set; }
-        DbSet<Referee> Referee { get; set; }
-        DbSet<RefereeMatches> RefereeMatches { get; set; }
         DbSet<Season> Season { get; set; }
         DbSet<SeasonDivision> SeasonDivision { get; set; }
         DbSet<Shot> Shot { get; set; }

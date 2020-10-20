@@ -268,18 +268,6 @@ namespace BasketballLeague.Persistence
                     }
                 }; // 2 create team matches also
 
-                var referees = new List<Referee>
-                {
-                    new Referee
-                    {
-                        Name = "Marcin", Surname = "Luta", JerseyNr = "1", Birthdate = new DateTime(1975, 12, 11)
-                    },
-                    new Referee
-                    {
-                        Name = "Wiktor", Surname = "Wizirkiewicz", JerseyNr = "23", Birthdate = new DateTime(1989, 05, 07)
-                    },
-                }; // 2
-
 
                 await context.Player.AddRangeAsync(players);
                 await context.Division.AddRangeAsync(divisions);
@@ -289,7 +277,6 @@ namespace BasketballLeague.Persistence
                 await context.TeamSeason.AddRangeAsync(teamSeasons);
                 await context.Team.AddRangeAsync(teams);
                 await context.Match.AddRangeAsync(matches);
-                await context.Referee.AddRangeAsync(referees);
 
                 await context.SaveChangesAsync();
             }

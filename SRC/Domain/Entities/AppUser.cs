@@ -12,7 +12,5 @@ namespace BasketballLeague.Domain.Entities
         public ICollection<Photo> Photos { get; set; }
 
         public string Bio { get; set; }
-
-        public Player Player { get; set; }
     }
 }

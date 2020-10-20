@@ -26,6 +26,5 @@ namespace BasketballLeague.Domain.Entities
         public virtual TeamSeason TeamSeasonHome { get; set; }
         public virtual ICollection<Incident> Incidents { get; set; }
         public virtual ICollection<PlayerMatch> PlayerMatches { get; set; }
-        public virtual ICollection<RefereeMatches> RefereeMatches { get; set; }
     }
 }

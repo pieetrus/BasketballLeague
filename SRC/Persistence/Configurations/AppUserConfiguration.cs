@@ -15,10 +15,6 @@ namespace BasketballLeague.Persistence.Configurations
             builder.Property(e => e.DisplayName)
                 .HasMaxLength(35);
 
-            builder.HasOne(d => d.Player)
-                .WithOne(p => p.AppUser)
-                .HasForeignKey<AppUser>(d => d.PlayerId)
-                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
