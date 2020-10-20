@@ -1,6 +1,5 @@
 ﻿using BasketballLeague.Application.Common.Exceptions;
 using BasketballLeague.Application.Common.Interfaces;
-using BasketballLeague.Domain.Entities;
 using MediatR;
 using System;
 using System.Threading;
@@ -23,7 +22,7 @@ namespace BasketballLeague.Application.FreeThrows.Commands.DeleteFreeThrow
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(JumpBall), request.Id);
+                throw new NotFoundException(nameof(Domain.Entities.FreeThrows), request.Id);
             }
 
             _context.FreeThrow.Remove(entity);

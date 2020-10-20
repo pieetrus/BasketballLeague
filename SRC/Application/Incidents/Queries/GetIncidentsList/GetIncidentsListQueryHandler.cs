@@ -32,7 +32,6 @@ namespace BasketballLeague.Application.Incidents.Queries.GetIncidentsList
                 .Include(x => x.Turnover).ThenInclude(x => x.Steal)
                 .Include(x => x.Substitution)
                 .Include(x => x.Timeout)
-                .Include(x => x.JumpBall)
                 .AsQueryable();
 
             // todo add incident dto and shot dto

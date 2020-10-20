@@ -19,6 +19,5 @@ namespace BasketballLeague.Domain.Entities
         public virtual Substitution Substitution { get; set; }
         public virtual Timeout Timeout { get; set; }
         public virtual Turnover Turnover { get; set; }
-        public virtual JumpBall JumpBall { get; set; }
     }
 }

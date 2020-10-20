@@ -19,7 +19,6 @@ namespace BasketballLeague.Persistence
         public virtual DbSet<Foul> Foul { get; set; }
         public virtual DbSet<FreeThrows> FreeThrow { get; set; }
         public virtual DbSet<Incident> Incident { get; set; }
-        public virtual DbSet<JumpBall> JumpBall { get; set; }
         public virtual DbSet<Match> Match { get; set; }
         public virtual DbSet<Player> Player { get; set; }
         public virtual DbSet<PlayerMatch> PlayerMatch { get; set; }

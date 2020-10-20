@@ -14,7 +14,6 @@ namespace BasketballLeague.Application.Common.Interfaces
         DbSet<Foul> Foul { get; set; }
         DbSet<Domain.Entities.FreeThrows> FreeThrow { get; set; }
         DbSet<Incident> Incident { get; set; }
-        DbSet<JumpBall> JumpBall { get; set; }
         DbSet<Match> Match { get; set; }
         DbSet<Player> Player { get; set; }
         DbSet<PlayerMatch> PlayerMatch { get; set; }

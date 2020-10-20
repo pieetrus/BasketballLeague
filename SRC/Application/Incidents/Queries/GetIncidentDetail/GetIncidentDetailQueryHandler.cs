@@ -24,7 +24,6 @@ namespace BasketballLeague.Application.Incidents.Queries.GetIncidentDetail
                 .Include(x => x.Substitution)
                 .Include(x => x.Timeout)
                 .Include(x => x.Foul)
-                .Include(x => x.JumpBall)
                 .Include(x => x.Turnover)
                 .Include(x => x.Match)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
