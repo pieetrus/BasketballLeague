@@ -1,4 +1,5 @@
 ﻿using BasketballLeague.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,6 +32,7 @@ namespace BasketballLeague.Application.Common.Interfaces
         DbSet<Turnover> Turnover { get; set; }
         DbSet<AppUser> AppUser { get; set; }
         DbSet<Photo> Photos { get; set; }
+        DbSet<IdentityRole> IdentityRoles { get; set; }
         int SaveChanges();
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));

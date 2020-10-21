@@ -45,10 +45,18 @@ namespace BasketballLeague.Persistence
                     },
                 }; // 4
 
+                var adminRole = new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" };
+                var userRole = new IdentityRole { Name = "User", NormalizedName = "USER" };
+
+                context.IdentityRoles.AddRange(adminRole, userRole);
+
                 foreach (var user in users)
                 {
                     await userManager.CreateAsync(user, "Haslo1");
                 }
+
+                await userManager.AddToRoleAsync(users[0], "ADMIN");
+                await userManager.AddToRoleAsync(users[1], "USER");
 
                 await context.SaveChangesAsync();
             }

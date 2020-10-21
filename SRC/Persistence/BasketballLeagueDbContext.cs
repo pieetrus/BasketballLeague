@@ -1,5 +1,6 @@
 ﻿using BasketballLeague.Application.Common.Interfaces;
 using BasketballLeague.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,7 @@ namespace BasketballLeague.Persistence
         public virtual DbSet<Turnover> Turnover { get; set; }
         public virtual DbSet<AppUser> AppUser { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
+        public virtual DbSet<IdentityRole> IdentityRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

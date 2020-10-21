@@ -44,10 +44,11 @@ namespace BasketballLeague.Application.User.Commands.Register
                 {
                     DisplayName = request.DisplayName,
                     Email = request.Email,
-                    UserName = request.UserName
+                    UserName = request.UserName,
                 };
 
                 var result = await _userManager.CreateAsync(user, request.Password);
+                await _userManager.AddToRoleAsync(user, "USER");
 
                 if (result.Succeeded)
                 {

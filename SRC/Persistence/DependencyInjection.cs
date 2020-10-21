@@ -18,6 +18,7 @@ namespace BasketballLeague.Persistence
 
             var builder = services.AddIdentityCore<AppUser>();
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
+            identityBuilder.AddRoles<IdentityRole>();
             identityBuilder.AddEntityFrameworkStores<BasketballLeagueDbContext>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
 
