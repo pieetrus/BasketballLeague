@@ -29,13 +29,16 @@ namespace BasketballLeague.Application.User.Queries.GetCurrentUser
                 .Include(x => x.Photos)
                 .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentUsername(),
                 cancellationToken);
+            var roles = await _userManager.GetRolesAsync(user);
+
 
             return new Dto.User
             {
                 DisplayName = user.DisplayName,
                 Username = user.UserName,
                 Token = _jwtGenerator.CreateToken(user),
-                Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
+                Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                Role = roles[0]
             };
         }
     }
