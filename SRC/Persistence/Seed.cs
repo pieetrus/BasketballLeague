@@ -21,15 +21,15 @@ namespace BasketballLeague.Persistence
                 {
                     new AppUser
                     {
-                        DisplayName = "Test",
-                        UserName = "test",
-                        Email = "test@test.com"
+                        DisplayName = "Admin",
+                        UserName = "admin",
+                        Email = "admin@admin.com"
                     },
                     new AppUser
                     {
-                        DisplayName = "Bob",
-                        UserName = "bob",
-                        Email = "bob@test.com"
+                        DisplayName = "User",
+                        UserName = "user",
+                        Email = "user@user.com"
                     },
                     new AppUser
                     {
