@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BasketballLeague.Application.aTest.MatchWithPlayerSeasonTest;
 using BasketballLeague.Application.Divisions;
 using BasketballLeague.Application.Matches.Queries.GetDetailedMatchesList;
 using BasketballLeague.Application.Matches.Queries.GetMatchDetailDetailed;
@@ -120,12 +119,6 @@ namespace BasketballLeague.Application.Common.Mappings
                 .ForMember(x => x.Divisions, x => x.MapFrom(x => x.SeasonDivisions.Select(x => x.Division)));
 
             CreateMap<Division, DivisionDto>();
-
-            CreateMap<Match, MatchTestDto>()
-                .ForMember(x => x.TeamGuest, x => x.MapFrom(x => x.TeamGuest.Team.Name))
-                .ForMember(x => x.TeamHome, x => x.MapFrom(x => x.TeamHome.Team.Name))
-                .ForMember(x => x.TeamSeasonGuest, x => x.MapFrom(x => x.TeamSeasonGuest.Team.Name))
-                .ForMember(x => x.TeamSeasonHome, x => x.MapFrom(x => x.TeamSeasonHome.Team.Name));
 
             CreateMap<PlayerMatch, PlayerMatchDto>()
                 .ForMember(x => x.Player, x => x.MapFrom(x => x.PlayerSeason));
