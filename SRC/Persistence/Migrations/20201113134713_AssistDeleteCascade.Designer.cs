@@ -4,14 +4,16 @@ using BasketballLeague.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BasketballLeague.Persistence.Migrations
 {
     [DbContext(typeof(BasketballLeagueDbContext))]
-    partial class BasketballLeagueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201113134713_AssistDeleteCascade")]
+    partial class AssistDeleteCascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1531,8 +1533,7 @@ namespace BasketballLeague.Persistence.Migrations
 
                     b.HasOne("BasketballLeague.Domain.Entities.Shot", "Shot")
                         .WithOne("Rebound")
-                        .HasForeignKey("BasketballLeague.Domain.Entities.Rebound", "ShotId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BasketballLeague.Domain.Entities.Rebound", "ShotId");
 
                     b.HasOne("BasketballLeague.Domain.Entities.Team", "Team")
                         .WithMany("Rebounds")

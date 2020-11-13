@@ -33,11 +33,13 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.HasOne(d => d.FreeThrows)
                 .WithOne(p => p.Rebound)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasForeignKey<Rebound>(d => d.FreeThrowId);
 
 
             builder.HasOne(d => d.Shot)
                 .WithOne(p => p.Rebound)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey<Rebound>(d => d.ShotId);
         }
     }

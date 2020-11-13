@@ -35,6 +35,7 @@ namespace BasketballLeague.Persistence.Configurations
             builder.HasOne(d => d.Shot)
                     .WithOne(p => p.Assist)
                     .HasForeignKey<Assist>(d => d.ShotId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Assist_Shot_ID_Shot_Shot_ID");
         }
     }
