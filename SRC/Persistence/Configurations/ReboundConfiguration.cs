@@ -33,7 +33,7 @@ namespace BasketballLeague.Persistence.Configurations
 
             builder.HasOne(d => d.FreeThrows)
                 .WithOne(p => p.Rebound)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasForeignKey<Rebound>(d => d.FreeThrowId);
 
 

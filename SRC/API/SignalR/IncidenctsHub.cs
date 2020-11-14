@@ -18,7 +18,7 @@ namespace BasketballLeague.API.SignalR
         {
             var incident = await _mediator.Send(command);
 
-            await Clients.All.SendAsync("ReceiveShot", incident.Shot.IsAccurate, incident.IsGuest, incident.Shot.Value, incident.MatchId, incident.Quater, incident.Minutes, incident.Seconds);
+            await Clients.All.SendAsync("ReceiveShot", incident.Shot.IsAccurate, incident.IsGuest, incident.Shot.Value, incident.MatchId, incident.Quater, incident.Minutes, incident.Seconds, incident.Id);
         }
 
     }

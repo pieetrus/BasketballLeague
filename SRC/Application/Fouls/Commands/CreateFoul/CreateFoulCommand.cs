@@ -141,8 +141,8 @@ namespace BasketballLeague.Application.Fouls.Commands.CreateFoul
                     teamMatchWhoWasFouled.Fta += request.Attempts.Value;
                     teamMatchWhoWasFouled.Ftm += request.AccurateShots.Value;
 
-                    playerMatchWhoWasFouled.Fta = request.Attempts.Value;
-                    playerMatchWhoWasFouled.Ftm = request.AccurateShots.Value;
+                    playerMatchWhoWasFouled.Fta += request.Attempts.Value;
+                    playerMatchWhoWasFouled.Ftm += request.AccurateShots.Value;
 
                     var freeThrow = new Domain.Entities.FreeThrows
                     {
