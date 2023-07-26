@@ -4,6 +4,7 @@ using BasketballLeague.Application.Divisions.Commands.DeleteDivision;
 using BasketballLeague.Application.Divisions.Commands.UpdateDivision;
 using BasketballLeague.Application.Divisions.Queries.GetDivisionDetail;
 using BasketballLeague.Application.Divisions.Queries.GetDivisionsList;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace BasketballLeague.API.Controllers
     public class DivisionController : BaseController
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<DivisionDto>>> GetAll()
         {
             return Ok(await Mediator.Send(new GetDivisionsListQuery()));
