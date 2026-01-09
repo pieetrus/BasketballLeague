@@ -15,6 +15,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "SRC\Persiste
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "SRC\API\API.csproj", "{5D3D57A8-95D1-4558-B18F-E77293602E7F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D06EC6E-BF48-431D-90AC-C2D175F9D451}"
+	ProjectSection(SolutionItems) = preProject
+		docs\README.md = docs\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1CAF1773-8120-43DA-B628-B4C5A2A7655F}"
+	ProjectSection(SolutionItems) = preProject
+		docs\archetype-patterns.md = docs\archetype-patterns.md
+		docs\bounded-contexts-analysis.md = docs\bounded-contexts-analysis.md
+		docs\es-d-plus-archetypes.md = docs\es-d-plus-archetypes.md
+		docs\event-sourcing-variants.md = docs\event-sourcing-variants.md
+		docs\plan.md = docs\plan.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +109,7 @@ Global
 		{570BF0F3-EC6E-471C-A62B-E32A13F2235F} = {AD4A3BA8-FA3A-4BCD-9A80-7FF58DCE47C3}
 		{D8165048-D10F-4251-89CF-8DF95E7C4D5A} = {AD4A3BA8-FA3A-4BCD-9A80-7FF58DCE47C3}
 		{5D3D57A8-95D1-4558-B18F-E77293602E7F} = {AD4A3BA8-FA3A-4BCD-9A80-7FF58DCE47C3}
+		{1CAF1773-8120-43DA-B628-B4C5A2A7655F} = {0D06EC6E-BF48-431D-90AC-C2D175F9D451}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4AD9B41A-4017-459E-B87F-969F19107239}
